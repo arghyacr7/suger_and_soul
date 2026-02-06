@@ -132,7 +132,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                         </div>
 
                         {/* Actions */}
-                        <div className="p-6 bg-cream space-y-3">
+                        <div className="p-6 pb-20 md:pb-6 bg-cream space-y-3">
                             <Button
                                 onClick={handleSave}
                                 disabled={saving}
