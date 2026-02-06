@@ -3,14 +3,9 @@ import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp"
 import { BottomMobileNav } from "@/components/layout/BottomMobileNav"
-import dynamic from "next/dynamic"
+import { BirthdayBannerWrapper } from "@/components/birthday/BirthdayBannerWrapper"
 import { AuthProvider } from "@/context/AuthContext"
 import "./globals.css"
-
-const BirthdayBanner = dynamic(
-  () => import("@/components/birthday/BirthdayBanner").then((mod) => mod.BirthdayBanner),
-  { ssr: false }
-)
 
 export const metadata: Metadata = {
   title: "Sugar & Soul - Baked with Love",
@@ -55,7 +50,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <Navbar />
-          <BirthdayBanner />
+          <BirthdayBannerWrapper />
           <main className="min-h-screen pt-16 pb-20 md:pb-0">
             {children}
           </main>
