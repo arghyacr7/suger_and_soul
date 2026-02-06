@@ -10,6 +10,7 @@ interface AuthContextType {
     session: Session | null
     loading: boolean
     greeting: string
+    isBirthday: boolean
     likedProducts: string[]
     toggleLike: (productId: string) => Promise<void>
     signOut: () => Promise<void>
@@ -24,8 +25,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [session, setSession] = useState<Session | null>(null)
     const [loading, setLoading] = useState(true)
     const [greeting, setGreeting] = useState("")
+    const [isBirthday, setIsBirthday] = useState(false)
     const [likedProducts, setLikedProducts] = useState<string[]>([])
     const router = useRouter()
+
+    // Check if today is user's birthday
+    const checkBirthday = (dob: string | undefined) => {
+        if (!dob) return false
+        try {
+            const today = new Date()
+            const birthDate = new Date(dob)
+            return (
+                today.getDate() === birthDate.getDate() &&
+                today.getMonth() === birthDate.getMonth()
+            )
+        } catch {
+            return false
+        }
+    }
 
     useEffect(() => {
         // Calculate Greeting
@@ -41,6 +58,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(session?.user ?? null)
             if (session?.user) {
                 fetchLikes(session.user.id)
+                setIsBirthday(checkBirthday(session.user.user_metadata?.dob))
             }
             setLoading(false)
         }
@@ -52,8 +70,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(session?.user ?? null)
             if (session?.user) {
                 fetchLikes(session.user.id)
+                setIsBirthday(checkBirthday(session.user.user_metadata?.dob))
             } else {
                 setLikedProducts([])
+                setIsBirthday(false)
             }
             setLoading(false)
         })
@@ -116,7 +136,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, session, loading, greeting, likedProducts, toggleLike, signOut, refreshSession, updateDOB }}>
+        <AuthContext.Provider value={{ user, session, loading, greeting, isBirthday, likedProducts, toggleLike, signOut, refreshSession, updateDOB }}>
             {children}
         </AuthContext.Provider>
     )

@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp"
 import { BottomMobileNav } from "@/components/layout/BottomMobileNav"
+import { BirthdayBanner } from "@/components/birthday/BirthdayBanner"
 import { AuthProvider } from "@/context/AuthContext"
 import "./globals.css"
 
@@ -49,6 +50,7 @@ export default function RootLayout({
       >
         <AuthProvider>
           <Navbar />
+          <BirthdayBanner />
           <main className="min-h-screen pt-16 pb-20 md:pb-0">
             {children}
           </main>
