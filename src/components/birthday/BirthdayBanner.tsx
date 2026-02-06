@@ -42,14 +42,21 @@ export function BirthdayBanner() {
     useEffect(() => {
         if (!dob) return
 
-        const today = new Date()
-        const dobDate = new Date(dob)
+        // dob comes as YYYY-MM-DD
+        const [year, month, day] = dob.split("-").map(Number)
 
-        const isBirthday =
-            today.getDate() === dobDate.getDate() &&
-            today.getMonth() === dobDate.getMonth()
+        const now = new Date()
 
-        setShowBanner(isBirthday)
+        const isBirthdayToday =
+            now.getDate() === day &&
+            now.getMonth() + 1 === month // JS months are 0-based
+
+        // HARD DEBUG (ONE TIME CHECK)
+        console.log("DOB STRING:", dob)
+        console.log("TODAY:", now.toString())
+        console.log("SHOW BANNER:", isBirthdayToday)
+
+        setShowBanner(isBirthdayToday)
     }, [dob])
 
     // ✅ Dismiss logic
