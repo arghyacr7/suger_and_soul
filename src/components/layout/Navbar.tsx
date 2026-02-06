@@ -41,6 +41,32 @@ export function Navbar() {
                     </span>
                 </Link>
 
+                {/* Mobile Heart Icon (next to logo) */}
+                <div className="flex md:hidden items-center">
+                    {user && !loading && (
+                        <Link
+                            href="/liked-products"
+                            className="p-1.5 rounded-full hover:bg-brown/5 transition-colors text-brown relative"
+                            aria-label="Liked Products"
+                        >
+                            <Heart size={20} className={cn("transition-colors", likedProducts.length > 0 ? "fill-red-500 text-red-500" : "text-brown")} strokeWidth={2.5} />
+                            {likedProducts.length > 0 && (
+                                <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 text-white text-[8px] font-bold flex items-center justify-center rounded-full">
+                                    {likedProducts.length}
+                                </span>
+                            )}
+                        </Link>
+                    )}
+                    {!user && !loading && (
+                        <Link
+                            href="/auth"
+                            className="text-[9px] font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors px-2"
+                        >
+                            Login
+                        </Link>
+                    )}
+                </div>
+
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8">
                     <div className="flex items-center gap-6 mr-4">
@@ -102,31 +128,7 @@ export function Navbar() {
 
                 <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
-                {/* Mobile Right: Heart + Menu */}
-                <div className="flex md:hidden items-center gap-1 flex-shrink-0">
-                    {user && !loading && (
-                        <Link
-                            href="/liked-products"
-                            className="p-1.5 rounded-full hover:bg-brown/5 transition-colors text-brown relative"
-                            aria-label="Liked Products"
-                        >
-                            <Heart size={20} className={cn("transition-colors", likedProducts.length > 0 ? "fill-red-500 text-red-500" : "text-brown")} strokeWidth={2.5} />
-                            {likedProducts.length > 0 && (
-                                <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 text-white text-[8px] font-bold flex items-center justify-center rounded-full">
-                                    {likedProducts.length}
-                                </span>
-                            )}
-                        </Link>
-                    )}
-                    {!user && !loading && (
-                        <Link
-                            href="/auth"
-                            className="text-[9px] font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors px-2"
-                        >
-                            Login
-                        </Link>
-                    )}
-                </div>
+
 
                 {/* Mobile Menu Toggle */}
                 <button
