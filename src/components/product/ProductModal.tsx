@@ -74,7 +74,16 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
             message += `\nRating: ${rating} Star`
         }
 
-        // Common footer
+        // Add Product Links
+        const productUrl = `https://suger-and-soul.vercel.app/product/${product.id}`
+        // Ensure image URL is properly formatted/encoded if needed, but usually standard URL works
+        const imageUrl = `https://suger-and-soul.vercel.app${product.image.split(" ").join("%20")}`
+
+        message += `\n\nProduct Page:\n${productUrl}`
+        message += `\n\nProduct Image:\n${imageUrl}`
+
+        message += `\n\nDelivery Location: __________\n(Note: Delivery available within 1 km only)`
+
         message += `\n\nPlease confirm availability.\nThank you.`
 
         const link = buildWhatsAppLink(message)

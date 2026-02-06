@@ -21,6 +21,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
         title: `${product.name} - Sugar & Soul`,
         description: product.description,
+        openGraph: {
+            title: `${product.name} - Sugar & Soul`,
+            description: product.description,
+            url: `https://suger-and-soul.vercel.app/product/${product.id}`,
+            images: [
+                {
+                    url: `https://suger-and-soul.vercel.app${product.image}`,
+                    width: 800,
+                    height: 600,
+                    alt: product.name,
+                },
+            ],
+            type: "website",
+        },
     }
 }
 
