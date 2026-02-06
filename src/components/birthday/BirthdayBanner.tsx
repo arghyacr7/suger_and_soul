@@ -30,14 +30,14 @@ export function BirthdayBanner() {
 
         // Check if banner was dismissed today
         if (typeof window !== 'undefined') {
-            const dismissedDate = localStorage.getItem("birthdayBannerDismissed")
+            const dismissedDate = localStorage.getItem("birthdayBannerDismissed_v2")
             const today = new Date().toDateString()
 
             if (dismissedDate === today) {
                 setIsDismissed(true)
             } else if (dismissedDate && dismissedDate !== today) {
                 // Clear old dismissal
-                localStorage.removeItem("birthdayBannerDismissed")
+                localStorage.removeItem("birthdayBannerDismissed_v2")
             }
         }
     }, [isBirthday, user, mounted])
@@ -45,7 +45,7 @@ export function BirthdayBanner() {
     const handleDismiss = () => {
         setIsDismissed(true)
         if (typeof window !== 'undefined') {
-            localStorage.setItem("birthdayBannerDismissed", new Date().toDateString())
+            localStorage.setItem("birthdayBannerDismissed_v2", new Date().toDateString())
         }
     }
 
