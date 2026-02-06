@@ -192,14 +192,18 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                                     readOnly={dobAlreadySet}
                                     disabled={dobAlreadySet}
                                     className={`w-full px-4 py-3 rounded-xl border-2 transition-all text-brown font-bold ${dobAlreadySet
-                                            ? 'bg-gray-100 border-gray-200 cursor-not-allowed'
-                                            : 'bg-white border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/20'
+                                        ? 'bg-gray-100 border-gray-200 cursor-not-allowed'
+                                        : 'bg-white border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/20'
                                         }`}
                                     placeholder="Select your date of birth"
                                 />
-                                {dobAlreadySet && (
+                                {dobAlreadySet ? (
                                     <p className="text-xs text-brown/60 italic">
                                         Your birthday is set and cannot be modified for security
+                                    </p>
+                                ) : (
+                                    <p className="text-xs text-gray-500">
+                                        Set your date of birth to receive a special birthday offer on your birthday.
                                     </p>
                                 )}
                             </div>
