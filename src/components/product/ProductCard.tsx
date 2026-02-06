@@ -52,16 +52,24 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
 
         let message = ""
 
+        const domain = "https://suger-and-soul-n7dbujw8l-arghyacr7s-projects.vercel.app"
+        const productUrl = `${domain}/product/${product.id}`
+        const imageUrl = `${domain}${product.image.split(" ").join("%20")}`
+
         if (product.type === "cupcake") {
-            message = `Hi Sugar & Soul,\n\nI would like to order cupcakes.\n\nItem: ${product.name}\nQuantity: ${selectedWeight === "piece" ? "1 Piece" : "10 Pieces"}\nPrice: Rs. ${currentPrice}\n\nPlease confirm availability.\nThank you.`
+            message = `Hi Sugar & Soul,\n\nI would like to order cupcakes.\n\nItem: ${product.name}\nQuantity: ${selectedWeight === "piece" ? "1 Piece" : "10 Pieces"}\nPrice: Rs. ${currentPrice}`
         } else if (product.category === "brownies") {
-            message = `Hi Sugar & Soul,\n\nI would like to order the following:\n\nItem: *${product.name}*\nOption: ${selectedWeight === "piece" ? "Per Piece" : "1lb Box (6 pcs)"}\nPrice: ₹${currentPrice}\n\nDelivery Location: __________\n(Note: Delivery available within 1 km radius only)\n\nPlease confirm availability.`
+            message = `Hi Sugar & Soul,\n\nI would like to order the following:\n\nItem: *${product.name}*\nOption: ${selectedWeight === "piece" ? "Per Piece" : "1lb Box (6 pcs)"}\nPrice: ₹${currentPrice}`
         } else {
             const weightLabel = selectedWeight === "1lb" ? "1lb (Approx 450g)" :
                 selectedWeight === "2lb" ? "2lb (Approx 900g)" :
                     "3lb (Approx 1350g)"
-            message = `Hi Sugar & Soul,\n\nI would like to order the following:\n\nItem: *${product.name}*\nWeight: ${weightLabel}\nPrice: ₹${currentPrice}\n\nDelivery Location: __________\n(Note: Delivery available within 1 km radius only)\n\nPlease confirm availability.`
+            message = `Hi Sugar & Soul,\n\nI would like to order the following:\n\nItem: *${product.name}*\nWeight: ${weightLabel}\nPrice: ₹${currentPrice}`
         }
+
+        message += `\n\nProduct Page:\n${productUrl}`
+        message += `\n\nProduct Image:\n${imageUrl}`
+        message += `\n\nDelivery Location: __________\n(Note: Delivery available within 1 km radius only)\n\nPlease confirm availability.\nThank you.`
 
         const link = buildWhatsAppLink(message)
         window.open(link, "_blank")
