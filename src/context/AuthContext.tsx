@@ -37,17 +37,21 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
         try {
             const today = new Date()
-            const birthDate = new Date(dob)
+
+            // Parse DOB manually to avoid timezone issues
+            // DOB format is "yyyy-mm-dd"
+            const [year, month, day] = dob.split('-').map(Number)
+
             const isBday = (
-                today.getDate() === birthDate.getDate() &&
-                today.getMonth() === birthDate.getMonth()
+                today.getDate() === day &&
+                today.getMonth() === (month - 1) // JavaScript months are 0-indexed
             )
             console.log('🎂 Birthday Check:', {
                 dob,
                 todayDate: today.getDate(),
                 todayMonth: today.getMonth(),
-                birthDate: birthDate.getDate(),
-                birthMonth: birthDate.getMonth(),
+                dobDay: day,
+                dobMonth: month - 1,
                 isBirthday: isBday
             })
             return isBday
