@@ -38,11 +38,7 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
             return
         }
 
-        // Prevent changing DOB if already set
-        if (dobAlreadySet && dob !== user?.user_metadata?.dob) {
-            setError("Date of birth cannot be changed once set")
-            return
-        }
+        // ❌ removed dobAlreadySet check to allow upserting to profiles table
 
         // Validate future date
         const selectedDate = new Date(dob)
