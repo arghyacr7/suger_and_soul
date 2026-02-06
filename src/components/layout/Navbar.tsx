@@ -62,10 +62,15 @@ export function Navbar() {
                         {loading ? (
                             <div className="w-20 h-8 bg-brown/5 animate-pulse rounded-full" />
                         ) : user ? (
-                            <div className="flex items-center gap-4">
-                                <span className="text-xs font-bold text-brown/60 hidden lg:inline">
-                                    {greeting}, {user.user_metadata.full_name?.split(" ")[0]}
-                                </span>
+                            <div className="flex items-center gap-2 md:gap-4">
+                                <motion.span
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.5, ease: "easeOut" }}
+                                    className="text-[10px] md:text-xs font-bold text-brown/60 truncate max-w-[100px] md:max-w-none"
+                                >
+                                    {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}
+                                </motion.span>
                                 <Link
                                     href="/liked-products"
                                     className="p-2 rounded-full hover:bg-brown/5 transition-colors text-brown relative group"
@@ -80,7 +85,7 @@ export function Navbar() {
                                 </Link>
                                 <button
                                     onClick={() => signOut()}
-                                    className="text-xs font-bold text-brown/60 hover:text-red-500 uppercase tracking-wide transition-colors"
+                                    className="text-[10px] md:text-xs font-bold text-brown/60 hover:text-red-500 uppercase tracking-wide transition-colors hidden md:block"
                                 >
                                     Logout
                                 </button>
