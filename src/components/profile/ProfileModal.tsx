@@ -16,6 +16,13 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
     const [dob, setDob] = useState(user?.user_metadata?.dob || "")
     const [saving, setSaving] = useState(false)
     const [success, setSuccess] = useState(false)
+    const [error, setError] = useState("")
+
+    // Check if DOB was already set
+    const dobAlreadySet = Boolean(user?.user_metadata?.dob)
+
+    // Get max date (today)
+    const maxDate = new Date().toISOString().split("T")[0]
 
     // Sync dob state with user data when it changes
     useEffect(() => {
@@ -25,14 +32,52 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
     }, [user?.user_metadata?.dob])
 
     const handleSave = async () => {
+        // Validate DOB is provided
+        if (!dob) {
+            setError("Please select your date of birth")
+            return
+        }
+
+        // Prevent changing DOB if already set
+        if (dobAlreadySet && dob !== user?.user_metadata?.dob) {
+            setError("Date of birth cannot be changed once set")
+            return
+        }
+
+        // Validate future date
+        const selectedDate = new Date(dob)
+        const today = new Date()
+        today.setHours(0, 0, 0, 0) // Reset time for accurate comparison
+        selectedDate.setHours(0, 0, 0, 0)
+
+        if (selectedDate > today) {
+            setError("Date of birth cannot be in the future")
+            return
+        }
+
+        // Validate minimum age (5 years)
+        const age = today.getFullYear() - selectedDate.getFullYear()
+        const monthDiff = today.getMonth() - selectedDate.getMonth()
+        const actualAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < selectedDate.getDate())
+            ? age - 1
+            : age
+
+        if (actualAge < 5) {
+            setError("Please enter a valid date of birth (minimum age: 5 years)")
+            return
+        }
+
         setSaving(true)
         setSuccess(false)
+        setError("")
+
         try {
             await updateDOB(dob)
             setSuccess(true)
             setTimeout(() => setSuccess(false), 3000)
         } catch (error) {
             console.error("Error saving DOB:", error)
+            setError("Failed to save date of birth. Please try again.")
         } finally {
             setSaving(false)
         }
@@ -109,6 +154,17 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                                 </motion.div>
                             )}
 
+                            {/* Error Message */}
+                            {error && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl text-sm font-bold"
+                                >
+                                    ❌ {error}
+                                </motion.div>
+                            )}
+
                             {/* Name Field (Read-only) */}
                             <div className="space-y-2">
                                 <label className="flex items-center gap-2 text-sm font-bold text-brown/60 uppercase">
@@ -122,19 +178,30 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                                 </div>
                             </div>
 
-                            {/* Date of Birth Field (Editable) */}
+                            {/* Date of Birth Field */}
                             <div className="space-y-2">
                                 <label className="flex items-center gap-2 text-sm font-bold text-brown/60 uppercase">
                                     <Calendar size={16} />
-                                    Date of Birth
+                                    Date of Birth {dobAlreadySet && "(Cannot be changed)"}
                                 </label>
                                 <input
                                     type="date"
                                     value={dob}
                                     onChange={(e) => setDob(e.target.value)}
-                                    className="w-full px-4 py-3 bg-white rounded-xl border-2 border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/20 transition-all text-brown font-bold"
+                                    max={maxDate}
+                                    readOnly={dobAlreadySet}
+                                    disabled={dobAlreadySet}
+                                    className={`w-full px-4 py-3 rounded-xl border-2 transition-all text-brown font-bold ${dobAlreadySet
+                                            ? 'bg-gray-100 border-gray-200 cursor-not-allowed'
+                                            : 'bg-white border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/20'
+                                        }`}
                                     placeholder="Select your date of birth"
                                 />
+                                {dobAlreadySet && (
+                                    <p className="text-xs text-brown/60 italic">
+                                        Your birthday is set and cannot be modified for security
+                                    </p>
+                                )}
                             </div>
                         </div>
 
