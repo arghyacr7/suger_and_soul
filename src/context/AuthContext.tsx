@@ -36,24 +36,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         else if (hour >= 12 && hour < 17) setGreeting("Good Afternoon")
         else setGreeting("Good Evening")
 
-        // Check active session
-        async function initSession() {
-            const { data: { session } } = await supabase.auth.getSession()
-            setSession(session)
-            setUser(session?.user ?? null)
-            if (session?.user) {
-                fetchLikes(session.user.id)
+        // ✅ Restore session on page refresh (PRODUCTION SAFE)
+        const restoreSession = async () => {
+            const { data } = await supabase.auth.getSession()
+            const restoredUser = data.session?.user ?? null
+
+            setUser(restoredUser)
+            setSession(data.session)
+
+            if (restoredUser) {
+                fetchLikes(restoredUser.id)
             }
             setLoading(false)
         }
-        initSession()
 
-        // Listen for changes
+        restoreSession()
+
+        // ✅ Listen to auth changes
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
             setSession(session)
-            setUser(session?.user ?? null)
-            if (session?.user) {
-                fetchLikes(session.user.id)
+            const newUser = session?.user ?? null
+            setUser(newUser)
+
+            if (newUser) {
+                fetchLikes(newUser.id)
             } else {
                 setLikedProducts([])
                 setIsBirthday(false)
