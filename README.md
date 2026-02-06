@@ -4,7 +4,7 @@ Baked with Love, Delivered with Care.
 
 **Sugar & Soul** is a premium cloud kitchen cake shop website built with modern web technologies. It allows users to browse a variety of baked goods, including plain cakes, cream cakes, brownies, and cupcakes, and place orders seamlessly via WhatsApp.
 
-![Sugar & Soul Banner](/public/images/logo.png) *(Note: Replace with actual banner if available)*
+![Sugar & Soul Banner](/public/images/logo.png)
 
 ## 🚀 Technologies Used
 
