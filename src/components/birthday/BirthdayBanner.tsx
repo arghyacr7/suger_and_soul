@@ -176,8 +176,8 @@ export function BirthdayBanner() {
                             </div>
                         </motion.div>
                     </motion.div>
-                </AnimatePresence>
+                </motion.div>
             )}
-        </>
+        </AnimatePresence >
     )
 }

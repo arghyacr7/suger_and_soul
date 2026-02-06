@@ -64,6 +64,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return () => subscription.unsubscribe()
     }, [])
 
+    // Check Birthday
+    useEffect(() => {
+        if (!user?.user_metadata?.dob) {
+            setIsBirthday(false)
+            return
+        }
+
+        try {
+            // Robust parsing: "YYYY-MM-DD" -> [YYYY, MM, DD]
+            // This avoids all timezone issues by treating date as strict integers
+            const dobParts = user.user_metadata.dob.split('-')
+            if (dobParts.length !== 3) return
+
+            const birthMonth = parseInt(dobParts[1], 10)
+            const birthDay = parseInt(dobParts[2], 10)
+
+            const today = new Date()
+            const currentMonth = today.getMonth() + 1
+            const currentDay = today.getDate()
+
+            console.log('🎂 Birthday Check:', { birthMonth, birthDay, currentMonth, currentDay })
+
+            if (birthMonth === currentMonth && birthDay === currentDay) {
+                setIsBirthday(true)
+            } else {
+                setIsBirthday(false)
+            }
+        } catch (e) {
+            console.error('Error checking birthday:', e)
+            setIsBirthday(false)
+        }
+    }, [user])
+
     const fetchLikes = async (userId: string) => {
         const { data, error } = await supabase
             .from('likes')
