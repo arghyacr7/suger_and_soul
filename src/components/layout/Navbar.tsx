@@ -28,7 +28,7 @@ export function Navbar() {
         <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-md border-b border-brown/10">
             <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 md:gap-3 scale-105 hover:scale-110 transition-transform origin-left flex-shrink-0">
+                <Link href="/" className="flex items-center gap-2 md:gap-3 scale-105 hover:scale-110 transition-transform origin-left">
                     <Image
                         src="/images/logo.png"
                         alt="Sugar & Soul"
@@ -36,7 +36,7 @@ export function Navbar() {
                         height={80}
                         className="w-auto h-10 md:h-16 object-contain"
                     />
-                    <span className="font-heading text-base md:text-2xl font-bold text-brown uppercase tracking-wider hidden sm:inline">
+                    <span className="font-heading text-sm md:text-2xl font-bold text-brown uppercase tracking-wider">
                         Sugar & Soul
                     </span>
                 </Link>
