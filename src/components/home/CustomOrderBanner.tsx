@@ -22,15 +22,12 @@ export function CustomOrderBanner() {
                 </div>
 
                 <div className="relative z-10 shrink-0">
-                    <button
-                        onClick={() => {
-                            const message = `Hi Sugar & Soul 🎂\n\nI’m interested in a custom cake.\n\nOccasion: __________\nPreferred Weight: __________\nFlavor Preference: __________\nCustom Message on Cake: __________\nRequired Date: __________\n\nPlease guide me further.\nThank you 💛`
-                            window.open(`https://wa.me/916289898378?text=${encodeURIComponent(message)}`, "_blank")
-                        }}
+                    <Link
+                        href="/custom-order"
                         className="inline-flex items-center justify-center h-14 px-8 text-xl font-medium bg-yellow text-brown hover:bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] uppercase tracking-wide gap-2 rounded-xl transition-all"
                     >
                         Get a Custom Cake
-                    </button>
+                    </Link>
                 </div>
 
                 {/* Decorations */}
