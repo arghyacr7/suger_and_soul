@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Home, Grid, Search, MessageCircle } from "lucide-react"
+import { Home, Grid, Search, MessageCircle, Heart } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
@@ -86,6 +86,14 @@ export function BottomMobileNav() {
                                             className="p-4 rounded-xl bg-blue/10 text-brown font-bold text-lg text-center active:scale-95 transition-transform border border-blue/20"
                                         >
                                             Brownies
+                                        </Link>
+                                        <Link
+                                            href="/liked-products"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="p-4 rounded-xl bg-red-50 text-brown font-bold text-lg text-center active:scale-95 transition-transform border border-red-200 flex items-center justify-center gap-2"
+                                        >
+                                            <Heart size={20} className="text-red-500" />
+                                            Liked Products
                                         </Link>
                                     </div>
                                 </motion.div>

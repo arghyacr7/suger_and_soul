@@ -42,16 +42,24 @@ export default function AuthPage() {
         setLoading(true)
         try {
             if (mode === "signup") {
-                const { error } = await supabase.auth.signUp({
+                const { data, error } = await supabase.auth.signUp({
                     email: formData.email,
                     password: formData.password,
                     options: {
                         data: {
                             full_name: formData.name,
                         },
+                        emailRedirectTo: undefined,
                     },
                 })
                 if (error) throw error
+
+                // Check if email confirmation is required
+                if (data?.user && !data.session) {
+                    setError("Please check your email to confirm your account before logging in.")
+                    setLoading(false)
+                    return
+                }
             } else {
                 const { error } = await supabase.auth.signInWithPassword({
                     email: formData.email,
@@ -60,8 +68,11 @@ export default function AuthPage() {
                 if (error) throw error
             }
 
-            // Success - Redirect back or to home
-            router.back()
+            // Wait a bit for session to propagate
+            await new Promise(resolve => setTimeout(resolve, 500))
+
+            // Redirect to home page
+            router.push("/")
         } catch (err: any) {
             setError(err.message)
         } finally {
