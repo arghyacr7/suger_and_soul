@@ -6,7 +6,7 @@ import { X, Gift, MessageCircle } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 import { Button } from "@/components/ui/Button"
 
-const WHATSAPP_NUMBER = "919163049775"
+const WHATSAPP_NUMBER = "919836733874"
 
 export function BirthdayBanner() {
     const { user, isBirthday } = useAuth()
@@ -31,7 +31,7 @@ export function BirthdayBanner() {
 
     const handleWhatsApp = () => {
         const userName = user?.user_metadata?.full_name || "User"
-        const message = `Hi Sugar & Soul,\n\nToday is my birthday 🎉\nI'd love to order a birthday cake.\n\nThank you!\n- ${userName}`
+        const message = `Hi Sugar & Soul,\n\nToday is my birthday 🎉\nI'd love to order a birthday cake with my 5% birthday discount!\n\nThank you!\n- ${userName}`
         const encodedMessage = encodeURIComponent(message)
         const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`
         window.open(whatsappUrl, "_blank")
