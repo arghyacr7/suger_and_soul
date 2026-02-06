@@ -11,30 +11,42 @@ const WHATSAPP_NUMBER = "919836733874"
 export function BirthdayBanner() {
     const { user, isBirthday } = useAuth()
     const [isDismissed, setIsDismissed] = useState(false)
+    const [mounted, setMounted] = useState(false)
+
+    // Ensure client-side only rendering
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     useEffect(() => {
-        console.log('🎉 BirthdayBanner - State:', {
-            isBirthday,
-            hasUser: !!user,
-            dob: user?.user_metadata?.dob
-        })
+        // Debug logs
+        if (mounted) {
+            console.log('🎉 BirthdayBanner - State Update:', {
+                isBirthday,
+                hasUser: !!user,
+                dob: user?.user_metadata?.dob
+            })
+        }
 
         // Check if banner was dismissed today
-        const dismissedDate = localStorage.getItem("birthdayBannerDismissed")
-        const today = new Date().toDateString()
-        console.log('🎉 BirthdayBanner - Dismissal check:', { dismissedDate, today })
+        if (typeof window !== 'undefined') {
+            const dismissedDate = localStorage.getItem("birthdayBannerDismissed")
+            const today = new Date().toDateString()
 
-        if (dismissedDate === today) {
-            setIsDismissed(true)
-        } else if (dismissedDate && dismissedDate !== today) {
-            // Clear old dismissal
-            localStorage.removeItem("birthdayBannerDismissed")
+            if (dismissedDate === today) {
+                setIsDismissed(true)
+            } else if (dismissedDate && dismissedDate !== today) {
+                // Clear old dismissal
+                localStorage.removeItem("birthdayBannerDismissed")
+            }
         }
-    }, [isBirthday, user])
+    }, [isBirthday, user, mounted])
 
     const handleDismiss = () => {
         setIsDismissed(true)
-        localStorage.setItem("birthdayBannerDismissed", new Date().toDateString())
+        if (typeof window !== 'undefined') {
+            localStorage.setItem("birthdayBannerDismissed", new Date().toDateString())
+        }
     }
 
     const handleWhatsApp = () => {
@@ -45,13 +57,8 @@ export function BirthdayBanner() {
         window.open(whatsappUrl, "_blank")
     }
 
-    console.log('🎉 BirthdayBanner - Render decision:', {
-        isBirthday,
-        hasUser: !!user,
-        isDismissed,
-        willShow: !(!isBirthday || !user || isDismissed)
-    })
-
+    // Don't render until client-side hydration is complete
+    if (!mounted) return null
     if (!isBirthday || !user || isDismissed) return null
 
     const firstName = user.user_metadata?.full_name?.split(" ")[0] || "Friend"
@@ -59,14 +66,20 @@ export function BirthdayBanner() {
     return (
         <AnimatePresence>
             <motion.div
-                initial={{ opacity: 0, y: -100 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -100 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="fixed top-20 left-0 right-0 z-40 px-4 md:px-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center px-4 md:px-6 bg-black/60 backdrop-blur-sm"
+                style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
             >
-                <div className="max-w-4xl mx-auto">
-                    <div className="relative bg-gradient-to-r from-yellow via-pink to-purple rounded-2xl shadow-2xl p-6 md:p-8 border-4 border-white/50">
+                <motion.div
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.5, opacity: 0 }}
+                    transition={{ type: "spring", damping: 20, stiffness: 300 }}
+                    className="w-full max-w-lg mx-auto relative"
+                >
+                    <div className="relative bg-gradient-to-r from-yellow via-pink to-purple rounded-3xl shadow-2xl p-6 md:p-8 border-4 border-white/50 overflow-hidden">
                         {/* Confetti Effect */}
                         <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
                             {[...Array(20)].map((_, i) => (
@@ -74,8 +87,8 @@ export function BirthdayBanner() {
                                     key={i}
                                     initial={{ y: -20, opacity: 1 }}
                                     animate={{
-                                        y: [0, 100],
-                                        x: [0, (Math.random() - 0.5) * 100],
+                                        y: [0, 400],
+                                        x: [0, (Math.random() - 0.5) * 200],
                                         opacity: [1, 0],
                                         rotate: [0, 360]
                                     }}
@@ -98,7 +111,7 @@ export function BirthdayBanner() {
                         {/* Close Button */}
                         <button
                             onClick={handleDismiss}
-                            className="absolute top-3 right-3 p-2 rounded-full bg-white/30 hover:bg-white/50 transition-colors z-10"
+                            className="absolute top-3 right-3 p-2 rounded-full bg-white/30 hover:bg-white/50 transition-colors z-20"
                             aria-label="Dismiss"
                         >
                             <X size={20} className="text-white" />
@@ -115,34 +128,39 @@ export function BirthdayBanner() {
                                     repeat: Infinity,
                                     ease: "easeInOut"
                                 }}
-                                className="text-5xl md:text-6xl mb-4"
+                                className="text-6xl md:text-7xl mb-4"
                             >
                                 🎂
                             </motion.div>
 
-                            <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-2 drop-shadow-lg">
+                            <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 drop-shadow-lg">
                                 Happy Birthday, {firstName}! 🎉
                             </h2>
 
-                            <p className="text-white/90 text-base md:text-lg mb-6 font-bold drop-shadow-md">
-                                Sugar & Soul wishes you a wonderful day!<br className="hidden md:block" />
+                            <p className="text-white/90 text-lg md:text-xl mb-8 font-bold drop-shadow-md leading-relaxed">
+                                Sugar & Soul wishes you a wonderful day!<br />
                                 Celebrate with something sweet 🍰
                             </p>
 
                             {/* CTA Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                            <div className="flex flex-col gap-3 justify-center items-center">
                                 <Button
                                     onClick={handleWhatsApp}
-                                    className="flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-6 py-3 rounded-xl shadow-lg hover:scale-105 transition-all"
+                                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-6 py-4 rounded-xl shadow-lg hover:scale-105 transition-all text-lg"
                                 >
-                                    <Gift size={20} />
+                                    <Gift size={24} />
                                     Claim Birthday Surprise
-                                    <MessageCircle size={18} />
                                 </Button>
+                                <button
+                                    onClick={handleDismiss}
+                                    className="text-white/80 text-sm font-semibold hover:text-white underline decoration-white/50 underline-offset-4"
+                                >
+                                    No thanks, maybe later
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             </motion.div>
         </AnimatePresence>
     )
