@@ -29,38 +29,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [likedProducts, setLikedProducts] = useState<string[]>([])
     const router = useRouter()
 
-    // Check if today is user's birthday
-    const checkBirthday = (dob: string | undefined) => {
-        if (!dob) {
-            console.log('🎂 Birthday Check: No DOB set')
-            return false
-        }
-        try {
-            const today = new Date()
-
-            // Parse DOB manually to avoid timezone issues
-            // DOB format is "yyyy-mm-dd"
-            const [year, month, day] = dob.split('-').map(Number)
-
-            const isBday = (
-                today.getDate() === day &&
-                today.getMonth() === (month - 1) // JavaScript months are 0-indexed
-            )
-            console.log('🎂 Birthday Check:', {
-                dob,
-                todayDate: today.getDate(),
-                todayMonth: today.getMonth(),
-                dobDay: day,
-                dobMonth: month - 1,
-                isBirthday: isBday
-            })
-            return isBday
-        } catch (error) {
-            console.error('🎂 Birthday Check Error:', error)
-            return false
-        }
-    }
-
     useEffect(() => {
         // Calculate Greeting
         const hour = new Date().getHours()
@@ -75,7 +43,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(session?.user ?? null)
             if (session?.user) {
                 fetchLikes(session.user.id)
-                setIsBirthday(checkBirthday(session.user.user_metadata?.dob))
             }
             setLoading(false)
         }
@@ -87,7 +54,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             setUser(session?.user ?? null)
             if (session?.user) {
                 fetchLikes(session.user.id)
-                setIsBirthday(checkBirthday(session.user.user_metadata?.dob))
             } else {
                 setLikedProducts([])
                 setIsBirthday(false)
@@ -135,7 +101,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(session?.user ?? null)
         // Re-check birthday after session refresh
         if (session?.user?.user_metadata?.dob) {
-            setIsBirthday(checkBirthday(session.user.user_metadata.dob))
+            // Force client-side re-render for birthday check via effect
+            const dob = session.user.user_metadata.dob
+            // We don't need to manually check here as the useEffect checks user.user_metadata.dob
         }
     }
 

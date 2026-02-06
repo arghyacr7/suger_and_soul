@@ -3,7 +3,12 @@ import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp"
 import { BottomMobileNav } from "@/components/layout/BottomMobileNav"
-import { BirthdayBanner } from "@/components/birthday/BirthdayBanner"
+import dynamic from "next/dynamic"
+
+const BirthdayBanner = dynamic(
+  () => import("@/components/birthday/BirthdayBanner").then(mod => mod.BirthdayBanner),
+  { ssr: false }
+)
 import { AuthProvider } from "@/context/AuthContext"
 import "./globals.css"
 
