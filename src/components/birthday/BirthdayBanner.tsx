@@ -2,168 +2,154 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { X, Gift, MessageCircle } from "lucide-react"
+import { X, Gift } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
 import { Button } from "@/components/ui/Button"
 
 const WHATSAPP_NUMBER = "919836733874"
 
 export function BirthdayBanner() {
-    const { user, isBirthday } = useAuth()
-    const [isDismissed, setIsDismissed] = useState(false)
-    const [mounted, setMounted] = useState(false)
+    const { user } = useAuth()
 
-    // Ensure client-side only rendering
+    const [mounted, setMounted] = useState(false)
+    const [showBanner, setShowBanner] = useState(false)
+    const [isDismissed, setIsDismissed] = useState(false)
+
+    // ✅ Ensure client-side rendering only
     useEffect(() => {
         setMounted(true)
     }, [])
 
+    // ✅ Check birthday AFTER user + hydration (PRODUCTION SAFE)
     useEffect(() => {
-        // Debug logs
-        if (mounted) {
-            console.log('🎉 BirthdayBanner - State Update:', {
-                isBirthday,
-                hasUser: !!user,
-                dob: user?.user_metadata?.dob
-            })
-        }
+        if (!mounted || !user) return
 
-        // Check if banner was dismissed today
-        if (typeof window !== 'undefined') {
-            const dismissedDate = localStorage.getItem("birthdayBannerDismissed_v2")
-            const today = new Date().toDateString()
+        const dob = user.user_metadata?.dob
+        if (!dob) return
 
-            if (dismissedDate === today) {
-                setIsDismissed(true)
-            } else if (dismissedDate && dismissedDate !== today) {
-                // Clear old dismissal
-                localStorage.removeItem("birthdayBannerDismissed_v2")
-            }
+        const today = new Date()
+        const dobDate = new Date(dob)
+
+        const isBirthdayToday =
+            today.getDate() === dobDate.getDate() &&
+            today.getMonth() === dobDate.getMonth()
+
+        setShowBanner(isBirthdayToday)
+    }, [mounted, user])
+
+    // ✅ Handle dismissal (once per day)
+    useEffect(() => {
+        if (!mounted) return
+
+        const dismissedDate = localStorage.getItem("birthdayBannerDismissed_v2")
+        const today = new Date().toDateString()
+
+        if (dismissedDate === today) {
+            setIsDismissed(true)
+        } else {
+            localStorage.removeItem("birthdayBannerDismissed_v2")
         }
-    }, [isBirthday, user, mounted])
+    }, [mounted])
 
     const handleDismiss = () => {
         setIsDismissed(true)
-        if (typeof window !== 'undefined') {
-            localStorage.setItem("birthdayBannerDismissed_v2", new Date().toDateString())
-        }
+        localStorage.setItem(
+            "birthdayBannerDismissed_v2",
+            new Date().toDateString()
+        )
     }
 
     const handleWhatsApp = () => {
-        const userName = user?.user_metadata?.full_name || "User"
-        const message = `Hi ${userName},\n\nThe Sugar & Soul family wishes you a very Happy Birthday 🎉\n\nWe hope your day is filled with joy and sweetness.\nIf you'd like to celebrate with a cake, we'd be happy to offer you a 5% birthday discount on your order.\n\nPlease feel free to reach out anytime.\nWarm wishes,\nSugar & Soul`
-        const encodedMessage = encodeURIComponent(message)
-        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`
+        const userName =
+            user?.user_metadata?.full_name?.split(" ")[0] || "Friend"
+
+        const message = `Hi ${userName},
+
+The Sugar & Soul family wishes you a very Happy Birthday.
+
+We hope your day is filled with joy and sweetness.
+If you'd like to celebrate with a cake, we’d be happy to offer you a 5% birthday discount on your order.
+
+Warm wishes,
+Sugar & Soul`
+
+        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+            message
+        )}`
+
         window.open(whatsappUrl, "_blank")
     }
 
-    // Don't render until client-side hydration is complete
-    if (!mounted) return null
-    if (!isBirthday || !user || isDismissed) return null
+    // ❌ Do not render until everything is ready
+    if (!mounted || !user || !showBanner || isDismissed) return null
 
-    const firstName = user.user_metadata?.full_name?.split(" ")[0] || "Friend"
+    const firstName =
+        user.user_metadata?.full_name?.split(" ")[0] || "Friend"
 
     return (
         <AnimatePresence>
-            {(isBirthday && !isDismissed) && (
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm"
+            >
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="fixed inset-0 z-[100] flex items-center justify-center px-4 md:px-6 bg-black/60 backdrop-blur-sm"
-                    style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+                    initial={{ scale: 0.6, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.6, opacity: 0 }}
+                    transition={{ type: "spring", damping: 18, stiffness: 250 }}
+                    className="w-full max-w-lg mx-auto"
                 >
-                    <motion.div
-                        initial={{ scale: 0.5, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ scale: 0.5, opacity: 0 }}
-                        transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                        className="w-full max-w-lg mx-auto relative"
-                    >
-                        <div className="relative bg-gradient-to-r from-yellow via-pink to-purple rounded-3xl shadow-2xl p-6 md:p-8 border-4 border-white/50 overflow-hidden">
-                            {/* Confetti Effect */}
-                            <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
-                                {[...Array(20)].map((_, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ y: -20, opacity: 1 }}
-                                        animate={{
-                                            y: [0, 400],
-                                            x: [0, (Math.random() - 0.5) * 200],
-                                            opacity: [1, 0],
-                                            rotate: [0, 360]
-                                        }}
-                                        transition={{
-                                            duration: 3 + Math.random() * 2,
-                                            repeat: Infinity,
-                                            delay: Math.random() * 2
-                                        }}
-                                        className="absolute text-2xl"
-                                        style={{
-                                            left: `${Math.random() * 100}%`,
-                                            top: -20
-                                        }}
-                                    >
-                                        {["🎉", "🎂", "🎈", "✨", "🎁"][Math.floor(Math.random() * 5)]}
-                                    </motion.div>
-                                ))}
-                            </div>
+                    <div className="relative bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 rounded-3xl shadow-2xl p-6 md:p-8 border-4 border-white/50 overflow-hidden">
 
-                            {/* Close Button */}
-                            <button
-                                onClick={handleDismiss}
-                                className="absolute top-3 right-3 p-2 rounded-full bg-white/30 hover:bg-white/50 transition-colors z-20"
-                                aria-label="Dismiss"
+                        {/* Close Button */}
+                        <button
+                            onClick={handleDismiss}
+                            className="absolute top-3 right-3 p-2 rounded-full bg-white/30 hover:bg-white/50 transition"
+                            aria-label="Close"
+                        >
+                            <X size={20} className="text-white" />
+                        </button>
+
+                        {/* Content */}
+                        <div className="text-center relative z-10">
+                            <motion.div
+                                animate={{ scale: [1, 1.1, 1] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="text-6xl mb-4"
                             >
-                                <X size={20} className="text-white" />
-                            </button>
+                                🎂
+                            </motion.div>
 
-                            {/* Content */}
-                            <div className="relative z-10 text-center">
-                                <motion.div
-                                    animate={{
-                                        scale: [1, 1.1, 1],
-                                    }}
-                                    transition={{
-                                        duration: 2,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }}
-                                    className="text-6xl md:text-7xl mb-4"
+                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 drop-shadow">
+                                Happy Birthday, {firstName}!
+                            </h2>
+
+                            <p className="text-white/90 text-lg mb-8 leading-relaxed">
+                                Wishing you a wonderful day filled with happiness and sweetness.
+                            </p>
+
+                            <div className="flex flex-col gap-3 items-center">
+                                <Button
+                                    onClick={handleWhatsApp}
+                                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-6 py-4 rounded-xl shadow-lg transition-transform hover:scale-105"
                                 >
-                                    🎂
-                                </motion.div>
+                                    <Gift size={22} />
+                                    Claim Birthday Surprise
+                                </Button>
 
-                                <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-2 drop-shadow-lg">
-                                    Happy Birthday, {firstName}! 🎉
-                                </h2>
-
-                                <p className="text-white/90 text-lg md:text-xl mb-8 font-bold drop-shadow-md leading-relaxed">
-                                    Sugar & Soul wishes you a wonderful day!<br />
-                                    Celebrate with something sweet 🍰
-                                </p>
-
-                                {/* CTA Buttons */}
-                                <div className="flex flex-col gap-3 justify-center items-center">
-                                    <Button
-                                        onClick={handleWhatsApp}
-                                        className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-6 py-4 rounded-xl shadow-lg hover:scale-105 transition-all text-lg"
-                                    >
-                                        <Gift size={24} />
-                                        Claim Birthday Surprise
-                                    </Button>
-                                    <button
-                                        onClick={handleDismiss}
-                                        className="text-white/80 text-sm font-semibold hover:text-white underline decoration-white/50 underline-offset-4"
-                                    >
-                                        No thanks, maybe later
-                                    </button>
-                                </div>
+                                <button
+                                    onClick={handleDismiss}
+                                    className="text-white/80 text-sm underline hover:text-white"
+                                >
+                                    No thanks, maybe later
+                                </button>
                             </div>
                         </div>
-                    </motion.div>
+                    </div>
                 </motion.div>
-            )}
+            </motion.div>
         </AnimatePresence>
     )
 }
