@@ -31,7 +31,7 @@ export function BirthdayBanner() {
 
     const handleWhatsApp = () => {
         const userName = user?.user_metadata?.full_name || "User"
-        const message = `Hi Sugar & Soul,\n\nToday is my birthday 🎉\nI'd love to order a birthday cake with my 5% birthday discount!\n\nThank you!\n- ${userName}`
+        const message = `Hi ${userName},\n\nThe Sugar & Soul family wishes you a very Happy Birthday 🎉\n\nWe hope your day is filled with joy and sweetness.\nIf you'd like to celebrate with a cake, we'd be happy to offer you a 5% birthday discount on your order.\n\nPlease feel free to reach out anytime.\nWarm wishes,\nSugar & Soul`
         const encodedMessage = encodeURIComponent(message)
         const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`
         window.open(whatsappUrl, "_blank")
