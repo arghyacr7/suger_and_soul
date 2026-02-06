@@ -141,16 +141,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     const updateDOB = async (dob: string) => {
-        if (!user) return
+        if (!user) throw new Error("User not logged in")
 
-        const { data, error } = await supabase.auth.updateUser({
-            data: {
-                dob: dob
-            }
+        // 1️⃣ Update Auth metadata
+        const { error: authError } = await supabase.auth.updateUser({
+            data: { dob }
         })
 
-        if (error) {
-            throw error
+        if (authError) {
+            console.error("Auth metadata update failed:", authError)
+            throw authError
+        }
+
+        // 2️⃣ UPSERT into profiles table (THIS IS THE FIX)
+        const { error: profileError } = await supabase
+            .from("profiles")
+            .upsert({
+                user_id: user.id,
+                name: user.user_metadata.full_name,
+                dob: dob,
+            })
+
+        if (profileError) {
+            console.error("Profiles table update failed:", profileError)
+            throw profileError
         }
 
         // Refresh session to get updated user data
