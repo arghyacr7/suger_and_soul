@@ -18,16 +18,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const product = getProductById(id)
     if (!product) return { title: "Product Not Found" }
 
+    const domain = "https://suger-and-soul-n7dbujw8l-arghyacr7s-projects.vercel.app"
+
     return {
         title: `${product.name} - Sugar & Soul`,
         description: product.description,
         openGraph: {
             title: `${product.name} - Sugar & Soul`,
             description: product.description,
-            url: `https://sugar-and-soul.vercel.app/product/${product.id}`,
+            url: `${domain}/product/${product.id}`,
             images: [
                 {
-                    url: `https://sugar-and-soul.vercel.app${product.image}`,
+                    url: `${domain}${product.image}`,
                     width: 800,
                     height: 600,
                     alt: product.name,

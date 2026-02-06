@@ -75,9 +75,11 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
         }
 
         // Add Product Links
-        const productUrl = `https://sugar-and-soul.vercel.app/product/${product.id}`
-        // Ensure image URL is properly formatted/encoded if needed, but usually standard URL works
-        const imageUrl = `https://sugar-and-soul.vercel.app${product.image.split(" ").join("%20")}`
+        // Using verified deployment URL
+        const domain = "https://suger-and-soul-n7dbujw8l-arghyacr7s-projects.vercel.app"
+        const productUrl = `${domain}/product/${product.id}`
+        // Ensure image URL is properly formatted/encoded if needed
+        const imageUrl = `${domain}${product.image.split(" ").join("%20")}`
 
         message += `\n\nProduct Page:\n${productUrl}`
         message += `\n\nProduct Image:\n${imageUrl}`
