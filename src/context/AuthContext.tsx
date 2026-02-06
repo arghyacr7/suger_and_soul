@@ -15,7 +15,6 @@ interface AuthContextType {
     toggleLike: (productId: string) => Promise<void>
     signOut: () => Promise<void>
     refreshSession: () => Promise<void>
-    updateDOB: (dob: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -141,39 +140,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
     }
 
-    const updateDOB = async (dob: string) => {
-        if (!user) throw new Error("User not logged in")
-
-        // 1️⃣ Update Auth metadata
-        const { error: authError } = await supabase.auth.updateUser({
-            data: { dob }
-        })
-
-        if (authError) {
-            console.error("Auth metadata update failed:", authError)
-            throw authError
-        }
-
-        // 2️⃣ UPSERT into profiles table (THIS IS THE FIX)
-        const { error: profileError } = await supabase
-            .from("profiles")
-            .upsert({
-                user_id: user.id,
-                name: user.user_metadata.full_name,
-                dob: dob,
-            })
-
-        if (profileError) {
-            console.error("Profiles table update failed:", profileError)
-            throw profileError
-        }
-
-        // Refresh session to get updated user data
-        await refreshSession()
-    }
-
     return (
-        <AuthContext.Provider value={{ user, session, loading, greeting, isBirthday, likedProducts, toggleLike, signOut, refreshSession, updateDOB }}>
+        <AuthContext.Provider value={{ user, session, loading, greeting, isBirthday, likedProducts, toggleLike, signOut, refreshSession }}>
             {children}
         </AuthContext.Provider>
     )
