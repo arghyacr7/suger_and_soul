@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, Gift } from "lucide-react"
+import { supabase } from "@/lib/supabase"
 import { useAuth } from "@/context/AuthContext"
 import { Button } from "@/components/ui/Button"
 
@@ -12,44 +13,52 @@ export function BirthdayBanner() {
     const { user } = useAuth()
 
     const [mounted, setMounted] = useState(false)
+    const [dob, setDob] = useState<string | null>(null)
     const [showBanner, setShowBanner] = useState(false)
     const [isDismissed, setIsDismissed] = useState(false)
 
-    // ✅ Ensure client-side rendering only
     useEffect(() => {
         setMounted(true)
     }, [])
 
-    // ✅ Check birthday AFTER user + hydration (PRODUCTION SAFE)
+    // ✅ Fetch DOB from profiles table (PRODUCTION SAFE)
     useEffect(() => {
         if (!mounted || !user) return
 
-        const dob = user.user_metadata?.dob
+        const fetchDOB = async () => {
+            const { data } = await supabase
+                .from("profiles")
+                .select("dob")
+                .eq("user_id", user.id)
+                .single()
+
+            if (data?.dob) setDob(data.dob)
+        }
+
+        fetchDOB()
+    }, [mounted, user])
+
+    // ✅ Birthday check AFTER DOB is fetched
+    useEffect(() => {
         if (!dob) return
 
         const today = new Date()
         const dobDate = new Date(dob)
 
-        const isBirthdayToday =
+        const isBirthday =
             today.getDate() === dobDate.getDate() &&
             today.getMonth() === dobDate.getMonth()
 
-        setShowBanner(isBirthdayToday)
-    }, [mounted, user])
+        setShowBanner(isBirthday)
+    }, [dob])
 
-    // ✅ Handle dismissal (once per day)
+    // ✅ Dismiss logic
     useEffect(() => {
-        if (!mounted) return
-
         const dismissedDate = localStorage.getItem("birthdayBannerDismissed_v2")
         const today = new Date().toDateString()
 
-        if (dismissedDate === today) {
-            setIsDismissed(true)
-        } else {
-            localStorage.removeItem("birthdayBannerDismissed_v2")
-        }
-    }, [mounted])
+        if (dismissedDate === today) setIsDismissed(true)
+    }, [])
 
     const handleDismiss = () => {
         setIsDismissed(true)
@@ -60,94 +69,59 @@ export function BirthdayBanner() {
     }
 
     const handleWhatsApp = () => {
-        const userName =
+        const firstName =
             user?.user_metadata?.full_name?.split(" ")[0] || "Friend"
 
-        const message = `Hi ${userName},
+        const message = `Hi ${firstName},
 
 The Sugar & Soul family wishes you a very Happy Birthday.
 
-We hope your day is filled with joy and sweetness.
-If you'd like to celebrate with a cake, we’d be happy to offer you a 5% birthday discount on your order.
+If you'd like to celebrate with a cake, we’d be happy to offer you a 5% birthday discount.
 
 Warm wishes,
 Sugar & Soul`
 
-        const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-            message
-        )}`
-
-        window.open(whatsappUrl, "_blank")
+        window.open(
+            `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,
+            "_blank"
+        )
     }
 
-    // ❌ Do not render until everything is ready
     if (!mounted || !user || !showBanner || isDismissed) return null
-
-    const firstName =
-        user.user_metadata?.full_name?.split(" ")[0] || "Friend"
 
     return (
         <AnimatePresence>
             <motion.div
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100] flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm"
             >
                 <motion.div
-                    initial={{ scale: 0.6, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    exit={{ scale: 0.6, opacity: 0 }}
-                    transition={{ type: "spring", damping: 18, stiffness: 250 }}
-                    className="w-full max-w-lg mx-auto"
+                    initial={{ scale: 0.6 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0.6 }}
+                    transition={{ type: "spring", damping: 20 }}
+                    className="bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 p-6 rounded-3xl max-w-lg w-full text-center border-4 border-white/50"
                 >
-                    <div className="relative bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 rounded-3xl shadow-2xl p-6 md:p-8 border-4 border-white/50 overflow-hidden">
+                    <button
+                        onClick={handleDismiss}
+                        className="absolute top-3 right-3 text-white"
+                    >
+                        <X />
+                    </button>
 
-                        {/* Close Button */}
-                        <button
-                            onClick={handleDismiss}
-                            className="absolute top-3 right-3 p-2 rounded-full bg-white/30 hover:bg-white/50 transition"
-                            aria-label="Close"
-                        >
-                            <X size={20} className="text-white" />
-                        </button>
+                    <div className="text-6xl mb-4">🎂</div>
+                    <h2 className="text-3xl font-bold text-white mb-3">
+                        Happy Birthday!
+                    </h2>
 
-                        {/* Content */}
-                        <div className="text-center relative z-10">
-                            <motion.div
-                                animate={{ scale: [1, 1.1, 1] }}
-                                transition={{ duration: 2, repeat: Infinity }}
-                                className="text-6xl mb-4"
-                            >
-                                🎂
-                            </motion.div>
-
-                            <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 drop-shadow">
-                                Happy Birthday, {firstName}!
-                            </h2>
-
-                            <p className="text-white/90 text-lg mb-8 leading-relaxed">
-                                Wishing you a wonderful day filled with happiness and sweetness.
-                            </p>
-
-                            <div className="flex flex-col gap-3 items-center">
-                                <Button
-                                    onClick={handleWhatsApp}
-                                    className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold px-6 py-4 rounded-xl shadow-lg transition-transform hover:scale-105"
-                                >
-                                    <Gift size={22} />
-                                    Claim Birthday Surprise
-                                </Button>
-
-                                <button
-                                    onClick={handleDismiss}
-                                    className="text-white/80 text-sm underline hover:text-white"
-                                >
-                                    No thanks, maybe later
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                    <Button
+                        onClick={handleWhatsApp}
+                        className="bg-[#25D366] w-full mt-4 text-white font-bold py-4 rounded-xl"
+                    >
+                        <Gift className="mr-2" /> Claim Birthday Surprise
+                    </Button>
                 </motion.div>
             </motion.div>
         </AnimatePresence>
