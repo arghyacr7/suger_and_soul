@@ -14,6 +14,7 @@ interface AuthContextType {
     toggleLike: (productId: string) => Promise<void>
     signOut: () => Promise<void>
     refreshSession: () => Promise<void>
+    updateDOB: (dob: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -97,8 +98,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(session?.user ?? null)
     }
 
+    const updateDOB = async (dob: string) => {
+        if (!user) return
+
+        const { data, error } = await supabase.auth.updateUser({
+            data: {
+                dob: dob
+            }
+        })
+
+        if (error) {
+            throw error
+        }
+
+        // Refresh session to get updated user data
+        await refreshSession()
+    }
+
     return (
-        <AuthContext.Provider value={{ user, session, loading, greeting, likedProducts, toggleLike, signOut, refreshSession }}>
+        <AuthContext.Provider value={{ user, session, loading, greeting, likedProducts, toggleLike, signOut, refreshSession, updateDOB }}>
             {children}
         </AuthContext.Provider>
     )
