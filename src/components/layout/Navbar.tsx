@@ -26,21 +26,36 @@ export function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-md border-b border-brown/10">
-            <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+            <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-2">
                 {/* Logo */}
-                {/* Logo */}
-                <Link href="/" className="flex items-center gap-3 scale-105 hover:scale-110 transition-transform origin-left">
+                <Link href="/" className="flex items-center gap-2 md:gap-3 scale-105 hover:scale-110 transition-transform origin-left flex-shrink-0">
                     <Image
                         src="/images/logo.png"
                         alt="Sugar & Soul"
                         width={80}
                         height={80}
-                        className="w-auto h-12 md:h-16 object-contain"
+                        className="w-auto h-10 md:h-16 object-contain"
                     />
-                    <span className="font-heading text-xl md:text-2xl font-bold text-brown uppercase tracking-wider">
+                    <span className="font-heading text-base md:text-2xl font-bold text-brown uppercase tracking-wider hidden sm:inline">
                         Sugar & Soul
                     </span>
                 </Link>
+
+                {/* Mobile Greeting (Center - Marked Area) */}
+                <div className="flex-1 flex justify-center md:hidden">
+                    {user && !loading && (
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8, y: -10 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            transition={{ duration: 0.6, ease: "easeOut" }}
+                            className="bg-gradient-to-r from-yellow/20 to-pink/20 px-3 py-1.5 rounded-full border border-brown/10 shadow-sm"
+                        >
+                            <span className="text-[10px] font-bold text-brown/70 whitespace-nowrap">
+                                {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}!
+                            </span>
+                        </motion.div>
+                    )}
+                </div>
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8">
@@ -111,37 +126,26 @@ export function Navbar() {
 
                 <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
-                {/* Mobile Auth Section */}
-                <div className="flex md:hidden items-center gap-2">
-                    {loading ? (
-                        <div className="w-16 h-6 bg-brown/5 animate-pulse rounded-full" />
-                    ) : user ? (
-                        <>
-                            <motion.span
-                                initial={{ opacity: 0, y: -10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, ease: "easeOut" }}
-                                className="text-[9px] font-bold text-brown/60 truncate max-w-[80px]"
-                            >
-                                {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}
-                            </motion.span>
-                            <Link
-                                href="/liked-products"
-                                className="p-1.5 rounded-full hover:bg-brown/5 transition-colors text-brown relative"
-                                aria-label="Liked Products"
-                            >
-                                <Heart size={18} className={cn("transition-colors", likedProducts.length > 0 ? "fill-red-500 text-red-500" : "text-brown")} strokeWidth={2.5} />
-                                {likedProducts.length > 0 && (
-                                    <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 text-white text-[8px] font-bold flex items-center justify-center rounded-full">
-                                        {likedProducts.length}
-                                    </span>
-                                )}
-                            </Link>
-                        </>
-                    ) : (
+                {/* Mobile Right: Heart + Menu */}
+                <div className="flex md:hidden items-center gap-2 flex-shrink-0">
+                    {user && !loading && (
+                        <Link
+                            href="/liked-products"
+                            className="p-1.5 rounded-full hover:bg-brown/5 transition-colors text-brown relative"
+                            aria-label="Liked Products"
+                        >
+                            <Heart size={20} className={cn("transition-colors", likedProducts.length > 0 ? "fill-red-500 text-red-500" : "text-brown")} strokeWidth={2.5} />
+                            {likedProducts.length > 0 && (
+                                <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 text-white text-[8px] font-bold flex items-center justify-center rounded-full">
+                                    {likedProducts.length}
+                                </span>
+                            )}
+                        </Link>
+                    )}
+                    {!user && !loading && (
                         <Link
                             href="/auth"
-                            className="text-[10px] font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors"
+                            className="text-[9px] font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors px-2"
                         >
                             Login
                         </Link>
@@ -150,7 +154,7 @@ export function Navbar() {
 
                 {/* Mobile Menu Toggle */}
                 <button
-                    className="md:hidden text-brown"
+                    className="md:hidden text-brown flex-shrink-0"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
