@@ -1,0 +1,91 @@
+import Image from "next/image"
+import Link from "next/link"
+import { Facebook, Instagram, Twitter } from "lucide-react"
+
+export function Footer() {
+    return (
+        <footer className="bg-brown text-cream py-12">
+            <div className="container mx-auto px-4 md:px-6">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+                    {/* Brand */}
+                    <div className="md:col-span-1">
+                        <Link href="/" className="flex items-center gap-3 mb-6 group">
+                            <Image
+                                src="/images/logo.png"
+                                alt="Sugar & Soul"
+                                width={60}
+                                height={60}
+                                className="w-auto h-14 object-contain"
+                            />
+                            <span className="font-display text-2xl font-bold text-cream">
+                                Sugar & Soul
+                            </span>
+                        </Link>
+                        <p className="text-cream/80 text-sm leading-relaxed mb-4">
+                            Baked with Love, Served with Soul.<br />
+                            A premium cloud kitchen delivering handcrafted cakes and brownies.
+                        </p>
+                        <div className="text-sm text-cream/80 space-y-2">
+                            <p className="font-semibold text-cream">Run by Moumita Das</p>
+                            <p>📍 Rabindranagar, Dankuni, West Bengal</p>
+                            <p>📲 9836733874</p>
+                        </div>
+                    </div>
+
+                    {/* Links */}
+                    <div>
+                        <h3 className="font-display text-lg font-semibold mb-4">Shop</h3>
+                        <ul className="space-y-2 text-sm text-cream/80">
+                            <li><Link href="/cakes" className="hover:text-accent">Cakes</Link></li>
+                            <li><Link href="/cream-cakes" className="hover:text-accent">Cream Cakes</Link></li>
+                            <li><Link href="/brownies" className="hover:text-accent">Brownies</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Support */}
+                    <div>
+                        <h3 className="font-heading text-lg font-semibold mb-4">Support</h3>
+                        <ul className="space-y-2 text-sm text-cream/80">
+                            <li><Link href="/contact" className="hover:text-accent">Contact Us</Link></li>
+                            <li><Link href="/faq" className="hover:text-accent">FAQs</Link></li>
+                            <li><Link href="/custom-order" className="hover:text-accent">Custom Order</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Delivery */}
+                    <div>
+                        <h3 className="font-heading text-lg font-semibold mb-4">Delivery</h3>
+                        <p className="text-sm text-cream/80 mb-2">
+                            🚚 <strong>1 km Radius Only</strong><br />
+                            Ensure fresh & fast delivery.
+                        </p>
+                        <p className="text-sm text-cream/80">
+                            📦 <strong>Pickup Available</strong><br />
+                            From our cloud kitchen.
+                        </p>
+                    </div>
+
+                    {/* Social */}
+                    <div>
+                        <h3 className="font-heading text-lg font-semibold mb-4">Follow Us</h3>
+                        <div className="flex gap-4">
+                            <Link href="https://www.instagram.com/iammoumita1" target="_blank" className="hover:text-accent transition-colors">
+                                <Instagram size={24} />
+                            </Link>
+                            <Link href="https://www.facebook.com/arghyadeep.das.948" target="_blank" className="hover:text-accent transition-colors">
+                                <Facebook size={24} />
+                            </Link>
+                            <Link href="#" className="hover:text-accent transition-colors">
+                                <Twitter size={24} />
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="border-t border-cream/10 mt-12 pt-8 text-center text-sm text-cream/60">
+                    © {new Date().getFullYear()} Sugar & Soul. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    )
+}

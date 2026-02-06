@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Rollin Inspired Palette */
+  --color-cream: #FDF6F0;
+  /* Light Off-White Background */
+  --color-yellow: #FFD23F;
+  /* Vibrant Yellow Accent */
+  --color-brown: #3E2723;
+  /* Deep Chocolate Brown Text */
+  --color-purple: #6A1B9A;
+  /* Deep Purple (optional accent) */
+  --color-pink: #FF80AB;
+  /* Soft Pink */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Manual Font Definitions */
+  --font-combo: "Combo", system-ui;
+  --font-asimovian: "Asimovian", sans-serif;
+
+  --font-sans: var(--font-combo);
+  --font-heading: var(--font-combo);
+  --font-script: var(--font-asimovian);
+
+
+  /* Animation Basics */
+  --animate-fade-in: fade-in 0.5s ease-out;
+  --animate-slide-up: slide-up 0.5s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes wiggle {
+
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+
+    50% {
+      transform: rotate(3deg);
+    }
   }
 }
 
+/* User Requested Font Classes */
+.combo-regular {
+  font-family: "Combo", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.asimovian-regular {
+  font-family: "Asimovian", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+:root {
+  --background: var(--color-cream);
+  --foreground: var(--color-brown);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Futuristic Bakery Background: Cream Base with Fluid Pastel Gradients */
+  background-color: #FDF6F0;
+  /* Cream Base */
+  background-image:
+    radial-gradient(at 0% 0%, hsla(35, 100%, 86%, 0.4) 0px, transparent 50%),
+    /* Soft Gold */
+    radial-gradient(at 100% 0%, hsla(340, 100%, 76%, 0.3) 0px, transparent 50%),
+    /* Soft Pink */
+    radial-gradient(at 100% 100%, hsla(280, 60%, 88%, 0.4) 0px, transparent 50%),
+    /* Lavender */
+    radial-gradient(at 0% 100%, hsla(22, 100%, 89%, 0.4) 0px, transparent 50%);
+  /* Soft Peach */
+  background-attachment: fixed;
+  background-size: 100% 100%;
+
+  /* Add subtle noise texture for premium feel */
+  position: relative;
+  min-height: 100vh;
+
+  color: var(--color-brown);
+  font-family: var(--font-heading);
+}
+
+/* Noise overlay using pseudo-element */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Fancy Text Utilities */
+.text-outline {
+  -webkit-text-stroke: 2px #3E2723;
+  /* Brown border */
+  text-shadow: 4px 4px 0px #FFD23F;
+  /* Yellow shadow */
+}
+
+.text-outline-white {
+  -webkit-text-stroke: 2px #3E2723;
+  text-shadow: 4px 4px 0px #FFFFFF;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+
+.font-script {
+  font-family: var(--font-script) !important;
 }
