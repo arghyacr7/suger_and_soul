@@ -59,20 +59,28 @@ export function BirthdayBanner() {
         setShowBanner(isBirthdayToday)
     }, [dob])
 
-    // ✅ Dismiss logic
+    // ✅ Dismiss logic (Year-aware)
     useEffect(() => {
-        const dismissedDate = localStorage.getItem("birthdayBannerDismissed_v2")
-        const today = new Date().toDateString()
+        if (!dob) return
 
-        if (dismissedDate === today) setIsDismissed(true)
-    }, [])
+        const currentYear = new Date().getFullYear()
+        const dismissedKey = localStorage.getItem("birthdayBannerDismissed_v3")
+        const expectedKey = `${dob}-${currentYear}`
+
+        if (dismissedKey === expectedKey) {
+            setIsDismissed(true)
+        }
+    }, [dob])
 
     const handleDismiss = () => {
         setIsDismissed(true)
-        localStorage.setItem(
-            "birthdayBannerDismissed_v2",
-            new Date().toDateString()
-        )
+        if (dob) {
+            const currentYear = new Date().getFullYear()
+            localStorage.setItem(
+                "birthdayBannerDismissed_v3",
+                `${dob}-${currentYear}`
+            )
+        }
     }
 
     const handleWhatsApp = () => {
