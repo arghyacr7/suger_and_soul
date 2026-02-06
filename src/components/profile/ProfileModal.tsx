@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, User, Calendar, LogOut } from "lucide-react"
 import { useAuth } from "@/context/AuthContext"
@@ -16,6 +16,13 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
     const [dob, setDob] = useState(user?.user_metadata?.dob || "")
     const [saving, setSaving] = useState(false)
     const [success, setSuccess] = useState(false)
+
+    // Sync dob state with user data when it changes
+    useEffect(() => {
+        if (user?.user_metadata?.dob) {
+            setDob(user.user_metadata.dob)
+        }
+    }, [user?.user_metadata?.dob])
 
     const handleSave = async () => {
         setSaving(true)
