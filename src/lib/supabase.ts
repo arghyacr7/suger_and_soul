@@ -8,5 +8,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey, {
         persistSession: true,
         autoRefreshToken: true,
         detectSessionInUrl: true,
+        storageKey: 'sugar-soul-auth-token',
+        storage: typeof window !== 'undefined' ? window.localStorage : undefined,
     },
 })

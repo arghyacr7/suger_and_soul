@@ -37,6 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
         // ✅ Restore session safely
         supabase.auth.getSession().then(({ data }) => {
+            console.log("🔐 [Auth] Initial Session Check:", data.session?.user?.email ?? "No session")
             setSession(data.session)
             setUser(data.session?.user ?? null)
             if (data.session?.user) {
@@ -46,7 +47,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         })
 
         const { data: listener } = supabase.auth.onAuthStateChange(
-            (_event, session) => {
+            (event, session) => {
+                console.log("🔐 [Auth] State Change:", event, session?.user?.email)
                 setSession(session)
                 setUser(session?.user ?? null)
                 if (session?.user) {
