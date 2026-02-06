@@ -36,38 +36,33 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         else if (hour >= 12 && hour < 17) setGreeting("Good Afternoon")
         else setGreeting("Good Evening")
 
-        // ✅ Restore session on page refresh (PRODUCTION SAFE)
-        const restoreSession = async () => {
-            const { data } = await supabase.auth.getSession()
-            const restoredUser = data.session?.user ?? null
-
-            setUser(restoredUser)
+        // ✅ Restore session safely
+        supabase.auth.getSession().then(({ data }) => {
             setSession(data.session)
-
-            if (restoredUser) {
-                fetchLikes(restoredUser.id)
-            }
-            setLoading(false)
-        }
-
-        restoreSession()
-
-        // ✅ Listen to auth changes
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session)
-            const newUser = session?.user ?? null
-            setUser(newUser)
-
-            if (newUser) {
-                fetchLikes(newUser.id)
-            } else {
-                setLikedProducts([])
-                setIsBirthday(false)
+            setUser(data.session?.user ?? null)
+            if (data.session?.user) {
+                fetchLikes(data.session.user.id)
             }
             setLoading(false)
         })
 
-        return () => subscription.unsubscribe()
+        const { data: listener } = supabase.auth.onAuthStateChange(
+            (_event, session) => {
+                setSession(session)
+                setUser(session?.user ?? null)
+                if (session?.user) {
+                    fetchLikes(session.user.id)
+                } else {
+                    setLikedProducts([])
+                    setIsBirthday(false)
+                }
+                setLoading(false)
+            }
+        )
+
+        return () => {
+            listener.subscription.unsubscribe()
+        }
     }, [])
 
     // Check Birthday

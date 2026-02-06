@@ -12,7 +12,7 @@ interface ProfileModalProps {
 }
 
 export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
-    const { user, signOut, updateDOB } = useAuth()
+    const { user, loading, signOut, updateDOB } = useAuth()
     const [dob, setDob] = useState(user?.user_metadata?.dob || "")
     const [saving, setSaving] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -32,6 +32,12 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
     }, [user?.user_metadata?.dob])
 
     const handleSave = async () => {
+        // Wait for auth to be ready
+        if (loading || !user) {
+            setError("Please wait, setting up your profile...")
+            return
+        }
+
         // Validate DOB is provided
         if (!dob) {
             setError("Please select your date of birth")
