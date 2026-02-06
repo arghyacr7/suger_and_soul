@@ -31,15 +31,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // Check if today is user's birthday
     const checkBirthday = (dob: string | undefined) => {
-        if (!dob) return false
+        if (!dob) {
+            console.log('🎂 Birthday Check: No DOB set')
+            return false
+        }
         try {
             const today = new Date()
             const birthDate = new Date(dob)
-            return (
+            const isBday = (
                 today.getDate() === birthDate.getDate() &&
                 today.getMonth() === birthDate.getMonth()
             )
-        } catch {
+            console.log('🎂 Birthday Check:', {
+                dob,
+                todayDate: today.getDate(),
+                todayMonth: today.getMonth(),
+                birthDate: birthDate.getDate(),
+                birthMonth: birthDate.getMonth(),
+                isBirthday: isBday
+            })
+            return isBday
+        } catch (error) {
+            console.error('🎂 Birthday Check Error:', error)
             return false
         }
     }

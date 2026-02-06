@@ -13,16 +13,24 @@ export function BirthdayBanner() {
     const [isDismissed, setIsDismissed] = useState(false)
 
     useEffect(() => {
+        console.log('🎉 BirthdayBanner - State:', {
+            isBirthday,
+            hasUser: !!user,
+            dob: user?.user_metadata?.dob
+        })
+
         // Check if banner was dismissed today
         const dismissedDate = localStorage.getItem("birthdayBannerDismissed")
         const today = new Date().toDateString()
+        console.log('🎉 BirthdayBanner - Dismissal check:', { dismissedDate, today })
+
         if (dismissedDate === today) {
             setIsDismissed(true)
         } else if (dismissedDate && dismissedDate !== today) {
             // Clear old dismissal
             localStorage.removeItem("birthdayBannerDismissed")
         }
-    }, [])
+    }, [isBirthday, user])
 
     const handleDismiss = () => {
         setIsDismissed(true)
@@ -36,6 +44,13 @@ export function BirthdayBanner() {
         const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`
         window.open(whatsappUrl, "_blank")
     }
+
+    console.log('🎉 BirthdayBanner - Render decision:', {
+        isBirthday,
+        hasUser: !!user,
+        isDismissed,
+        willShow: !(!isBirthday || !user || isDismissed)
+    })
 
     if (!isBirthday || !user || isDismissed) return null
 
