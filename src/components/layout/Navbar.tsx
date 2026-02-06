@@ -111,6 +111,43 @@ export function Navbar() {
 
                 <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
+                {/* Mobile Auth Section */}
+                <div className="flex md:hidden items-center gap-2">
+                    {loading ? (
+                        <div className="w-16 h-6 bg-brown/5 animate-pulse rounded-full" />
+                    ) : user ? (
+                        <>
+                            <motion.span
+                                initial={{ opacity: 0, y: -10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, ease: "easeOut" }}
+                                className="text-[9px] font-bold text-brown/60 truncate max-w-[80px]"
+                            >
+                                {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}
+                            </motion.span>
+                            <Link
+                                href="/liked-products"
+                                className="p-1.5 rounded-full hover:bg-brown/5 transition-colors text-brown relative"
+                                aria-label="Liked Products"
+                            >
+                                <Heart size={18} className={cn("transition-colors", likedProducts.length > 0 ? "fill-red-500 text-red-500" : "text-brown")} strokeWidth={2.5} />
+                                {likedProducts.length > 0 && (
+                                    <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 bg-red-500 text-white text-[8px] font-bold flex items-center justify-center rounded-full">
+                                        {likedProducts.length}
+                                    </span>
+                                )}
+                            </Link>
+                        </>
+                    ) : (
+                        <Link
+                            href="/auth"
+                            className="text-[10px] font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors"
+                        >
+                            Login
+                        </Link>
+                    )}
+                </div>
+
                 {/* Mobile Menu Toggle */}
                 <button
                     className="md:hidden text-brown"
