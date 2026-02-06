@@ -26,6 +26,15 @@ Baked with Love, Delivered with Care.
     -   Dynamic price calculation.
 -   **📲 WhatsApp Ordering**: Direct integration generating pre-filled order messages with product details, selected options, and user rating.
 -   **🏷️ Occasion-Based Tagging**: Highlights special cakes for Anniversaries, Kids' Birthdays, etc.
+-   **🔐 Robust Authentication**:
+    -   Secure email/password login via Supabase.
+    -   **Persistent Sessions**: Keeps users logged in across refreshes and browser restarts.
+    -   **Simplified Profile**: Clean user interface showing name and logout options.
+-   **🎂 Automated Birthday System**:
+    -   **Birthday Detection**: Automatically detects user's birthday based on profile data.
+    -   **Celebratory Banner**: Displays a personalized greeting with confetti animations.
+    -   **Exclusive Offers**: Direct WhatsApp link to claim special birthday surprises.
+    -   **Smart Dismissal**: Remembers banner dismissal for the day but resets annually.
 
 ## 🛠️ Getting Started
 
