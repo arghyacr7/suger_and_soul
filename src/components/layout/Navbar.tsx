@@ -103,7 +103,7 @@ export function Navbar() {
                 <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
                 {/* Mobile Right: Heart + Menu */}
-                <div className="flex md:hidden items-center gap-2 flex-shrink-0">
+                <div className="flex md:hidden items-center gap-1 flex-shrink-0">
                     {user && !loading && (
                         <Link
                             href="/liked-products"
