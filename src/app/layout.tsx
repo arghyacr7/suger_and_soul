@@ -4,13 +4,13 @@ import { Footer } from "@/components/layout/Footer"
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp"
 import { BottomMobileNav } from "@/components/layout/BottomMobileNav"
 import dynamic from "next/dynamic"
-
-const BirthdayBanner = dynamic(
-  () => import("@/components/birthday/BirthdayBanner").then(mod => mod.BirthdayBanner),
-  { ssr: false }
-)
 import { AuthProvider } from "@/context/AuthContext"
 import "./globals.css"
+
+const BirthdayBanner = dynamic(
+  () => import("@/components/birthday/BirthdayBanner").then((mod) => mod.BirthdayBanner),
+  { ssr: false }
+)
 
 export const metadata: Metadata = {
   title: "Sugar & Soul - Baked with Love",
