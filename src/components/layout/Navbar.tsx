@@ -2,12 +2,13 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Menu, X, ShoppingBag, Search, Phone } from "lucide-react"
+import { Menu, X, ShoppingBag, Search, Phone, Heart } from "lucide-react"
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/Button"
 import { motion, AnimatePresence } from "framer-motion"
 import { SearchModal } from "@/components/ui/SearchModal"
+import { useAuth } from "@/context/AuthContext"
 
 const navLinks = [
     { name: "Home", href: "/" },
@@ -21,6 +22,7 @@ const navLinks = [
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const { user, greeting, loading, likedProducts, signOut } = useAuth()
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-md border-b border-brown/10">
@@ -56,15 +58,41 @@ export function Navbar() {
                     </div>
 
                     <div className="flex items-center gap-4 border-l border-brown/10 pl-6">
-                        <a
-                            href="tel:9836733874"
-                            className="flex items-center gap-2 text-brown hover:text-purple font-bold tracking-wide transition-colors group"
-                        >
-                            <div className="p-2 rounded-full bg-brown/5 group-hover:bg-brown/10 transition-colors">
-                                <Phone size={20} />
+                        {/* Auth Section */}
+                        {loading ? (
+                            <div className="w-20 h-8 bg-brown/5 animate-pulse rounded-full" />
+                        ) : user ? (
+                            <div className="flex items-center gap-4">
+                                <span className="text-xs font-bold text-brown/60 hidden lg:inline">
+                                    {greeting}, {user.user_metadata.full_name?.split(" ")[0]}
+                                </span>
+                                <Link
+                                    href="/liked-products"
+                                    className="p-2 rounded-full hover:bg-brown/5 transition-colors text-brown relative group"
+                                    aria-label="Liked Products"
+                                >
+                                    <Heart size={22} className={cn("transition-colors", likedProducts.length > 0 ? "fill-red-500 text-red-500" : "text-brown")} strokeWidth={2.5} />
+                                    {likedProducts.length > 0 && (
+                                        <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[10px] font-bold flex items-center justify-center rounded-full">
+                                            {likedProducts.length}
+                                        </span>
+                                    )}
+                                </Link>
+                                <button
+                                    onClick={() => signOut()}
+                                    className="text-xs font-bold text-brown/60 hover:text-red-500 uppercase tracking-wide transition-colors"
+                                >
+                                    Logout
+                                </button>
                             </div>
-                            <span className="hidden lg:inline text-sm">9836733874</span>
-                        </a>
+                        ) : (
+                            <Link
+                                href="/auth"
+                                className="text-sm font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors"
+                            >
+                                Login
+                            </Link>
+                        )}
 
                         <button
                             onClick={() => setIsSearchOpen(true)}

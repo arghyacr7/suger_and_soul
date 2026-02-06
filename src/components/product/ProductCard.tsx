@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/Button"
 import { cn } from "@/lib/utils"
 import { buildWhatsAppLink } from "@/lib/whatsapp"
 
+import { useRouter } from "next/navigation"
+import { useAuth } from "@/context/AuthContext"
+
 interface ProductCardProps {
     product: Product
     onSelect?: (product: Product) => void
@@ -15,7 +18,10 @@ interface ProductCardProps {
 
 export function ProductCard({ product, onSelect }: ProductCardProps) {
     const [selectedWeight, setSelectedWeight] = useState<"1lb" | "2lb" | "3lb" | "piece" | "10pc" | null>(null)
-    const [isLiked, setIsLiked] = useState(false)
+    const { user, likedProducts, toggleLike } = useAuth()
+    const router = useRouter()
+
+    const isLiked = likedProducts.includes(product.id)
 
     // Initialize default state
     useEffect(() => {
@@ -81,6 +87,15 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
         }
     }
 
+    const handleLikeClick = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        if (!user) {
+            router.push("/auth")
+            return
+        }
+        toggleLike(product.id)
+    }
+
     return (
         <div
             className="group relative bg-white rounded-[1.25rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-brown/5 flex flex-col h-full"
@@ -123,10 +138,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
                 )}
                 {/* Like Button Overlay */}
                 <button
-                    onClick={(e) => {
-                        e.stopPropagation()
-                        setIsLiked(!isLiked)
-                    }}
+                    onClick={handleLikeClick}
                     className="absolute bottom-3 left-3 bg-white/90 p-2 rounded-full shadow-md hover:bg-white transition-transform hover:scale-110 active:scale-95 backdrop-blur-sm z-10"
                 >
                     <Heart

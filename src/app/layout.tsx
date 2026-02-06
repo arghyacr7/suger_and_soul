@@ -3,6 +3,7 @@ import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp"
 import { BottomMobileNav } from "@/components/layout/BottomMobileNav"
+import { AuthProvider } from "@/context/AuthContext"
 import "./globals.css"
 
 export const metadata: Metadata = {
@@ -46,13 +47,15 @@ export default function RootLayout({
       <body
         className={`antialiased bg-cream text-brown`}
       >
-        <Navbar />
-        <main className="min-h-screen pt-16 pb-20 md:pb-0">
-          {children}
-        </main>
-        <FloatingWhatsApp />
-        <BottomMobileNav />
-        <Footer />
+        <AuthProvider>
+          <Navbar />
+          <main className="min-h-screen pt-16 pb-20 md:pb-0">
+            {children}
+          </main>
+          <FloatingWhatsApp />
+          <BottomMobileNav />
+          <Footer />
+        </AuthProvider>
       </body>
     </html>
   )
