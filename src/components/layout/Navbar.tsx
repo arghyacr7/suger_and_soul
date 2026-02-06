@@ -41,22 +41,6 @@ export function Navbar() {
                     </span>
                 </Link>
 
-                {/* Mobile Greeting (Center - Marked Area) */}
-                <div className="flex-1 flex justify-center md:hidden">
-                    {user && !loading && (
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8, y: -10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            transition={{ duration: 0.6, ease: "easeOut" }}
-                            className="bg-gradient-to-r from-yellow/20 to-pink/20 px-3 py-1.5 rounded-full border border-brown/10 shadow-sm"
-                        >
-                            <span className="text-[10px] font-bold text-brown/70 whitespace-nowrap">
-                                {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}!
-                            </span>
-                        </motion.div>
-                    )}
-                </div>
-
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8">
                     <div className="flex items-center gap-6 mr-4">

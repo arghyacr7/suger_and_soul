@@ -1,7 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/Button"
+import { motion } from "framer-motion"
+import { useAuth } from "@/context/AuthContext"
 
 export function Hero() {
+    const { user, greeting, loading } = useAuth()
     return (
         <section className="relative min-h-[75vh] w-full flex items-center justify-center overflow-visible py-12 md:py-20">
             {/* Background Graphic/Image Placeholder - CSS Pattern */}
@@ -10,6 +15,22 @@ export function Hero() {
 
             {/* Content */}
             <div className="relative z-10 text-center px-4 max-w-4xl mx-auto backdrop-blur-sm bg-cream/30 dark:bg-black/10 rounded-[3rem] p-6 md:p-10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] border border-white/20">
+
+                {/* User Greeting */}
+                {user && !loading && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        transition={{ duration: 0.7, ease: "easeOut" }}
+                        className="mb-6"
+                    >
+                        <div className="inline-block bg-gradient-to-r from-yellow/30 via-pink/30 to-purple/30 px-6 py-3 rounded-full border-2 border-brown/20 shadow-lg backdrop-blur-md">
+                            <span className="text-base md:text-xl font-bold text-brown drop-shadow-md">
+                                {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}! 🎂
+                            </span>
+                        </div>
+                    </motion.div>
+                )}
 
                 <h1 className="font-script text-4xl md:text-7xl text-white mb-6 leading-tight animate-[slide-up_1s_ease-out] drop-shadow-xl tracking-wider text-center flex flex-col items-center justify-center gap-2">
                     <span className="text-outline-white text-[#FF80AB] drop-shadow-[5px_5px_0px_#3E2723]">Baked with Love</span>
