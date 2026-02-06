@@ -26,9 +26,17 @@ export function Footer() {
                             A premium cloud kitchen delivering handcrafted cakes and brownies.
                         </p>
                         <div className="text-sm text-cream/80 space-y-2">
-                            <p className="font-semibold text-cream">Run by Moumita Das</p>
-                            <p>📍 Rabindranagar, Dankuni, West Bengal</p>
-                            <p>📲 9836733874</p>
+                            <p className="font-semibold text-cream">Contact Us</p>
+                            <p>
+                                <a href="mailto:dasmoumita0668@gmail.com" className="hover:text-accent transition-colors">
+                                    Email: dasmoumita0668@gmail.com
+                                </a>
+                            </p>
+                            <p>
+                                <a href="tel:9836733874" className="hover:text-accent transition-colors">
+                                    Phone: 9836733874
+                                </a>
+                            </p>
                         </div>
                     </div>
 
@@ -69,14 +77,11 @@ export function Footer() {
                     <div>
                         <h3 className="font-heading text-lg font-semibold mb-4">Follow Us</h3>
                         <div className="flex gap-4">
-                            <Link href="https://www.instagram.com/iammoumita1" target="_blank" className="hover:text-accent transition-colors">
-                                <Instagram size={24} />
-                            </Link>
-                            <Link href="https://www.facebook.com/arghyadeep.das.948" target="_blank" className="hover:text-accent transition-colors">
+                            <Link href="https://www.facebook.com/arghyadeep.das.948" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                                 <Facebook size={24} />
                             </Link>
-                            <Link href="#" className="hover:text-accent transition-colors">
-                                <Twitter size={24} />
+                            <Link href="https://www.instagram.com/iammoumita1?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                                <Instagram size={24} />
                             </Link>
                         </div>
                     </div>

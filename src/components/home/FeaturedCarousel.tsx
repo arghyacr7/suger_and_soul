@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/Button"
 import { products } from "@/lib/products"
 
 // Get popular products for the carousel
-const featuredProducts = products.filter(product => product.popular)
+const featuredProducts = products
+    .filter(product => product.popular)
+    .sort((a, b) => Number(b.bestseller || false) - Number(a.bestseller || false))
 
 import { useState } from "react"
 import { ProductModal } from "@/components/product/ProductModal"

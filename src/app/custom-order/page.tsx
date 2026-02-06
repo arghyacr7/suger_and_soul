@@ -66,16 +66,19 @@ export default function CustomOrderPage() {
 
                         {/* Weight */}
                         <div className="space-y-2">
-                            <label className="block text-sm font-bold text-brown uppercase tracking-wide">Estimated Weight</label>
+                            <label className="block text-sm font-bold text-brown uppercase tracking-wide">Estimated Weight (kg)</label>
                             <select
                                 value={weight}
                                 onChange={(e) => setWeight(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/10 outline-none transition-all text-brown appearance-none cursor-not-allowed opacity-80"
-                                disabled
+                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/10 outline-none transition-all text-brown appearance-none"
                             >
                                 <option value="1 kg">1 kg</option>
+                                <option value="2 kg">2 kg</option>
+                                <option value="3 kg">3 kg</option>
+                                <option value="4 kg">4 kg</option>
+                                <option value="5 kg">5 kg</option>
                             </select>
-                            <p className="text-[10px] text-brown/40 italic">*Currently accepting order for 1kg only</p>
+                            <p className="text-[10px] text-brown/60 italic">*Currently accepting custom cake orders from 1 kg up to 5 kg only.</p>
                         </div>
 
                         {/* Date */}
