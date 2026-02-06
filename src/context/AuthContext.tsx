@@ -116,6 +116,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const { data: { session } } = await supabase.auth.getSession()
         setSession(session)
         setUser(session?.user ?? null)
+        // Re-check birthday after session refresh
+        if (session?.user?.user_metadata?.dob) {
+            setIsBirthday(checkBirthday(session.user.user_metadata.dob))
+        }
     }
 
     const updateDOB = async (dob: string) => {
