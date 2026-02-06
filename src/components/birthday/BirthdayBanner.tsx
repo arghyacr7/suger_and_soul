@@ -77,8 +77,8 @@ export function BirthdayBanner() {
                 <p>Dismissed: {isDismissed ? 'Yes' : 'No'}</p>
             </div>
 
-            {(isBirthday && !isDismissed) && (
-                <AnimatePresence>
+            <AnimatePresence>
+                {(isBirthday && !isDismissed) && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -176,8 +176,8 @@ export function BirthdayBanner() {
                             </div>
                         </motion.div>
                     </motion.div>
-                </motion.div>
-            )}
-        </AnimatePresence >
+                )}
+            </AnimatePresence>
+        </>
     )
 }
