@@ -83,7 +83,7 @@ export function BottomMobileNav() {
                                     animate={{ y: 0, opacity: 1 }}
                                     exit={{ y: "100%", opacity: 0 }}
                                     transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                                    className="absolute bottom-full left-0 right-0 bg-white rounded-t-[2rem] shadow-2xl border-t-2 border-brown/10 p-6 z-30 mb-2"
+                                    className="absolute bottom-full left-0 right-0 bg-white rounded-t-[2rem] shadow-2xl border-t-2 border-brown/10 p-6 z-50 mb-2"
                                 >
                                     <div className="flex flex-col gap-3">
                                         <div className="text-center mb-2">
