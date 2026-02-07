@@ -84,6 +84,11 @@ export function Footer() {
                                 <Instagram size={24} />
                             </Link>
                         </div>
+                        <div className="mt-4">
+                            <span className="text-[10px] text-cream/40 hover:text-cream/60 transition-colors cursor-default tracking-wider">
+                                Crafted by Arghyadeep
+                            </span>
+                        </div>
                     </div>
                 </div>
 
