@@ -8,8 +8,43 @@ import { AuthProvider } from "@/context/AuthContext"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Sugar & Soul - Baked with Love",
-  description: "Premium cloud kitchen cake shop serving cakes, cream cakes, and brownies.",
+  metadataBase: new URL("https://sugarandsoul.com"),
+  title: {
+    default: "Sugar & Soul | Premium Cakes & Cloud Kitchen in Dankuni",
+    template: "%s | Sugar & Soul"
+  },
+  description: "Order fresh, handcrafted cakes, brownies, and desserts from Sugar & Soul. Premium cloud kitchen in Rabindranagar, Dankuni. Fast delivery for birthdays & celebrations.",
+  keywords: ["cake delivery", "birthday cakes", "brownies", "cloud kitchen", "bakery", "custom cakes", "sugar and soul", "desserts", "Dankuni", "Rabindranagar", "online cake order"],
+  authors: [{ name: "Sugar & Soul" }],
+  creator: "Sugar & Soul",
+  publisher: "Sugar & Soul",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "Sugar & Soul | Premium Cakes & Cloud Kitchen",
+    description: "Handcrafted cakes and brownies delivered to your doorstep in Dankuni. Order now for fresh, premium quality desserts.",
+    url: "https://sugarandsoul.com",
+    siteName: "Sugar & Soul",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/images/og-image.jpg", // Ensure this exists or use a fallback
+        width: 1200,
+        height: 630,
+        alt: "Sugar & Soul Premium Cakes",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sugar & Soul | Premium Cakes & Cloud Kitchen",
+    description: "Order fresh, handcrafted cakes and brownies in Dankuni.",
+    images: ["/images/og-image.jpg"],
+  },
   icons: {
     icon: [
       {
@@ -30,6 +65,17 @@ export const metadata: Metadata = {
     apple: "/images/favicon_io/apple-touch-icon.png",
   },
   manifest: "/images/favicon_io/site.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 }
 
 export default function RootLayout({

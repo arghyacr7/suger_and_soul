@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const product = getProductById(id)
     if (!product) return { title: "Product Not Found" }
 
-    const domain = "https://suger-and-soul-n7dbujw8l-arghyacr7s-projects.vercel.app"
+    const domain = "https://sugarandsoul.com"
 
     return {
         title: `${product.name} - Sugar & Soul`,
