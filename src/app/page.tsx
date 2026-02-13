@@ -43,7 +43,6 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <div className="absolute top-[80vh] left-0 right-0 h-40 bg-gradient-to-b from-transparent to-[#050505] z-20 pointer-events-none" />
       <Hero />
       <div className="relative">
         <div className="absolute inset-0 bg-purple-900/10 blur-[100px] pointer-events-none" />
