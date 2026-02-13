@@ -38,10 +38,10 @@ export function Hero() {
                     >
                         <div
                             onClick={() => setIsProfileOpen(true)}
-                            className="inline-block bg-gradient-to-r from-yellow/30 via-pink/30 to-purple/30 px-6 py-3 rounded-full border border-brown/10 shadow-lg backdrop-blur-xl cursor-pointer hover:scale-105 transition-transform active:scale-95"
+                            className="inline-block bg-white/5 backdrop-blur-xl px-8 py-4 rounded-full border-2 border-white/10 hover:border-yellow/50 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] cursor-pointer hover:scale-105 transition-all duration-300 active:scale-95"
                         >
-                            <span className="text-base md:text-xl font-bold text-brown drop-shadow-sm">
-                                {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}! 🎂
+                            <span className="text-base md:text-xl font-bold text-white drop-shadow-lg">
+                                {greeting}, <span className="text-yellow">{user.user_metadata.full_name?.split(" ")[0] || "User"}</span>! 🎂
                             </span>
                         </div>
                     </motion.div>
