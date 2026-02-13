@@ -11,7 +11,7 @@ export function Hero() {
     const { user, greeting, loading } = useAuth()
     const [isProfileOpen, setIsProfileOpen] = useState(false)
     return (
-        <section className="relative min-h-[75vh] w-full flex items-center justify-center overflow-visible py-8 md:py-20">
+        <section className="relative min-h-[60vh] md:min-h-[75vh] w-full flex items-center justify-center overflow-visible pt-24 pb-8 md:py-20">
             {/* Background Graphic/Image Placeholder - CSS Pattern */}
             <div className="absolute inset-0 bg-yellow/5" />
             <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#4A3B32_1px,transparent_1px)] [background-size:20px_20px]" />

@@ -32,7 +32,7 @@ export function ProductCatalogue() {
     }
 
     return (
-        <section id="menu" className="py-8 md:py-16 container mx-auto px-4 md:px-6 scroll-mt-20">
+        <section id="menu" className="py-8 md:py-16 container mx-auto px-4 md:px-6 scroll-mt-20 mt-6 md:mt-12">
             <div className="text-center mb-6 md:mb-12">
                 <h2 className="font-heading text-3xl md:text-5xl text-brown mb-4 uppercase drop-shadow-sm">Our Cake Catalogue</h2>
                 <p className="text-brown/70 text-lg">Freshly baked delights for every craving.</p>
