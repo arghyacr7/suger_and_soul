@@ -102,7 +102,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
             onClick={handleImageClick}
         >
             {/* 1. Image Section */}
-            <div className="relative aspect-square w-full bg-cream overflow-hidden cursor-pointer">
+            <div className="relative h-52 md:h-auto md:aspect-square w-full bg-cream overflow-hidden cursor-pointer">
                 <Image
                     src={product.image}
                     alt={`${product.name} by Sugar & Soul`}
@@ -149,9 +149,9 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
             </div>
 
             {/* 2. Content Section */}
-            <div className="p-4 flex flex-col flex-grow">
+            <div className="p-3 md:p-4 flex flex-col flex-grow">
                 <div className="mb-3">
-                    <h3 className="font-heading text-xl font-bold text-brown leading-tight mb-1 line-clamp-2 md:min-h-[3.25rem]">
+                    <h3 className="font-heading text-lg md:text-xl font-bold text-brown leading-tight mb-1 line-clamp-2 md:min-h-[3.25rem]">
                         {product.name}
                     </h3>
                     <p className={cn(
@@ -288,7 +288,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
                         <Button
                             onClick={handleOrder}
                             disabled={!selectedWeight}
-                            className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white h-10 rounded-xl text-xs font-bold uppercase tracking-wide flex items-center justify-center shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white h-8 md:h-10 rounded-xl text-[10px] md:text-xs font-bold uppercase tracking-wide flex items-center justify-center shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Order
                         </Button>

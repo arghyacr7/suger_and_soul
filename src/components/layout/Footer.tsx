@@ -92,7 +92,7 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-cream/10 mt-12 pt-8 text-center text-sm text-cream/60">
+                <div className="border-t border-cream/10 mt-6 md:mt-12 pt-8 text-center text-sm text-cream/60">
                     © {new Date().getFullYear()} Sugar & Soul. All rights reserved.
                 </div>
             </div>

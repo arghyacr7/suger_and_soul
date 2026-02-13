@@ -52,8 +52,8 @@ Thank you.`
 
 export function ShopByOccasion() {
     return (
-        <section className="py-16 container mx-auto px-4 md:px-6">
-            <div className="text-center mb-12">
+        <section className="py-8 md:py-16 container mx-auto px-4 md:px-6">
+            <div className="text-center mb-6 md:mb-12">
                 <h2 className="font-heading text-4xl text-brown mb-4 uppercase drop-shadow-sm">Shop by Occasion</h2>
                 <p className="text-brown/70 font-bold max-w-2xl mx-auto">Find the perfect cake for your special moment.</p>
             </div>
