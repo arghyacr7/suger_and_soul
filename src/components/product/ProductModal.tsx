@@ -96,22 +96,22 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
             {/* Backdrop */}
             <div
-                className="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+                className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
                 onClick={onClose}
             />
 
-            {/* Modal Content */}
-            <div className="relative bg-white rounded-[2rem] w-full max-w-2xl overflow-hidden shadow-2xl animate-[slide-up_0.3s_ease-out] max-h-[90vh] flex flex-col md:flex-row overflow-y-auto md:overflow-visible">
+            {/* Modal Content - Dark Luxury Style */}
+            <div className="relative bg-[#0A0A0A]/95 backdrop-blur-xl border border-white/10 rounded-[2rem] w-full max-w-2xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-[slide-up_0.3s_ease-out] max-h-[90vh] flex flex-col md:flex-row overflow-y-auto md:overflow-visible">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 z-10 bg-white/80 p-2 rounded-full hover:bg-white transition-colors cursor-pointer"
+                    className="absolute top-4 right-4 z-10 bg-black/50 border border-white/10 p-2 rounded-full hover:bg-white/10 transition-colors cursor-pointer text-white/70 hover:text-white"
                 >
-                    <X size={24} className="text-brown" />
+                    <X size={24} />
                 </button>
 
                 {/* Image Side */}
-                <div className="md:w-1/2 h-64 md:h-auto relative bg-cream">
+                <div className="md:w-1/2 h-64 md:h-auto relative bg-white/5">
                     <Image
                         src={product.image}
                         alt={`${product.name} by Sugar & Soul`}
@@ -119,27 +119,27 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                         className="object-cover"
                     />
                     {product.discountText && (
-                        <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wide z-10">
+                        <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg uppercase tracking-wide z-10">
                             {product.discountText}
                         </div>
                     )}
                 </div>
                 {/* Info Side */}
                 <div className="md:w-1/2 p-6 md:p-10 flex flex-col overflow-y-auto">
-                    <span className="text-purple font-bold text-sm uppercase tracking-wider mb-2">{product.category.replace("-", " ")}</span>
-                    <h2 className="font-heading text-3xl text-brown mb-2 leading-tight">{product.name}</h2>
-                    <p className="text-brown/70 mb-6 text-sm leading-relaxed">{product.description}</p>
+                    <span className="text-purple-400 font-bold text-sm uppercase tracking-wider mb-2">{product.category.replace("-", " ")}</span>
+                    <h2 className="font-heading text-3xl text-white mb-2 leading-tight">{product.name}</h2>
+                    <p className="text-white/70 mb-6 text-sm leading-relaxed font-light">{product.description}</p>
 
                     {/* Size Guide - Only for Cakes */}
                     {product.type !== "cupcake" && product.category !== "brownies" && (
-                        <div className="text-[10px] text-brown/50 mb-2 italic">
+                        <div className="text-[10px] text-white/40 mb-2 italic">
                             Size Guide: 1lb ≈ 450g | 2lb ≈ 900g | 3lb ≈ 1350g
                         </div>
                     )}
 
                     {/* Weights / Options */}
                     <div className="mb-6">
-                        <label className="block text-brown font-bold text-sm mb-3 uppercase tracking-wide">
+                        <label className="block text-white font-bold text-sm mb-3 uppercase tracking-wide opacity-90">
                             {product.type === "cupcake" ? "Select Quantity" : product.category === "brownies" ? "Select Option" : "Select Weight"}
                         </label>
                         <div className="flex gap-3 flex-wrap">
@@ -148,34 +148,34 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                                     <button
                                         onClick={() => setSelectedWeight("piece")}
                                         className={cn(
-                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border-2 transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
+                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
                                             selectedWeight === "piece"
-                                                ? "border-purple bg-purple/5 text-purple shadow-md"
-                                                : "border-gray-200 text-brown/60 hover:border-purple/30"
+                                                ? "border-purple-500 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                                                : "border-white/10 text-white/50 hover:border-white/30 hover:text-white"
                                         )}
                                     >
                                         <span className="block text-xs uppercase mb-1 opacity-70">1 Piece</span>
                                         <span className="block text-lg">₹{product.variantPrices?.["piece"] || 20}</span>
                                         {selectedWeight === "piece" && (
                                             <div className="absolute top-2 right-2">
-                                                <Check size={16} className="text-purple" strokeWidth={3} />
+                                                <Check size={16} className="text-purple-400" strokeWidth={3} />
                                             </div>
                                         )}
                                     </button>
                                     <button
                                         onClick={() => setSelectedWeight("10pc")}
                                         className={cn(
-                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border-2 transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
+                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
                                             selectedWeight === "10pc"
-                                                ? "border-purple bg-purple/5 text-purple shadow-md"
-                                                : "border-gray-200 text-brown/60 hover:border-purple/30"
+                                                ? "border-purple-500 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                                                : "border-white/10 text-white/50 hover:border-white/30 hover:text-white"
                                         )}
                                     >
                                         <span className="block text-xs uppercase mb-1 opacity-70">10 Pieces (Combo)</span>
                                         <span className="block text-lg">₹{product.variantPrices?.["10pc"] || 170}</span>
                                         {selectedWeight === "10pc" && (
                                             <div className="absolute top-2 right-2">
-                                                <Check size={16} className="text-purple" strokeWidth={3} />
+                                                <Check size={16} className="text-purple-400" strokeWidth={3} />
                                             </div>
                                         )}
                                     </button>
@@ -185,34 +185,34 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                                     <button
                                         onClick={() => setSelectedWeight("piece")}
                                         className={cn(
-                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border-2 transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
+                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
                                             selectedWeight === "piece"
-                                                ? "border-purple bg-purple/5 text-purple shadow-md"
-                                                : "border-gray-200 text-brown/60 hover:border-purple/30"
+                                                ? "border-purple-500 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                                                : "border-white/10 text-white/50 hover:border-white/30 hover:text-white"
                                         )}
                                     >
                                         <span className="block text-xs uppercase mb-1 opacity-70">Per Piece</span>
                                         <span className="block text-lg">₹{product.variantPrices?.["piece"] || 50}</span>
                                         {selectedWeight === "piece" && (
                                             <div className="absolute top-2 right-2">
-                                                <Check size={16} className="text-purple" strokeWidth={3} />
+                                                <Check size={16} className="text-purple-400" strokeWidth={3} />
                                             </div>
                                         )}
                                     </button>
                                     <button
                                         onClick={() => setSelectedWeight("1lb")}
                                         className={cn(
-                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border-2 transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
+                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border transition-all duration-200 relative overflow-hidden flex flex-col items-center justify-center min-w-[120px]",
                                             selectedWeight === "1lb"
-                                                ? "border-purple bg-purple/5 text-purple shadow-md"
-                                                : "border-gray-200 text-brown/60 hover:border-purple/30"
+                                                ? "border-purple-500 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                                                : "border-white/10 text-white/50 hover:border-white/30 hover:text-white"
                                         )}
                                     >
                                         <span className="block text-xs uppercase mb-1 opacity-70">1lb Box (6pcs)</span>
                                         <span className="block text-lg">₹{product.variantPrices?.["1lb"] || 250}</span>
                                         {selectedWeight === "1lb" && (
                                             <div className="absolute top-2 right-2">
-                                                <Check size={16} className="text-purple" strokeWidth={3} />
+                                                <Check size={16} className="text-purple-400" strokeWidth={3} />
                                             </div>
                                         )}
                                     </button>
@@ -223,10 +223,10 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                                         key={weight}
                                         onClick={() => setSelectedWeight(weight)}
                                         className={cn(
-                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border-2 transition-all duration-200 relative overflow-hidden",
+                                            "flex-1 py-3 px-2 rounded-xl text-sm font-bold border transition-all duration-200 relative overflow-hidden",
                                             selectedWeight === weight
-                                                ? "border-purple bg-purple/5 text-purple shadow-md"
-                                                : "border-gray-200 text-brown/60 hover:border-purple/30"
+                                                ? "border-purple-500 bg-purple-500/10 text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]"
+                                                : "border-white/10 text-white/50 hover:border-white/30 hover:text-white"
                                         )}
                                     >
                                         <span className="block text-xs uppercase mb-1 opacity-70">
@@ -237,7 +237,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                                         </span>
                                         {selectedWeight === weight && (
                                             <div className="absolute top-1 right-1">
-                                                <Check size={12} className="text-purple" strokeWidth={4} />
+                                                <Check size={12} className="text-purple-400" strokeWidth={4} />
                                             </div>
                                         )}
                                     </button>
@@ -248,7 +248,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
 
                     {/* NEW Rating Section */}
                     <div className="mb-8">
-                        <label className="block text-brown/80 font-bold text-sm mb-2 opacity-90">
+                        <label className="block text-white/80 font-bold text-sm mb-2 opacity-90 uppercase tracking-wide">
                             How do you like this cake?
                         </label>
                         <div className="flex gap-2">
@@ -266,9 +266,9 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                                             "transition-colors duration-200",
                                             (hoverRating || rating || 0) >= star
                                                 ? "fill-yellow text-yellow"
-                                                : "fill-transparent text-gray-300"
+                                                : "fill-transparent text-white/20"
                                         )}
-                                        strokeWidth={2}
+                                        strokeWidth={1.5}
                                     />
                                 </button>
                             ))}
@@ -281,21 +281,21 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                     </div>
 
                     {/* Price & Action */}
-                    <div className="mt-auto pt-6 border-t border-gray-100 flex items-center justify-between gap-4">
+                    <div className="mt-auto pt-6 border-t border-white/10 flex items-center justify-between gap-4">
                         <div>
-                            <span className="block text-xs text-brown/50 uppercase font-bold">Total Price</span>
+                            <span className="block text-xs text-white/40 uppercase font-bold tracking-wider">Total Price</span>
                             <div className="flex items-baseline gap-2">
                                 {product.originalPrice && (
                                     (product.type === "cupcake" && selectedWeight === "10pc") ||
                                     (!product.type && (!selectedWeight || selectedWeight === "1lb"))
                                 ) && (
-                                        <span className="text-lg text-brown/40 line-through font-bold">₹{product.originalPrice}</span>
+                                        <span className="text-lg text-white/30 line-through font-bold">₹{product.originalPrice}</span>
                                     )}
-                                <span className={cn("font-heading text-3xl animate-[fade-in_0.3s_ease-out] block",
+                                <span className={cn("font-heading text-3xl animate-[fade-in_0.3s_ease-out] block text-white drop-shadow-md",
                                     product.originalPrice && (
                                         (product.type === "cupcake" && selectedWeight === "10pc") ||
                                         (!product.type && (!selectedWeight || selectedWeight === "1lb"))
-                                    ) ? "text-red-500" : "text-brown"
+                                    ) ? "text-green-400" : "text-white"
                                 )}>
                                     ₹{currentPrice}
                                 </span>
@@ -310,7 +310,7 @@ export function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
                             <Button
                                 onClick={handleOrder}
                                 disabled={!selectedWeight}
-                                className="bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.1)] px-8 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[0_0_20px_rgba(37,211,102,0.4)] px-8 py-6 rounded-xl font-bold uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 transition-all"
                             >
                                 Order on WhatsApp
                             </Button>
