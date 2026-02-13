@@ -37,7 +37,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm flex items-start justify-center pt-24"
+                className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-start justify-center pt-24"
                 onClick={onClose}
             >
                 <motion.div
@@ -48,7 +48,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Header */}
-                    <div className="p-4 border-b border-white/10 flex items-center gap-4 bg-white/5">
+                    <div className="p-4 border-b border-white/10 flex items-center gap-4 bg-[#111]">
                         <Search className="text-white/50" size={24} />
                         <input
                             type="text"
@@ -70,15 +70,9 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
                                 {results.map(product => (
                                     <Link
                                         key={product.id}
-                                        href={`/#menu`} // Linking to menu since individual product pages might not be fully set up for all items, or using direct ProductModal handler would be better but this is a quick fix. ideally /product/[id] if that page works. user said "opening a card card it not chnaged" implies modals.
-                                        // Wait, the previous issue was about MODALS not opening. 
-                                        // If I link to /product/id, does that page exist? I verified src/app/product/[id] exists.
-                                        // Let's rely on the route.
-                                        // actually, user might want the modal to open. But SearchModal is a separate overlay. 
-                                        // Navigating to /product/[id] is the standard way for search results.
                                         href={`/product/${product.id}`}
                                         onClick={onClose}
-                                        className="flex items-center gap-4 p-3 bg-white/5 rounded-2xl hover:bg-white/10 border border-transparent hover:border-yellow/50 transition-all group"
+                                        className="flex items-center gap-4 p-3 bg-[#111] rounded-2xl hover:bg-[#1A1A1A] border border-white/5 hover:border-yellow/50 transition-all group"
                                     >
                                         <div className="w-16 h-16 bg-white/5 rounded-xl overflow-hidden relative border border-white/10">
                                             <Image

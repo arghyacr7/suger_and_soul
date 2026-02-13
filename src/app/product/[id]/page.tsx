@@ -42,7 +42,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ProductPage({ params }: PageProps) {
     const { id } = await params
-    const product = getProductById(id)
+    const decodedId = decodeURIComponent(id)
+    const product = getProductById(decodedId)
 
     if (!product) {
         notFound()
