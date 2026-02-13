@@ -88,8 +88,7 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Asimovian&family=Combo&display=swap" rel="stylesheet" />
-        {/* Note: 'Asimovian' must exist on Google Fonts for this to work. If it's a custom font, it won't load. */}
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
       </head>
       <body
         className={`antialiased bg-cream text-brown`}

@@ -25,7 +25,7 @@ export function Navbar() {
     const { user, greeting, loading, likedProducts, signOut } = useAuth()
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-cream/80 backdrop-blur-md border-b border-brown/10">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/95 backdrop-blur-md border-b border-white/10">
             <div className="container mx-auto px-2 md:px-6 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 md:gap-3 scale-105 hover:scale-110 transition-transform origin-left">
@@ -143,22 +143,24 @@ export function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-cream border-t border-brown/10 overflow-hidden"
+                        className="md:hidden bg-[#0A0A0A] border-t border-white/10 overflow-hidden"
                     >
-                        <div className="flex flex-col p-4 gap-4">
+                        <div className="flex flex-col p-6 gap-4">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-brown font-medium text-lg py-2"
+                                    className="text-white/80 hover:text-yellow font-heading uppercase tracking-widest text-sm py-3 border-b border-white/5 transition-colors"
                                     onClick={() => setIsOpen(false)}
                                 >
                                     {link.name}
                                 </Link>
                             ))}
-                            <Button className="w-full" onClick={() => setIsOpen(false)}>
-                                Order Now
-                            </Button>
+                            <Link href="/cakes">
+                                <Button className="w-full bg-yellow text-black border border-yellow hover:bg-white hover:text-black rounded-none uppercase tracking-widest font-bold mt-4" onClick={() => setIsOpen(false)}>
+                                    Order Now
+                                </Button>
+                            </Link>
                         </div>
                     </motion.div>
                 )}

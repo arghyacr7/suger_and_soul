@@ -81,101 +81,110 @@ export default function AuthPage() {
     }
 
     return (
-        <div className="min-h-screen bg-cream flex flex-col justify-center items-center p-4">
-            <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden animate-[fade-in_0.5s_ease-out]">
-                {/* Header */}
-                <div className="bg-brown text-cream p-6 relative">
-                    <button
-                        onClick={() => router.back()}
-                        className="absolute top-6 left-6 text-cream/70 hover:text-white transition-colors"
-                    >
-                        <ChevronLeft size={24} />
-                    </button>
-                    <h1 className="font-heading text-3xl text-center mt-4">
-                        {mode === "login" ? "Welcome Back" : "Join Sugar & Soul"}
-                    </h1>
-                    <p className="text-center text-cream/60 text-sm mt-1">
-                        {mode === "login" ? "Login to access your liked cakes" : "Sign up to save your favorites"}
+        <div className="min-h-screen flex flex-col md:flex-row bg-[#050505]">
+            {/* Left Side - Cinematic Image */}
+            <div className="w-full h-48 md:h-auto md:w-1/2 relative overflow-hidden shrink-0">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform hover:scale-105 duration-[5s]" style={{ backgroundImage: "url('/images/cream%20cake/Red_Velvet_Cake2.jpg')" }}>
+                    <div className="absolute inset-0 bg-black/40 md:bg-black/60 backdrop-blur-[0px] md:backdrop-blur-[1px]"></div>
+                </div>
+                <div className="absolute bottom-0 left-0 p-6 md:p-16 max-w-2xl z-10">
+                    <h2 className="font-heading text-3xl md:text-6xl mb-2 md:mb-6 leading-none text-white md:text-brown tracking-tighter drop-shadow-lg md:drop-shadow-none">
+                        Experience <br /><span className="text-yellow">Excellence.</span>
+                    </h2>
+                    <p className="hidden md:block text-xl text-brown/80 font-light tracking-wide max-w-md border-l border-yellow pl-6">
+                        Join the inner circle. Exclusive tastes, reserved for the distinguished.
                     </p>
                 </div>
+            </div>
 
-                {/* Form */}
-                <form onSubmit={handleSubmit} className="p-8 space-y-4">
-                    {mode === "signup" && (
-                        <div className="space-y-1">
-                            <label className="text-xs font-bold text-brown/60 uppercase ml-1">Full Name</label>
-                            <div className="relative">
-                                <User className="absolute left-3 top-3 text-brown/40" size={18} />
+            {/* Right Side - Dark Auth Form */}
+            <div className="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12 relative bg-[#050505]">
+                <div className="w-full max-w-md bg-[#0A0A0A] border border-[#222] rounded-[2rem] p-8 md:p-16 shadow-[0_20px_50px_rgba(0,0,0,0.7)] animate-[fade-in_0.8s_ease-out]">
+
+                    {/* Header */}
+                    <div className="mb-8 md:mb-12 text-center">
+                        <h1 className="font-heading text-3xl md:text-4xl text-brown mb-3 tracking-[0.1em] uppercase">
+                            {mode === "login" ? "Member Login" : "Sign Up"}
+                        </h1>
+                        <div className="w-16 h-0.5 bg-yellow mx-auto mb-4 rounded-full"></div>
+                        <p className="text-brown/40 text-[10px] md:text-xs tracking-[0.2em] uppercase">
+                            {mode === "login" ? "Welcome back to the suite" : "Begin your journey"}
+                        </p>
+                    </div>
+
+                    {/* Form */}
+                    <form onSubmit={handleSubmit} className="space-y-6 md:space-y-10">
+                        {mode === "signup" && (
+                            <div className="group relative">
                                 <input
                                     type="text"
-                                    placeholder="Your Name"
-                                    className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-purple/50 text-brown"
+                                    placeholder="FULL NAME"
+                                    className="peer w-full py-3 bg-transparent border-b border-[#333] focus:border-yellow outline-none transition-colors text-brown placeholder-transparent font-light tracking-widest text-sm"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 />
+                                <label className="absolute left-0 -top-3.5 text-[10px] text-yellow transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-brown/30 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-yellow peer-focus:text-[10px] uppercase tracking-widest">
+                                    Full Name
+                                </label>
                             </div>
-                        </div>
-                    )}
+                        )}
 
-                    <div className="space-y-1">
-                        <label className="text-xs font-bold text-brown/60 uppercase ml-1">Email</label>
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-3 text-brown/40" size={18} />
+                        <div className="group relative">
                             <input
                                 type="email"
-                                placeholder="hello@example.com"
-                                className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-purple/50 text-brown"
+                                placeholder="EMAIL ADDRESS"
+                                className="peer w-full py-3 bg-transparent border-b border-[#333] focus:border-yellow outline-none transition-colors text-brown placeholder-transparent font-light tracking-widest text-sm"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             />
+                            <label className="absolute left-0 -top-3.5 text-[10px] text-yellow transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-brown/30 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-yellow peer-focus:text-[10px] uppercase tracking-widest">
+                                Email Address
+                            </label>
                         </div>
-                    </div>
 
-                    <div className="space-y-1">
-                        <label className="text-xs font-bold text-brown/60 uppercase ml-1">Password</label>
-                        <div className="relative">
-                            <Lock className="absolute left-3 top-3 text-brown/40" size={18} />
+                        <div className="group relative">
                             <input
                                 type="password"
-                                placeholder={mode === "signup" ? "Min 6 chars (A-Z, 0-9)" : "Your password"}
-                                className="w-full pl-10 pr-4 py-3 bg-gray-50 rounded-xl border-none focus:ring-2 focus:ring-purple/50 text-brown"
+                                placeholder="PASSWORD"
+                                className="peer w-full py-3 bg-transparent border-b border-[#333] focus:border-yellow outline-none transition-colors text-brown placeholder-transparent font-light tracking-widest text-sm"
                                 value={formData.password}
                                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                             />
+                            <label className="absolute left-0 -top-3.5 text-[10px] text-yellow transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:text-brown/30 peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-yellow peer-focus:text-[10px] uppercase tracking-widest">
+                                Password
+                            </label>
                         </div>
-                    </div>
 
-                    {error && (
-                        <div className="bg-red-50 text-red-500 text-sm p-3 rounded-lg flex items-center gap-2">
-                            <AlertCircle size={16} />
-                            {error}
-                        </div>
-                    )}
+                        {error && (
+                            <div className="border border-red-900/50 bg-red-950/20 text-red-400 text-xs p-4 tracking-wide flex items-center gap-3 rounded-lg">
+                                <AlertCircle size={14} />
+                                {error}
+                            </div>
+                        )}
 
-                    <Button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full bg-purple hover:bg-purple/90 h-12 rounded-xl text-lg font-bold shadow-lg mt-4"
-                    >
-                        {loading ? <Loader2 className="animate-spin" /> : (mode === "login" ? "Login" : "Sign Up")}
-                    </Button>
+                        <Button
+                            type="submit"
+                            disabled={loading}
+                            variant="primary"
+                            className="w-full text-xs mt-6 h-12 rounded-xl"
+                        >
+                            {loading ? <Loader2 className="animate-spin" /> : (mode === "login" ? "Enter" : "Sign Up")}
+                        </Button>
 
-                    <div className="text-center pt-4">
-                        <p className="text-sm text-brown/60">
-                            {mode === "login" ? "Don't have an account?" : "Already have an account?"}
+                        <div className="text-center pt-4">
                             <button
                                 type="button"
                                 onClick={() => {
                                     setMode(mode === "login" ? "signup" : "login")
                                     setError(null)
                                 }}
-                                className="text-purple font-bold ml-1 hover:underline focus:outline-none"
+                                className="text-brown/40 hover:text-yellow text-[10px] uppercase tracking-[0.2em] transition-colors"
                             >
-                                {mode === "login" ? "Sign Up" : "Login"}
+                                {mode === "login" ? "Create an Account" : "Already a Member?"}
                             </button>
-                        </p>
-                    </div>
-                </form>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )

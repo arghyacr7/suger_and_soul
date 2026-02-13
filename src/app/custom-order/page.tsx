@@ -24,94 +24,101 @@ export default function CustomOrderPage() {
     const today = new Date().toISOString().split("T")[0]
 
     return (
-        <div className="min-h-screen bg-cream py-8 px-4 md:px-6">
-            <div className="container mx-auto max-w-2xl">
+        <div className="min-h-screen bg-[#050505] py-20 px-4 md:px-6">
+            <div className="container mx-auto max-w-3xl">
                 {/* Back Link */}
-                <Link href="/" className="inline-flex items-center gap-2 text-brown/60 hover:text-brown mb-8 font-bold uppercase text-xs tracking-wider transition-colors">
-                    <ArrowLeft size={16} /> Back to Home
+                <Link href="/" className="inline-flex items-center gap-2 text-white/60 hover:text-yellow mb-10 font-bold uppercase text-xs tracking-[0.2em] transition-colors group">
+                    <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" /> Back to Home
                 </Link>
 
                 {/* Header */}
-                <div className="text-center mb-10">
-                    <h1 className="font-heading text-4xl py-2 md:text-5xl text-brown mb-3">Custom Cake Enquiry</h1>
-                    <p className="text-brown/70 text-lg">Dreaming of a unique cake? Tell us about it!</p>
+                <div className="text-center mb-12">
+                    <h1 className="font-heading text-4xl md:text-6xl text-white mb-4 tracking-wider">Custom <span className="text-yellow">Creations</span></h1>
+                    <p className="text-white/60 text-lg font-light tracking-wide max-w-xl mx-auto">
+                        Your imagination, our craftsmanship. Design a masterpiece for your special moment.
+                    </p>
                 </div>
 
                 {/* Form */}
-                <div className="bg-white rounded-3xl p-6 md:p-10 shadow-xl border-4 border-white">
-                    <div className="space-y-6">
+                <div className="bg-[#0A0A0A] rounded-[2.5rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-purple-900/10 rounded-full blur-[100px] pointer-events-none" />
+
+                    <div className="space-y-8 relative z-10">
                         {/* Occasion */}
-                        <div className="space-y-2">
-                            <label className="block text-sm font-bold text-brown uppercase tracking-wide">Occasion</label>
+                        <div className="group relative">
+                            <label className="block text-[10px] font-bold text-yellow uppercase tracking-[0.2em] mb-2">Occasion</label>
                             <input
                                 type="text"
                                 placeholder="Birthday, Anniversary, Wedding..."
                                 value={occasion}
                                 onChange={(e) => setOccasion(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/10 outline-none transition-all placeholder:text-gray-400 text-brown"
+                                className="w-full px-0 py-3 bg-transparent border-b border-white/10 focus:border-yellow outline-none transition-all placeholder:text-white/20 text-white font-light tracking-wide rounded-none"
                             />
                         </div>
 
                         {/* Theme */}
-                        <div className="space-y-2">
-                            <label className="block text-sm font-bold text-brown uppercase tracking-wide">Theme / Design</label>
+                        <div className="group relative">
+                            <label className="block text-[10px] font-bold text-yellow uppercase tracking-[0.2em] mb-2">Theme / Design</label>
                             <input
                                 type="text"
-                                placeholder="Marvel, Unicorn, Floral..."
+                                placeholder="Marvel, Unicorn, Floral, Minimalist..."
                                 value={theme}
                                 onChange={(e) => setTheme(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/10 outline-none transition-all placeholder:text-gray-400 text-brown"
+                                className="w-full px-0 py-3 bg-transparent border-b border-white/10 focus:border-yellow outline-none transition-all placeholder:text-white/20 text-white font-light tracking-wide rounded-none"
                             />
                         </div>
 
                         {/* Weight */}
-                        <div className="space-y-2">
-                            <label className="block text-sm font-bold text-brown uppercase tracking-wide">Estimated Weight (kg)</label>
-                            <select
-                                value={weight}
-                                onChange={(e) => setWeight(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/10 outline-none transition-all text-brown appearance-none"
-                            >
-                                <option value="1 kg">1 kg</option>
-                                <option value="2 kg">2 kg</option>
-                                <option value="3 kg">3 kg</option>
-                                <option value="4 kg">4 kg</option>
-                                <option value="5 kg">5 kg</option>
-                            </select>
-                            <p className="text-[10px] text-brown/60 italic">*Currently accepting custom cake orders from 1 kg up to 5 kg only.</p>
+                        <div className="group relative">
+                            <label className="block text-[10px] font-bold text-yellow uppercase tracking-[0.2em] mb-2">Estimated Weight</label>
+                            <div className="relative">
+                                <select
+                                    value={weight}
+                                    onChange={(e) => setWeight(e.target.value)}
+                                    className="w-full px-0 py-3 bg-transparent border-b border-white/10 focus:border-yellow outline-none transition-all text-white font-light tracking-wide rounded-none appearance-none cursor-pointer"
+                                >
+                                    <option className="bg-[#111] text-white" value="1 kg">1 kg</option>
+                                    <option className="bg-[#111] text-white" value="2 kg">2 kg</option>
+                                    <option className="bg-[#111] text-white" value="3 kg">3 kg</option>
+                                    <option className="bg-[#111] text-white" value="4 kg">4 kg</option>
+                                    <option className="bg-[#111] text-white" value="5 kg">5 kg</option>
+                                </select>
+                                <p className="text-[10px] text-white/40 italic mt-2">*Currently accepting custom cake orders from 1 kg up to 5 kg only.</p>
+                            </div>
                         </div>
 
                         {/* Date */}
-                        <div className="space-y-2">
-                            <label className="block text-sm font-bold text-brown uppercase tracking-wide">Date Required</label>
+                        <div className="group relative">
+                            <label className="block text-[10px] font-bold text-yellow uppercase tracking-[0.2em] mb-2">Date Required</label>
                             <input
                                 type="date"
                                 min={today}
                                 value={date}
                                 onChange={(e) => setDate(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/10 outline-none transition-all text-brown"
+                                className="w-full px-0 py-3 bg-transparent border-b border-white/10 focus:border-yellow outline-none transition-all text-white font-light tracking-wide rounded-none [color-scheme:dark]"
                             />
                         </div>
 
                         {/* Message */}
-                        <div className="space-y-2">
-                            <label className="block text-sm font-bold text-brown uppercase tracking-wide">Message on Cake</label>
+                        <div className="group relative">
+                            <label className="block text-[10px] font-bold text-yellow uppercase tracking-[0.2em] mb-2">Message on Cake</label>
                             <input
                                 type="text"
-                                placeholder="Happy Birthday Alex!"
+                                placeholder="Happy Birthday..."
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:border-purple focus:ring-2 focus:ring-purple/10 outline-none transition-all placeholder:text-gray-400 text-brown"
+                                className="w-full px-0 py-3 bg-transparent border-b border-white/10 focus:border-yellow outline-none transition-all placeholder:text-white/20 text-white font-light tracking-wide rounded-none"
                             />
                         </div>
 
                         {/* Action */}
-                        <div className="pt-4">
+                        <div className="pt-8">
                             <Button
                                 onClick={handleEnquire}
-                                className="w-full h-14 text-lg bg-[#25D366] hover:bg-[#128C7E] text-white shadow-lg shadow-green-200 hover:shadow-xl hover:-translate-y-0.5 border-none"
+                                variant="gradient"
+                                className="w-full h-14 text-sm bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 font-bold uppercase tracking-[0.2em] hover:brightness-110 hover:scale-[1.02] transition-all shadow-[0_0_30px_rgba(236,72,153,0.3)] rounded-xl"
                             >
-                                <Send size={20} className="mr-2" /> Enquire on WhatsApp
+                                <Send size={16} className="mr-3" /> Enquire on WhatsApp
                             </Button>
                         </div>
                     </div>

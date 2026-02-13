@@ -35,14 +35,14 @@ export function FeaturedCarousel() {
     }
 
     return (
-        <section className="py-16 container mx-auto px-4 md:px-6 bg-white/50 border-y-2 border-brown/5">
+        <section className="py-16 container mx-auto px-4 md:px-6 bg-transparent border-y border-white/5">
             <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                 <div>
-                    <h2 className="font-heading text-3xl md:text-4xl text-brown mb-2 uppercase">Customer Favorites</h2>
-                    <p className="text-brown/60">Our most loved treats, picked again and again.</p>
+                    <h2 className="font-heading text-3xl md:text-4xl text-brown mb-2 uppercase tracking-wider">Customer Favorites</h2>
+                    <p className="text-brown/60 tracking-wide uppercase text-sm">Our most loved treats.</p>
                 </div>
                 <Link href="/cakes">
-                    <Button variant="outline" className="text-brown border-brown hover:bg-brown hover:text-white">
+                    <Button variant="outline" className="text-yellow border-yellow hover:bg-yellow hover:text-black rounded-none uppercase tracking-widest bg-transparent">
                         View All
                     </Button>
                 </Link>
@@ -67,7 +67,7 @@ export function FeaturedCarousel() {
                 {/* Right Arrow Button */}
                 <button
                     onClick={scrollRight}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-white/90 p-3 rounded-full shadow-lg border border-brown/10 text-brown hover:bg-brown hover:text-white transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-[#0A0A0A] p-3 shadow-lg border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100 rounded-none"
                 >
                     <ChevronRight size={24} />
                 </button>

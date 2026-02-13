@@ -1,30 +1,31 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Rollin Inspired Palette */
-  --color-cream: #FDF6F0;
-  /* Light Off-White Background */
-  --color-yellow: #FFD23F;
-  /* Vibrant Yellow Accent */
-  --color-brown: #3E2723;
-  /* Deep Chocolate Brown Text */
-  --color-purple: #6A1B9A;
-  /* Deep Purple (optional accent) */
-  --color-pink: #FF80AB;
-  /* Soft Pink */
+  /* Dark Luxury Palette */
+  --color-cream: #050505;
+  /* Deep Luxury Black */
+  --color-yellow: #D4AF37;
+  /* Gold Accent */
+  --color-brown: #F5F5F7;
+  /* Off-White Text */
+  --color-purple: #D4AF37;
+  /* Mapping Purple to Gold for consistency */
+  --color-pink: #C0C0C0;
+  /* Silver/Bronze secondary */
 
-  /* Manual Font Definitions */
-  --font-combo: "Combo", system-ui;
+  /* Font Definitions */
+  --font-cinzel: "Cinzel", serif;
+  --font-montserrat: "Montserrat", sans-serif;
   --font-asimovian: "Asimovian", sans-serif;
+  /* Keeping for Logo checks */
 
-  --font-sans: var(--font-combo);
-  --font-heading: var(--font-combo);
+  --font-sans: var(--font-montserrat);
+  --font-heading: var(--font-cinzel);
   --font-script: var(--font-asimovian);
 
-
   /* Animation Basics */
-  --animate-fade-in: fade-in 0.5s ease-out;
-  --animate-slide-up: slide-up 0.5s ease-out;
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-slide-up: slide-up 0.8s ease-out;
 
   @keyframes fade-in {
     from {
@@ -38,7 +39,7 @@
 
   @keyframes slide-up {
     from {
-      transform: translateY(20px);
+      transform: translateY(30px);
       opacity: 0;
     }
 
@@ -47,43 +48,6 @@
       opacity: 1;
     }
   }
-
-  @keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-
-  @keyframes wiggle {
-
-    0%,
-    100% {
-      transform: rotate(-3deg);
-    }
-
-    50% {
-      transform: rotate(3deg);
-    }
-  }
-}
-
-/* User Requested Font Classes */
-.combo-regular {
-  font-family: "Combo", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.asimovian-regular {
-  font-family: "Asimovian", sans-serif;
-  font-weight: 400;
-  font-style: normal;
 }
 
 :root {
@@ -92,54 +56,13 @@
 }
 
 body {
-  /* Futuristic Bakery Background: Cream Base with Fluid Pastel Gradients */
-  background-color: #FDF6F0;
-  /* Cream Base */
-  background-image:
-    radial-gradient(at 0% 0%, hsla(35, 100%, 86%, 0.4) 0px, transparent 50%),
-    /* Soft Gold */
-    radial-gradient(at 100% 0%, hsla(340, 100%, 76%, 0.3) 0px, transparent 50%),
-    /* Soft Pink */
-    radial-gradient(at 100% 100%, hsla(280, 60%, 88%, 0.4) 0px, transparent 50%),
-    /* Lavender */
-    radial-gradient(at 0% 100%, hsla(22, 100%, 89%, 0.4) 0px, transparent 50%);
-  /* Soft Peach */
-  background-attachment: fixed;
-  background-size: 100% 100%;
-
-  /* Add subtle noise texture for premium feel */
-  position: relative;
+  background-color: #050505;
+  color: #E5E5E5;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: 0.05em;
   min-height: 100vh;
-
-  color: var(--color-brown);
-  font-family: var(--font-heading);
-}
-
-/* Noise overlay using pseudo-element */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: -1;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-}
-
-/* Fancy Text Utilities */
-.text-outline {
-  -webkit-text-stroke: 2px #3E2723;
-  /* Brown border */
-  text-shadow: 4px 4px 0px #FFD23F;
-  /* Yellow shadow */
-}
-
-.text-outline-white {
-  -webkit-text-stroke: 2px #3E2723;
-  text-shadow: 4px 4px 0px #FFFFFF;
+  overflow-x: hidden;
 }
 
 h1,
@@ -149,8 +72,52 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #F5F5F7;
+}
+
+/* Fancy Text Utilities */
+.text-outline {
+  -webkit-text-stroke: 1px #D4AF37;
+  color: transparent;
 }
 
 .font-script {
   font-family: var(--font-script) !important;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(-45deg, #ec4899, #a855f7, #9333ea, #f472b6);
+  background-size: 300% 300%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes slowZoom {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-slowZoom {
+  animation: slowZoom 20s ease-in-out infinite alternate;
 }

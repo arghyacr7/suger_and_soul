@@ -10,14 +10,23 @@ import { ProfileModal } from "@/components/profile/ProfileModal"
 export function Hero() {
     const { user, greeting, loading } = useAuth()
     const [isProfileOpen, setIsProfileOpen] = useState(false)
-    return (
-        <section className="relative min-h-[45vh] md:min-h-[75vh] w-full flex items-center justify-center overflow-visible pt-20 pb-2 md:py-20">
-            {/* Background Graphic/Image Placeholder - CSS Pattern */}
-            <div className="absolute inset-0 bg-yellow/5" />
-            <div className="absolute inset-0 opacity-20 bg-[radial-gradient(#4A3B32_1px,transparent_1px)] [background-size:20px_20px]" />
 
-            {/* Content */}
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto backdrop-blur-sm bg-cream/30 dark:bg-black/10 rounded-[3rem] p-6 md:p-10 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)] border border-white/20">
+    return (
+        <section className="relative min-h-[70vh] md:min-h-[90vh] w-full flex items-center justify-center overflow-hidden pt-32 pb-12 md:py-32">
+            {/* Cinematic Background Image with Slow Zoom */}
+            <div
+                className="absolute inset-0 bg-cover bg-center animate-slowZoom"
+                style={{
+                    backgroundImage: "url('/images/plain%20cake/Rich_Chocolate_Sponge.jpg')",
+                    filter: "brightness(0.6)"
+                }}
+            />
+
+            {/* Dark Overlay with Blur */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black backdrop-blur-[2px]" />
+
+            {/* Content - Dark Luxury Card */}
+            <div className="relative z-10 text-center px-6 max-w-5xl mx-auto backdrop-blur-md bg-[#0A0A0A]/40 rounded-[3rem] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 animate-[fade-in_1s_ease-out]">
 
                 {/* User Greeting */}
                 {user && !loading && (
@@ -25,40 +34,50 @@ export function Hero() {
                         initial={{ opacity: 0, scale: 0.9, y: -20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 0.7, ease: "easeOut" }}
-                        className="mb-2 md:mb-6"
+                        className="mb-4 md:mb-8"
                     >
                         <div
                             onClick={() => setIsProfileOpen(true)}
-                            className="inline-block bg-gradient-to-r from-yellow/30 via-pink/30 to-purple/30 px-6 py-3 rounded-full border-2 border-brown/20 shadow-lg backdrop-blur-md cursor-pointer hover:scale-105 transition-transform active:scale-95"
+                            className="inline-block bg-gradient-to-r from-yellow/30 via-pink/30 to-purple/30 px-6 py-3 rounded-full border border-brown/10 shadow-lg backdrop-blur-xl cursor-pointer hover:scale-105 transition-transform active:scale-95"
                         >
-                            <span className="text-base md:text-xl font-bold text-brown drop-shadow-md">
+                            <span className="text-base md:text-xl font-bold text-brown drop-shadow-sm">
                                 {greeting}, {user.user_metadata.full_name?.split(" ")[0] || "User"}! 🎂
                             </span>
                         </div>
                     </motion.div>
                 )}
 
-                <h1 className="font-script text-3xl md:text-7xl text-white mb-2 md:mb-6 leading-tight animate-[slide-up_1s_ease-out] drop-shadow-xl tracking-wider text-center flex flex-col items-center justify-center gap-2">
-                    <span className="text-outline-white text-[#FF80AB] drop-shadow-[5px_5px_0px_#3E2723]">Baked with Love</span>
-                    <span className="text-3xl md:text-4xl text-yellow font-heading opacity-80">&</span>
-                    <span className="text-outline-white text-[#FFD23F] drop-shadow-[5px_5px_0px_#3E2723]">Served with Soul</span>
+                {/* Animated Gradient Badge */}
+                <div className="relative group inline-block mb-6">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                    <span className="relative font-bold uppercase tracking-[0.3em] text-xs md:text-sm bg-[#0A0A0A] text-yellow px-4 py-2 border border-yellow/20 rounded-full inline-block backdrop-blur-xl">
+                        Dankuni, West Bengal
+                    </span>
+                </div>
+
+                <h1 className="font-heading text-5xl md:text-8xl mb-8 leading-tight text-white drop-shadow-2xl">
+                    <span className="block text-white">Sugar</span>
+                    <span className="block text-[0.5em] md:text-[0.6em] font-script text-yellow my-2 md:my-4">&</span>
+                    <span className="block text-white">Soul</span>
                 </h1>
 
-                <p className="text-base md:text-xl text-brown mb-3 md:mb-8 font-bold max-w-xl mx-auto drop-shadow-md leading-relaxed">
-                    Premium Cakes, Cream Cakes & Brownies.<br />
-                    Freshly baked to order from our cloud kitchen in <span className="text-purple bg-white px-2 rounded-md transform -skew-x-12 inline-block border-2 border-black">Dankuni</span>.
+                <p className="font-sans text-lg md:text-xl text-white/90 max-w-lg mx-auto mb-10 leading-relaxed font-light tracking-wide text-shadow">
+                    Premium Cloud Kitchen
+                    <span className="block text-sm mt-2 text-white/70">Handcrafted Cakes • Brownies • Desserts</span>
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-2 md:gap-4 justify-center animate-[slide-up_1.4s_ease-out] relative z-20">
-                    <div className="animate-[float_3s_infinite_ease-in-out]">
-                        <Link href="#menu">
-                            <Button variant="primary" size="lg" className="text-lg bg-[#25D366] hover:bg-[#128C7E] text-white border-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]">
-                                Order on WhatsApp
-                            </Button>
-                        </Link>
-                    </div>
+                <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <Link href="https://wa.me/919836733874" target="_blank" rel="noopener noreferrer">
+                        <Button
+                            variant="gradient"
+                            size="lg"
+                            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 font-bold uppercase tracking-widest hover:brightness-110 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(236,72,153,0.3)] rounded-xl"
+                        >
+                            Order on WhatsApp
+                        </Button>
+                    </Link>
                     <Link href="#menu">
-                        <Button variant="secondary" size="lg" className="text-lg bg-white text-brown hover:bg-cream">
+                        <Button variant="secondary" size="lg" className="text-sm md:text-base bg-transparent text-yellow border border-yellow hover:bg-yellow hover:text-black rounded-xl uppercase tracking-[0.2em] font-bold backdrop-blur-sm px-8 py-6">
                             View Menu
                         </Button>
                     </Link>

@@ -7,16 +7,16 @@ import { Sparkles } from "lucide-react"
 export function CustomOrderBanner() {
     return (
         <section className="py-12 container mx-auto px-4 md:px-6">
-            <div className="bg-gradient-to-r from-purple to-pink rounded-[2.5rem] p-8 md:p-12 relative overflow-hidden border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-white text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="bg-[#0A0A0A] rounded-none p-8 md:p-12 relative overflow-hidden border border-white/10 md:border-white/5 flex flex-col md:flex-row items-center justify-between gap-8 group hover:border-yellow/30 transition-all duration-500">
 
-                <div className="relative z-10 max-w-xl">
-                    <div className="inline-flex items-center gap-2 bg-black/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider mb-4 border border-white/20">
-                        <Sparkles size={16} className="text-yellow" /> Custom Cakes
+                <div className="relative z-10 max-w-xl text-center md:text-left">
+                    <div className="inline-flex items-center gap-2 bg-white/5 backdrop-blur-sm px-4 py-2 rounded-none text-xs font-bold uppercase tracking-[0.2em] mb-6 border border-white/10 text-yellow">
+                        <Sparkles size={14} className="text-yellow" /> Custom Cakes
                     </div>
-                    <h2 className="font-heading text-3xl md:text-5xl font-black mb-4 uppercase drop-shadow-md">
-                        Have something special in mind?
+                    <h2 className="font-heading text-3xl md:text-5xl text-brown mb-6 uppercase tracking-widest leading-tight">
+                        Have something <span className="text-yellow">special</span> in mind?
                     </h2>
-                    <p className="text-white/90 text-xl font-medium leading-relaxed">
+                    <p className="text-brown/60 text-sm md:text-base font-light leading-relaxed tracking-wide uppercase">
                         Tell us your idea and we’ll turn it into a delicious reality. Theme cakes, custom flavors, and special messages.
                     </p>
                 </div>
@@ -24,15 +24,15 @@ export function CustomOrderBanner() {
                 <div className="relative z-10 shrink-0">
                     <Link
                         href="/custom-order"
-                        className="inline-flex items-center justify-center h-14 px-8 text-xl font-medium bg-yellow text-brown hover:bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:shadow-none active:translate-x-[4px] active:translate-y-[4px] uppercase tracking-wide gap-2 rounded-xl transition-all"
+                        className="inline-flex items-center justify-center h-14 px-10 text-sm font-bold bg-transparent text-yellow border border-yellow hover:bg-yellow hover:text-black uppercase tracking-[0.2em] transition-all duration-500 rounded-none transform hover:-translate-y-1"
                     >
                         Get a Custom Cake
                     </Link>
                 </div>
 
                 {/* Decorations */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-                <div className="absolute bottom-0 left-0 w-48 h-48 bg-yellow/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
+                <div className="absolute top-0 right-0 w-96 h-96 bg-yellow/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-64 h-64 bg-yellow/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
             </div>
         </section>
     )

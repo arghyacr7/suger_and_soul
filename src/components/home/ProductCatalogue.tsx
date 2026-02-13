@@ -32,7 +32,7 @@ export function ProductCatalogue() {
     }
 
     return (
-        <section id="menu" className="py-4 md:py-16 container mx-auto px-4 md:px-6 scroll-mt-20 mt-0 md:mt-12">
+        <section id="menu" className="py-0 container mx-auto px-6 md:px-8 scroll-mt-32">
             <div className="text-center mb-6 md:mb-12">
                 <h2 className="font-heading text-3xl md:text-5xl text-brown mb-4 uppercase drop-shadow-sm">Our Cake Catalogue</h2>
                 <p className="text-brown/70 text-lg">Freshly baked delights for every craving.</p>
@@ -49,10 +49,10 @@ export function ProductCatalogue() {
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id as any)}
                         className={cn(
-                            "px-8 py-3 rounded-full font-bold text-lg transition-all border-2",
+                            "px-8 py-3 rounded-none font-bold text-sm md:text-lg transition-all border uppercase tracking-widest",
                             activeTab === tab.id
-                                ? "bg-brown text-white border-brown shadow-[4px_4px_0px_0px_rgba(255,210,63,1)] transform -translate-y-1"
-                                : "bg-white text-brown border-brown/20 hover:border-brown hover:bg-cream"
+                                ? "bg-yellow text-black border-yellow shadow-[0_0_15px_rgba(212,175,55,0.4)] transform -translate-y-1"
+                                : "bg-transparent text-brown/60 border-white/10 hover:border-yellow hover:text-yellow hover:bg-white/5"
                         )}
                     >
                         {tab.label}
@@ -80,7 +80,7 @@ export function ProductCatalogue() {
                 {/* Right Arrow Button */}
                 <button
                     onClick={scrollRight}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-white/90 p-3 rounded-full shadow-lg border border-brown/10 text-brown hover:bg-brown hover:text-white transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-black/50 backdrop-blur-sm p-3 rounded-none shadow-lg border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100"
                 >
                     <ChevronRight size={24} />
                 </button>

@@ -54,8 +54,8 @@ export function ShopByOccasion() {
     return (
         <section className="py-8 md:py-16 container mx-auto px-4 md:px-6">
             <div className="text-center mb-6 md:mb-12">
-                <h2 className="font-heading text-4xl text-brown mb-4 uppercase drop-shadow-sm">Shop by Occasion</h2>
-                <p className="text-brown/70 font-bold max-w-2xl mx-auto">Find the perfect cake for your special moment.</p>
+                <h2 className="font-heading text-4xl text-brown mb-4 uppercase drop-shadow-sm tracking-widest">Shop by Occasion</h2>
+                <p className="text-brown/60 uppercase tracking-widest text-sm max-w-2xl mx-auto">Find the perfect cake for your special moment.</p>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -66,13 +66,13 @@ export function ShopByOccasion() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Order for ${occ.name}`}
-                        className={`group flex flex-col items-center justify-center p-8 rounded-[2rem] border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] transition-all bg-white relative overflow-hidden cursor-pointer`}
+                        className={`group flex flex-col items-center justify-center p-8 rounded-none border border-white/10 hover:border-yellow shadow-none hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all bg-[#0A0A0A] relative overflow-hidden cursor-pointer duration-500`}
                     >
-                        <div className={`absolute top-0 left-0 w-full h-2 ${occ.color}`} />
-                        <div className="mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                        <div className={`absolute top-0 left-0 w-full h-[1px] ${occ.color} opacity-50`} />
+                        <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100">
                             {occ.icon}
                         </div>
-                        <h3 className="font-heading text-xl text-brown uppercase">{occ.name}</h3>
+                        <h3 className="font-heading text-lg text-brown uppercase tracking-widest group-hover:text-yellow transition-colors">{occ.name}</h3>
                     </a>
                 ))}
             </div>

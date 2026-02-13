@@ -38,15 +38,22 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col gap-0 pb-20">
+    <div className="flex flex-col gap-24 md:gap-32 pb-32 bg-[#050505]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <div className="absolute top-[80vh] left-0 right-0 h-40 bg-gradient-to-b from-transparent to-[#050505] z-20 pointer-events-none" />
       <Hero />
-      <ProductCatalogue />
+      <div className="relative">
+        <div className="absolute inset-0 bg-purple-900/10 blur-[100px] pointer-events-none" />
+        <ProductCatalogue />
+      </div>
       <FeaturedCarousel />
-      <ShopByOccasion />
+      <div className="relative">
+        <div className="absolute inset-0 bg-pink-900/10 blur-[100px] pointer-events-none" />
+        <ShopByOccasion />
+      </div>
       <CustomOrderBanner />
       <WhySugarAndSoul />
       <MapEmbed />

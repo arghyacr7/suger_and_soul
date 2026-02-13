@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils"
 // import { Loader2 } from "lucide-react" // usage for loading state later
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: "primary" | "secondary" | "outline" | "ghost"
+    variant?: "primary" | "secondary" | "outline" | "ghost" | "gradient"
     size?: "sm" | "md" | "lg"
 }
 
@@ -13,15 +13,16 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             <button
                 ref={ref}
                 className={cn(
-                    "inline-flex items-center justify-center rounded-full font-bold transition-all duration-200 disabled:pointer-events-none disabled:opacity-50",
+                    "inline-flex items-center justify-center rounded-none font-semibold transition-all duration-500 disabled:pointer-events-none disabled:opacity-50 uppercase tracking-[0.2em]",
                     {
-                        "bg-yellow text-brown border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]": variant === "primary",
-                        "bg-pink text-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]": variant === "secondary",
-                        "border-2 border-brown text-brown hover:bg-brown hover:text-white": variant === "outline",
-                        "hover:bg-brown/5 text-brown": variant === "ghost",
-                        "h-9 px-5 text-sm": size === "sm",
-                        "h-12 px-8 text-base": size === "md",
-                        "h-16 px-10 text-xl": size === "lg",
+                        "bg-transparent border border-yellow text-yellow hover:bg-yellow hover:text-black shadow-[0_0_15px_rgba(212,175,55,0.1)] hover:shadow-[0_0_25px_rgba(212,175,55,0.4)]": variant === "primary",
+                        "bg-transparent border border-brown/30 text-brown hover:border-brown hover:bg-brown hover:text-black": variant === "secondary",
+                        "border border-brown text-brown hover:bg-brown hover:text-black": variant === "outline",
+                        "text-yellow border-b border-transparent hover:border-yellow p-0 h-auto rounded-none": variant === "ghost",
+                        "bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 hover:brightness-110 hover:scale-[1.02] shadow-[0_0_20px_rgba(236,72,153,0.3)]": variant === "gradient",
+                        "h-10 px-6 text-[10px]": size === "sm",
+                        "h-12 px-8 text-xs": size === "md",
+                        "h-16 px-12 text-sm": size === "lg",
                     },
                     className
                 )}
