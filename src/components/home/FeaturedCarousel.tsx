@@ -42,13 +42,13 @@ export function FeaturedCarousel() {
 
     return (
         <section className="py-8 md:py-12 container mx-auto px-4 md:px-6 bg-transparent border-y border-white/5">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-8 gap-4">
+            <div className="flex flex-row justify-between items-end mb-6 md:mb-8 gap-4">
                 <div>
-                    <h2 className="font-heading text-3xl md:text-4xl text-brown mb-2 uppercase tracking-wider">Customer Favorites</h2>
-                    <p className="text-brown/60 tracking-wide uppercase text-sm">Our most loved treats.</p>
+                    <h2 className="font-heading text-2xl md:text-4xl text-brown mb-2 uppercase tracking-wider">Customer Favorites</h2>
+                    <p className="text-brown/60 tracking-wide uppercase text-xs md:text-sm">Our most loved treats.</p>
                 </div>
                 <Link href="/cakes">
-                    <Button variant="outline" className="text-yellow border-yellow hover:bg-yellow hover:text-black rounded-none uppercase tracking-widest bg-transparent">
+                    <Button variant="outline" className="text-yellow border-yellow hover:bg-yellow hover:text-black rounded-none uppercase tracking-widest bg-transparent text-xs md:text-sm px-3 md:px-4">
                         View All
                     </Button>
                 </Link>
@@ -58,9 +58,9 @@ export function FeaturedCarousel() {
                 {/* Left Arrow Button */}
                 <button
                     onClick={scrollLeft}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-[#0A0A0A] p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100 rounded-full"
+                    className="absolute -left-3 md:left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-[#0A0A0A] p-2 md:p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all flex opacity-100 md:opacity-0 md:group-hover/scroll:opacity-100 rounded-full"
                 >
-                    <ChevronRight size={24} className="rotate-180" />
+                    <ChevronRight size={20} className="md:w-6 md:h-6 rotate-180" />
                 </button>
 
                 <div
@@ -81,9 +81,9 @@ export function FeaturedCarousel() {
                 {/* Right Arrow Button */}
                 <button
                     onClick={scrollRight}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-[#0A0A0A] p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100 rounded-full"
+                    className="absolute -right-3 md:right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-[#0A0A0A] p-2 md:p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all flex opacity-100 md:opacity-0 md:group-hover/scroll:opacity-100 rounded-full"
                 >
-                    <ChevronRight size={24} />
+                    <ChevronRight size={20} className="md:w-6 md:h-6" />
                 </button>
             </div>
 

@@ -71,9 +71,9 @@ export function ProductCatalogue() {
                 {/* Left Arrow Button */}
                 <button
                     onClick={scrollLeft}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-[#0A0A0A] p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100 rounded-full"
+                    className="absolute -left-3 md:left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-[#0A0A0A] p-2 md:p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all flex opacity-100 md:opacity-0 md:group-hover/scroll:opacity-100 rounded-full"
                 >
-                    <ChevronRight size={24} className="rotate-180" />
+                    <ChevronRight size={20} className="md:w-6 md:h-6 rotate-180" />
                 </button>
 
                 <div
@@ -94,9 +94,9 @@ export function ProductCatalogue() {
                 {/* Right Arrow Button */}
                 <button
                     onClick={scrollRight}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-[#0A0A0A] p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100 rounded-full"
+                    className="absolute -right-3 md:right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-[#0A0A0A] p-2 md:p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all flex opacity-100 md:opacity-0 md:group-hover/scroll:opacity-100 rounded-full"
                 >
-                    <ChevronRight size={24} />
+                    <ChevronRight size={20} className="md:w-6 md:h-6" />
                 </button>
             </div>
 

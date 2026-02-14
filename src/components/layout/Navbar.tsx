@@ -131,7 +131,7 @@ export function Navbar() {
                     {!user && !loading && (
                         <Link
                             href="/auth"
-                            className="text-[9px] font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors px-2"
+                            className="text-[10px] font-bold bg-yellow/10 text-yellow border border-yellow/20 px-3 py-1.5 rounded-full hover:bg-yellow hover:text-black uppercase tracking-wider transition-all ml-2"
                         >
                             Login
                         </Link>
