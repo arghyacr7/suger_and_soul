@@ -16,6 +16,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Sherly Kitchen";
+  src: url("/font/sherly-kitchen/Sherly Kitchen.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   /* Dark Luxury Palette */
   --color-cream: #050505;
@@ -30,15 +38,18 @@
   /* Silver/Bronze secondary */
 
   /* Font Definitions */
-  --font-cinzel: "Cinzel", serif;
-  --font-montserrat: "Montserrat", sans-serif;
-  --font-asimovian: "Asimovian", sans-serif;
+  --font-cinzel: "Sherly Kitchen", sans-serif;
+  --font-montserrat: "Sherly Kitchen", sans-serif;
+  --font-asimovian: "Sherly Kitchen", sans-serif;
   --font-berita: "Berita", sans-serif;
+
+  --font-sherly: "Sherly Kitchen", sans-serif;
+
   /* Keeping for Logo checks */
 
-  --font-sans: var(--font-montserrat);
-  --font-heading: var(--font-cinzel);
-  --font-script: var(--font-asimovian);
+  --font-sans: var(--font-sherly);
+  --font-heading: var(--font-sherly);
+  --font-script: var(--font-sherly);
   --font-branding: var(--font-berita);
 
   /* Animation Basics */
