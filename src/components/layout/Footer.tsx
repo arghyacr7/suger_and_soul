@@ -17,7 +17,7 @@ export function Footer() {
                                 height={60}
                                 className="w-auto h-14 object-contain invert"
                             />
-                            <span className="font-branding text-2xl font-bold text-white uppercase tracking-wider">
+                            <span className="font-branding text-2xl font-bold text-white">
                                 Sugar & Soul
                             </span>
                         </Link>

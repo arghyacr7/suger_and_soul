@@ -37,7 +37,7 @@ export function Navbar() {
                         className="w-auto h-12 md:h-16 object-contain"
                     />
                     <div className="flex flex-col items-start -gap-1 md:gap-0">
-                        <span className="font-branding text-sm md:text-2xl font-bold text-brown uppercase tracking-wider leading-none">
+                        <span className="font-branding text-sm md:text-2xl font-bold text-brown leading-none">
                             Sugar & Soul
                         </span>
 
