@@ -9,8 +9,8 @@
 }
 
 @font-face {
-  font-family: "Yosan";
-  src: url("/font/yosan/Yosan.ttf") format("truetype");
+  font-family: "Bakery Roast";
+  src: url("/font/bakery-roast-demo/BakeryRoastDemoRegular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -38,19 +38,21 @@
   /* Silver/Bronze secondary */
 
   /* Font Definitions */
-  --font-cinzel: "Yosan", sans-serif;
-  --font-montserrat: "Yosan", sans-serif;
-  --font-asimovian: "Yosan", sans-serif;
+  --font-cinzel: "Bakery Roast", sans-serif;
+  --font-montserrat: "Bakery Roast", sans-serif;
+  --font-asimovian: "Bakery Roast", sans-serif;
 
-  --font-yosan: "Yosan", sans-serif;
+  --font-bakery: "Bakery Roast", sans-serif;
+  --font-yosan: "Bakery Roast", sans-serif;
+  /* Keeping variable name for compatibility but mapping to Bakery Roast */
   --font-pinko: "Pinko", sans-serif;
   --font-qareports: "QAReports", sans-serif;
 
   /* Keeping for Logo checks */
 
-  --font-sans: var(--font-yosan);
-  --font-heading: var(--font-yosan);
-  --font-script: var(--font-yosan);
+  --font-sans: var(--font-bakery);
+  --font-heading: var(--font-bakery);
+  --font-script: var(--font-bakery);
   --font-branding: var(--font-pinko);
   --font-signature: var(--font-qareports);
 
