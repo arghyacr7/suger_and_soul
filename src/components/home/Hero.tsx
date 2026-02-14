@@ -12,7 +12,7 @@ export function Hero() {
     const [isProfileOpen, setIsProfileOpen] = useState(false)
 
     return (
-        <section className="relative min-h-[85dvh] md:min-h-[55vh] w-full flex items-center justify-center overflow-hidden pt-20 pb-16 md:pt-16 md:pb-12">
+        <section className="relative min-h-[85dvh] md:min-h-[55vh] w-full flex items-center justify-center overflow-hidden pt-16 pb-16 md:pt-16 md:pb-12">
             {/* Cinematic Background Image with Slow Zoom */}
             <div
                 className="absolute inset-0 bg-cover bg-center animate-slowZoom"
