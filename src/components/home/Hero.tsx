@@ -12,7 +12,7 @@ export function Hero() {
     const [isProfileOpen, setIsProfileOpen] = useState(false)
 
     return (
-        <section className="relative min-h-[50vh] md:min-h-[65vh] w-full flex items-start md:items-center justify-center overflow-hidden pt-12 pb-4 md:pt-19 md:pb-20">
+        <section className="relative min-h-[50vh] md:min-h-[55vh] w-full flex items-start md:items-center justify-center overflow-hidden pt-12 pb-4 md:pt-16 md:pb-12">
             {/* Cinematic Background Image with Slow Zoom */}
             <div
                 className="absolute inset-0 bg-cover bg-center animate-slowZoom"
@@ -55,13 +55,13 @@ export function Hero() {
                     </span>
                 </div>
 
-                <h1 className="font-heading text-5xl md:text-8xl mb-8 leading-tight text-white drop-shadow-2xl">
+                <h1 className="font-heading text-5xl md:text-7xl mb-6 leading-tight text-white drop-shadow-2xl">
                     <span className="block text-white">Sugar</span>
                     <span className="block text-[0.5em] md:text-[0.6em] font-script text-yellow my-2 md:my-4">&</span>
                     <span className="block text-white">Soul</span>
                 </h1>
 
-                <p className="font-sans text-lg md:text-xl text-white/90 max-w-lg mx-auto mb-10 leading-relaxed font-light tracking-wide text-shadow">
+                <p className="font-sans text-lg md:text-xl text-white/90 max-w-lg mx-auto mb-8 leading-relaxed font-light tracking-wide text-shadow">
                     Premium Cloud Kitchen
                     <span className="block text-sm mt-2 text-white/70">Handcrafted Cakes • Brownies • Desserts</span>
                 </p>
