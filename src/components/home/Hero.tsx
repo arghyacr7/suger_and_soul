@@ -55,7 +55,7 @@ export function Hero() {
                     </span>
                 </div>
 
-                <h1 className="font-branding text-5xl md:text-7xl mb-6 leading-tight text-white drop-shadow-2xl normal-case tracking-normal">
+                <h1 className="font-branding text-5xl md:text-7xl mb-6 leading-tight text-white drop-shadow-2xl normal-case tracking-normal font-normal">
                     <span className="block text-white">Sugar</span>
                     <span className="block text-[0.5em] md:text-[0.6em] text-yellow my-2 md:my-4">&</span>
                     <span className="block text-white">Soul</span>
