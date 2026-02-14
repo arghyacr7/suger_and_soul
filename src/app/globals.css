@@ -9,8 +9,8 @@
 }
 
 @font-face {
-  font-family: "Broccoli Cupcakes";
-  src: url("/font/broccoli-cupcakes.regular.ttf") format("truetype");
+  font-family: "Handmade Cupcakes";
+  src: url("/font/Handmade Cupcakes.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -38,23 +38,25 @@
   /* Silver/Bronze secondary */
 
   /* Font Definitions */
-  --font-cinzel: "Broccoli Cupcakes", sans-serif;
-  --font-montserrat: "Broccoli Cupcakes", sans-serif;
-  --font-asimovian: "Broccoli Cupcakes", sans-serif;
+  --font-cinzel: "Handmade Cupcakes", sans-serif;
+  --font-montserrat: "Handmade Cupcakes", sans-serif;
+  --font-asimovian: "Handmade Cupcakes", sans-serif;
 
-  --font-broccoli: "Broccoli Cupcakes", sans-serif;
-  --font-bakery: "Broccoli Cupcakes", sans-serif;
+  --font-handmade: "Handmade Cupcakes", sans-serif;
+  --font-broccoli: "Handmade Cupcakes", sans-serif;
   /* Keep compatibility */
-  --font-yosan: "Broccoli Cupcakes", sans-serif;
+  --font-bakery: "Handmade Cupcakes", sans-serif;
+  /* Keep compatibility */
+  --font-yosan: "Handmade Cupcakes", sans-serif;
   /* Keep compatibility */
   --font-pinko: "Pinko", sans-serif;
   --font-qareports: "QAReports", sans-serif;
 
   /* Keeping for Logo checks */
 
-  --font-sans: var(--font-broccoli);
-  --font-heading: var(--font-broccoli);
-  --font-script: var(--font-broccoli);
+  --font-sans: var(--font-handmade);
+  --font-heading: var(--font-handmade);
+  --font-script: var(--font-handmade);
   --font-branding: var(--font-pinko);
   --font-signature: var(--font-qareports);
 
