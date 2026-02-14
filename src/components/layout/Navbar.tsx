@@ -25,8 +25,8 @@ export function Navbar() {
     const { user, greeting, loading, likedProducts, signOut } = useAuth()
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/95 backdrop-blur-md border-b border-white/10">
-            <div className="container mx-auto px-2 md:px-6 h-24 flex items-center justify-between">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/95 backdrop-blur-md border-b border-white/10 shadow-[0_4px_20px_-10px_rgba(255,215,0,0.3)] md:shadow-none">
+            <div className="container mx-auto px-2 md:px-6 h-20 md:h-24 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 md:gap-4 scale-105 hover:scale-110 transition-transform origin-left">
                     <Image
