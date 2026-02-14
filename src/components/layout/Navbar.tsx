@@ -45,7 +45,7 @@ export function Navbar() {
                         <div className="w-10 md:w-16 h-[1px] bg-gradient-to-r from-transparent via-yellow-400 to-transparent mt-1 mb-1 opacity-80"></div>
 
                         {/* Premium Glow Credit */}
-                        <span className="text-[9px] md:text-[10px] font-light tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 drop-shadow-[0_0_6px_rgba(255,215,0,0.6)] leading-none ml-0.5">
+                        <span className="font-signature text-[9px] md:text-[10px] font-light tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-400 to-amber-500 drop-shadow-[0_0_6px_rgba(255,215,0,0.6)] leading-none ml-0.5">
                             by Moumita Das
                         </span>
                     </div>
