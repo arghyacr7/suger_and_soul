@@ -29,7 +29,7 @@ export default function ForgotPassword() {
         if (error) {
             setError(error.message)
         } else {
-            setMessage("Password reset link sent to your email.")
+            setMessage(`If an account exists for ${email}, a password reset link has been sent.`)
         }
 
         setLoading(false)
