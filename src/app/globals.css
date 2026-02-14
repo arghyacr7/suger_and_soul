@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Royal Pastry";
-  src: url("/font/royal-pastry-demo/RoyalPastryDemoRegular.ttf") format("truetype");
+  font-family: "Pinko";
+  src: url("/font/pinko/Pinko.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
