@@ -26,9 +26,9 @@ export function Navbar() {
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-[#050505]/95 backdrop-blur-md border-b border-white/10">
-            <div className="container mx-auto px-2 md:px-6 h-20 flex items-center justify-between">
+            <div className="container mx-auto px-2 md:px-6 h-24 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex flex-col items-start gap-1 scale-105 hover:scale-110 transition-transform origin-left">
+                <Link href="/" className="flex flex-col items-start gap-0 scale-105 hover:scale-110 transition-transform origin-left">
                     <div className="flex items-center gap-2 md:gap-3">
                         <Image
                             src="/images/logo.png"
@@ -41,7 +41,7 @@ export function Navbar() {
                             Sugar & Soul
                         </span>
                     </div>
-                    <span className="font-script text-[10px] md:text-xs text-yellow/90 italic ml-11 md:ml-16 mt-0 leading-tight">
+                    <span className="font-script text-[9px] md:text-[11px] text-yellow/90 italic ml-11 md:ml-16 leading-none">
                         by Moumita Das
                     </span>
                 </Link>
