@@ -25,6 +25,12 @@ export function ProductCatalogue() {
         setIsModalOpen(true)
     }
 
+    const scrollLeft = () => {
+        if (scrollContainerRef.current) {
+            scrollContainerRef.current.scrollBy({ left: -300, behavior: "smooth" })
+        }
+    }
+
     const scrollRight = () => {
         if (scrollContainerRef.current) {
             scrollContainerRef.current.scrollBy({ left: 300, behavior: "smooth" })
@@ -62,6 +68,14 @@ export function ProductCatalogue() {
 
             {/* Horizontal Scroll Container */}
             <div className="relative group/scroll">
+                {/* Left Arrow Button */}
+                <button
+                    onClick={scrollLeft}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 bg-[#0A0A0A] p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100 rounded-full"
+                >
+                    <ChevronRight size={24} className="rotate-180" />
+                </button>
+
                 <div
                     ref={scrollContainerRef}
                     className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide"
@@ -80,7 +94,7 @@ export function ProductCatalogue() {
                 {/* Right Arrow Button */}
                 <button
                     onClick={scrollRight}
-                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-black/50 backdrop-blur-sm p-3 rounded-none shadow-lg border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 bg-[#0A0A0A] p-3 shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-yellow text-yellow hover:bg-yellow hover:text-black transition-all hidden md:flex opacity-0 group-hover/scroll:opacity-100 rounded-full"
                 >
                     <ChevronRight size={24} />
                 </button>
