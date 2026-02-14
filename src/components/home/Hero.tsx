@@ -12,7 +12,7 @@ export function Hero() {
     const [isProfileOpen, setIsProfileOpen] = useState(false)
 
     return (
-        <section className="relative min-h-[50vh] md:min-h-[55vh] w-full flex items-start md:items-center justify-center overflow-hidden pt-12 pb-4 md:pt-16 md:pb-12">
+        <section className="relative min-h-[85dvh] md:min-h-[55vh] w-full flex items-center justify-center overflow-hidden pt-20 pb-16 md:pt-16 md:pb-12">
             {/* Cinematic Background Image with Slow Zoom */}
             <div
                 className="absolute inset-0 bg-cover bg-center animate-slowZoom"
@@ -26,7 +26,7 @@ export function Hero() {
             <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black backdrop-blur-[2px]" />
 
             {/* Content - Dark Luxury Card */}
-            <div className="relative z-10 text-center px-6 max-w-5xl mx-auto backdrop-blur-md bg-[#0A0A0A]/40 rounded-[3rem] p-8 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 animate-[fade-in_1s_ease-out]">
+            <div className="relative z-10 text-center px-6 max-w-5xl mx-auto backdrop-blur-md bg-[#0A0A0A]/40 rounded-[3rem] p-6 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 animate-[fade-in_1s_ease-out] w-[90%] md:w-full mt-8 md:mt-0">
 
                 {/* User Greeting */}
                 {user && !loading && (
