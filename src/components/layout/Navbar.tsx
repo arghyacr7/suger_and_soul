@@ -35,7 +35,7 @@ export function Navbar() {
                             alt="Sugar & Soul"
                             width={80}
                             height={80}
-                            className="w-auto h-10 md:h-14 object-contain"
+                            className="w-auto h-12 md:h-20 object-contain"
                         />
                         <span className="font-heading text-sm md:text-2xl font-bold text-brown uppercase tracking-wider">
                             Sugar & Soul
