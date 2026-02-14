@@ -155,6 +155,18 @@ export default function AuthPage() {
                             </label>
                         </div>
 
+                        {mode === "login" && (
+                            <div className="flex justify-end -mt-4 mb-6">
+                                <button
+                                    type="button"
+                                    onClick={() => router.push("/forgot-password")}
+                                    className="text-[10px] md:text-xs text-brown/60 hover:text-yellow transition-colors tracking-widest uppercase"
+                                >
+                                    Forgot Password?
+                                </button>
+                            </div>
+                        )}
+
                         {error && (
                             <div className="border border-red-900/50 bg-red-950/20 text-red-400 text-xs p-4 tracking-wide flex items-center gap-3 rounded-lg">
                                 <AlertCircle size={14} />
