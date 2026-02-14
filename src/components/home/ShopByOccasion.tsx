@@ -66,13 +66,13 @@ export function ShopByOccasion() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`Order for ${occ.name}`}
-                        className={`group flex flex-col items-center justify-center p-8 rounded-none border border-white/10 hover:border-yellow shadow-none hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all bg-[#0A0A0A] relative overflow-hidden cursor-pointer duration-500`}
+                        className={`group flex flex-col items-center justify-center p-4 md:p-8 rounded-none border border-white/10 hover:border-yellow shadow-none hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] transition-all bg-[#0A0A0A] relative overflow-hidden cursor-pointer duration-500`}
                     >
                         <div className={`absolute top-0 left-0 w-full h-[1px] ${occ.color} opacity-50`} />
-                        <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100">
+                        <div className="mb-4 md:mb-6 transform group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100">
                             {occ.icon}
                         </div>
-                        <h3 className="font-heading text-lg text-brown uppercase tracking-widest group-hover:text-yellow transition-colors">{occ.name}</h3>
+                        <h3 className="font-heading text-xs md:text-lg text-brown uppercase tracking-wider md:tracking-widest group-hover:text-yellow transition-colors break-words text-center">{occ.name}</h3>
                     </a>
                 ))}
             </div>
