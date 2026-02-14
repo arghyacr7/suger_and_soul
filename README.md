@@ -2,7 +2,7 @@
 
 Baked with Love, Delivered with Care.
 
-**Sugar & Soul** is a premium cloud kitchen cake shop website built with modern web technologies. It allows users to browse a variety of baked goods, including plain cakes, cream cakes, brownies, and cupcakes, and place orders seamlessly via WhatsApp.
+**Sugar & Soul** is a premium **Handcrafted Home Bakery** website built with modern web technologies. It features a "Dark Luxury" design aesthetic, allowing users to browse a variety of baked goods—including plain cakes, cream cakes, brownies, and cupcakes—and place orders seamlessly via WhatsApp.
 
 ![Sugar & Soul Banner](/public/images/logo.png)
 
@@ -12,29 +12,32 @@ Baked with Love, Delivered with Care.
 -   **Language**: [TypeScript](https://www.typescriptlang.org/)
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 -   **Icons**: [Lucide React](https://lucide.dev/)
+-   **Database & Auth**: [Supabase](https://supabase.com/)
 -   **Deployment**: Vercel / Hostinger (Static Export compatible)
 
 ## ✨ Key Features
 
--   **📱 Fully Responsive Design**: Mobile-first approach ensuring a great experience on all devices.
--   **🎨 Dynamic Product Cards**: Beautifully designed cards with tagging (e.g., "Anniversary", "Kids Special").
--   **🔍 Search & Filtering**: Easy navigation through categories and search functionality.
+-   **🎨 Dark Luxury Aesthetic**:
+    -   Deep black backgrounds with gold accents for a premium feel.
+    -   Smooth "slow zoom" cinematic animations in the Hero section.
+    -   Glassmorphism and subtle gradients throughout the UI.
+-   **📱 Universal Mobile Design**:
+    -   Optimized for all screen sizes, including 5-7 inch mobile displays.
+    -   Dynamic viewport adjustments (`dvh`) for perfect fit.
 -   **🛒 Interactive Product Modal**:
     -   Detailed view with high-quality images.
     -   Weight/Quantity selection (1lb, 2lb, 3lb, Pieces).
     -   **Interactive 5-Star Rating System**.
     -   Dynamic price calculation.
 -   **📲 WhatsApp Ordering**: Direct integration generating pre-filled order messages with product details, selected options, and user rating.
--   **🏷️ Occasion-Based Tagging**: Highlights special cakes for Anniversaries, Kids' Birthdays, etc.
 -   **🔐 Robust Authentication**:
     -   Secure email/password login via Supabase.
-    -   **Persistent Sessions**: Keeps users logged in across refreshes and browser restarts.
-    -   **Simplified Profile**: Clean user interface showing name and logout options.
+    -   **Forgot Password Flow**: Complete reset mechanism with secure feedback.
+    -   **Persistent Sessions**: Keeps users logged in across refreshes.
 -   **🎂 Automated Birthday System**:
     -   **Birthday Detection**: Automatically detects user's birthday based on profile data.
     -   **Celebratory Banner**: Displays a personalized greeting with confetti animations.
     -   **Exclusive Offers**: Direct WhatsApp link to claim special birthday surprises.
-    -   **Smart Dismissal**: Remembers banner dismissal for the day but resets annually.
 
 ## 🛠️ Getting Started
 
