@@ -35,14 +35,14 @@
   --font-asimovian: "Sherly Kitchen", sans-serif;
 
   --font-sherly: "Sherly Kitchen", sans-serif;
-  --font-royal: "Royal Pastry", sans-serif;
+  --font-pinko: "Pinko", sans-serif;
 
   /* Keeping for Logo checks */
 
   --font-sans: var(--font-sherly);
   --font-heading: var(--font-sherly);
   --font-script: var(--font-sherly);
-  --font-branding: var(--font-royal);
+  --font-branding: var(--font-pinko);
 
   /* Animation Basics */
   --animate-fade-in: fade-in 0.6s ease-out;
