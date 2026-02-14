@@ -4,6 +4,8 @@ Baked with Love, Delivered with Care.
 
 **Sugar & Soul** is a premium **Handcrafted Home Bakery** website built with modern web technologies. It features a "Dark Luxury" design aesthetic, allowing users to browse a variety of baked goods—including plain cakes, cream cakes, brownies, and cupcakes—and place orders seamlessly via WhatsApp.
 
+[**🌐 Live Demo**](https://sugernsoul.shop/)
+
 ![Sugar & Soul Banner](/public/images/logo.png)
 
 ## 🚀 Technologies Used
