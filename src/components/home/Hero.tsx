@@ -62,7 +62,7 @@ export function Hero() {
                 </h1>
 
                 <p className="font-sans text-lg md:text-xl text-white/90 max-w-lg mx-auto mb-8 leading-relaxed font-light tracking-wide text-shadow">
-                    Premium Cloud Kitchen
+                    Handcrafted Home Bakery
                     <span className="block text-sm mt-2 text-white/70">Handcrafted Cakes • Brownies • Desserts</span>
                 </p>
 
