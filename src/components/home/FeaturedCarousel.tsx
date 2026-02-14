@@ -35,8 +35,8 @@ export function FeaturedCarousel() {
     }
 
     return (
-        <section className="py-8 md:py-16 container mx-auto px-4 md:px-6 bg-transparent border-y border-white/5">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-12 gap-4">
+        <section className="py-8 md:py-12 container mx-auto px-4 md:px-6 bg-transparent border-y border-white/5">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-6 md:mb-8 gap-4">
                 <div>
                     <h2 className="font-heading text-3xl md:text-4xl text-brown mb-2 uppercase tracking-wider">Customer Favorites</h2>
                     <p className="text-brown/60 tracking-wide uppercase text-sm">Our most loved treats.</p>

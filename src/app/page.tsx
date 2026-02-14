@@ -38,7 +38,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col gap-8 md:gap-32 pb-32 bg-[#050505]">
+    <div className="flex flex-col gap-8 md:gap-16 pb-32 bg-[#050505]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

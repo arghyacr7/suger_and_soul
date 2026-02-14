@@ -4,9 +4,9 @@ import { CheckCircle, Clock, Heart } from "lucide-react"
 
 export function WhySugarAndSoul() {
     return (
-        <section className="py-24 bg-transparent border-t border-white/5">
+        <section className="py-16 bg-transparent border-t border-white/5">
             <div className="container mx-auto px-4 md:px-6">
-                <div className="text-center mb-16">
+                <div className="text-center mb-10">
                     <h2 className="font-heading text-3xl md:text-5xl text-brown mb-4 uppercase tracking-widest">Why Sugar & Soul?</h2>
                     <p className="text-brown/50 tracking-widest uppercase text-sm">The secret ingredients.</p>
                 </div>
