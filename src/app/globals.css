@@ -1,16 +1,8 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: "Berita";
-  src: url("/font/berita/Berita.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Berita";
-  src: url("/font/berita/Berita.otf") format("opentype");
+  font-family: "Royal Pastry";
+  src: url("/font/royal-pastry-demo/RoyalPastryDemoRegular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -41,16 +33,16 @@
   --font-cinzel: "Sherly Kitchen", sans-serif;
   --font-montserrat: "Sherly Kitchen", sans-serif;
   --font-asimovian: "Sherly Kitchen", sans-serif;
-  --font-berita: "Berita", sans-serif;
 
   --font-sherly: "Sherly Kitchen", sans-serif;
+  --font-royal: "Royal Pastry", sans-serif;
 
   /* Keeping for Logo checks */
 
   --font-sans: var(--font-sherly);
   --font-heading: var(--font-sherly);
   --font-script: var(--font-sherly);
-  --font-branding: var(--font-berita);
+  --font-branding: var(--font-royal);
 
   /* Animation Basics */
   --animate-fade-in: fade-in 0.6s ease-out;
