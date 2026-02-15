@@ -96,7 +96,7 @@ export function Navbar() {
                                 href="/auth"
                                 className="text-sm font-bold text-brown hover:text-purple uppercase tracking-wide transition-colors"
                             >
-                                Login
+                                Join
                             </Link>
                         )}
 
@@ -133,7 +133,7 @@ export function Navbar() {
                             href="/auth"
                             className="text-[10px] font-bold bg-yellow/10 text-yellow border border-yellow/20 px-3 py-1.5 rounded-full hover:bg-yellow hover:text-black uppercase tracking-wider transition-all ml-2"
                         >
-                            Login
+                            Join
                         </Link>
                     )}
                     {/* Mobile Menu Toggle */}
