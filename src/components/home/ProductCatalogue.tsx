@@ -1,24 +1,25 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { ProductCard } from "@/components/product/ProductCard"
 import { cn } from "@/lib/utils"
-
 import { getProductsByCategory } from "@/lib/products"
-
-// Data is now fetched from @/lib/products
-
 import { Product } from "@/types"
 import { ProductModal } from "@/components/product/ProductModal"
-
-import { useRef } from "react"
 import { ChevronRight } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 export function ProductCatalogue() {
     const [activeTab, setActiveTab] = useState<"plain-cakes" | "cream-cakes" | "brownies">("plain-cakes")
+    const [activeFilter, setActiveFilter] = useState("all")
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+    // Reset filter when tab changes
+    useEffect(() => {
+        setActiveFilter("all")
+    }, [activeTab])
 
     const handleProductSelect = (product: Product) => {
         setSelectedProduct(product)
@@ -37,6 +38,47 @@ export function ProductCatalogue() {
         }
     }
 
+    const filters = [
+        { id: "all", label: "All" },
+        { id: "birthday", label: "Birthday" },
+        { id: "anniversary", label: "Anniversary" },
+        { id: "kids", label: "Kids Special" },
+        { id: "celebration", label: "Celebration" },
+    ]
+
+    const products = getProductsByCategory(activeTab)
+
+    const filteredProducts = activeTab === "cream-cakes"
+        ? activeFilter === "all"
+            ? products
+            : products
+                .filter(product => {
+                    const hasTag = product.occasions?.includes(activeFilter)
+
+                    // Specific exclusion: Don't show Anniversary cakes in Birthday filter
+                    if (activeFilter === "birthday" && product.occasions?.includes("anniversary")) {
+                        return false
+                    }
+
+                    return hasTag
+                })
+                .sort((a, b) => {
+                    // 1. Priority to products with filter keyword in name
+                    const aNameMatch = a.name.toLowerCase().includes(activeFilter.toLowerCase())
+                    const bNameMatch = b.name.toLowerCase().includes(activeFilter.toLowerCase())
+                    if (aNameMatch && !bNameMatch) return -1
+                    if (!aNameMatch && bNameMatch) return 1
+
+                    // 2. Priority to products where occasion is the FIRST tag
+                    const aFirstTag = a.occasions?.[0] === activeFilter
+                    const bFirstTag = b.occasions?.[0] === activeFilter
+                    if (aFirstTag && !bFirstTag) return -1
+                    if (!aFirstTag && bFirstTag) return 1
+
+                    return 0
+                })
+        : products
+
     return (
         <section id="menu" className="py-0 container mx-auto px-6 md:px-8 scroll-mt-32">
             <div className="text-center mb-6 md:mb-12">
@@ -45,7 +87,7 @@ export function ProductCatalogue() {
             </div>
 
             {/* Tabs */}
-            <div className="flex justify-center gap-4 mb-12 flex-wrap">
+            <div className="flex justify-center gap-4 mb-8 flex-wrap">
                 {[
                     { id: "plain-cakes", label: "Plain Cakes" },
                     { id: "cream-cakes", label: "Cream Cakes" },
@@ -66,6 +108,38 @@ export function ProductCatalogue() {
                 ))}
             </div>
 
+            {/* Filters (Only for Cream Cakes) */}
+            <AnimatePresence>
+                {activeTab === "cream-cakes" && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12"
+                    >
+                        {filters.map((filter) => (
+                            <button
+                                key={filter.id}
+                                onClick={() => setActiveFilter(filter.id)}
+                                className={cn(
+                                    "relative px-4 py-2 md:px-6 md:py-2.5 rounded-full text-sm md:text-base font-medium transition-colors duration-300",
+                                    activeFilter === filter.id ? "text-black font-bold" : "text-brown/60 hover:text-brown border border-brown/20"
+                                )}
+                            >
+                                {activeFilter === filter.id && (
+                                    <motion.div
+                                        layoutId="catalogueActiveFilter"
+                                        className="absolute inset-0 bg-yellow rounded-full"
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{filter.label}</span>
+                            </button>
+                        ))}
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             {/* Horizontal Scroll Container */}
             <div className="relative group/scroll">
                 {/* Left Arrow Button */}
@@ -81,14 +155,30 @@ export function ProductCatalogue() {
                     className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide"
                     style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                    {getProductsByCategory(activeTab).map((product) => (
-                        <div key={product.id} className="min-w-[280px] md:min-w-[320px] snap-center">
-                            <ProductCard
-                                product={product as Product}
-                                onSelect={handleProductSelect}
-                            />
-                        </div>
-                    ))}
+                    <AnimatePresence mode="popLayout">
+                        {filteredProducts.length > 0 ? (
+                            filteredProducts.map((product) => (
+                                <motion.div
+                                    key={product.id}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.9 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="min-w-[280px] md:min-w-[320px] snap-center"
+                                >
+                                    <ProductCard
+                                        product={product as Product}
+                                        onSelect={handleProductSelect}
+                                    />
+                                </motion.div>
+                            ))
+                        ) : (
+                            <div className="w-full text-center py-10 text-brown/50 min-w-[300px]">
+                                <p>No products found for this filter.</p>
+                            </div>
+                        )}
+                    </AnimatePresence>
                 </div>
 
                 {/* Right Arrow Button */}
