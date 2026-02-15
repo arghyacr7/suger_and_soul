@@ -26,7 +26,23 @@ export function CategoryProductList({ products, categorySlug }: CategoryProductL
     const filteredProducts = isCreamCakes
         ? activeFilter === "all"
             ? products
-            : products.filter(product => product.occasions?.includes(activeFilter))
+            : products
+                .filter(product => product.occasions?.includes(activeFilter))
+                .sort((a, b) => {
+                    // 1. Priority to products with filter keyword in name
+                    const aNameMatch = a.name.toLowerCase().includes(activeFilter.toLowerCase())
+                    const bNameMatch = b.name.toLowerCase().includes(activeFilter.toLowerCase())
+                    if (aNameMatch && !bNameMatch) return -1
+                    if (!aNameMatch && bNameMatch) return 1
+
+                    // 2. Priority to products where occasion is the FIRST tag
+                    const aFirstTag = a.occasions?.[0] === activeFilter
+                    const bFirstTag = b.occasions?.[0] === activeFilter
+                    if (aFirstTag && !bFirstTag) return -1
+                    if (!aFirstTag && bFirstTag) return 1
+
+                    return 0
+                })
         : products
 
     return (
