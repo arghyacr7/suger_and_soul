@@ -84,7 +84,7 @@ export const products: Product[] = [
         originalPrice: 500,
         discountText: "Limited Offer",
         tag: "Anniversary",
-        variantPrices: { "1lb": 450, "2lb": 900, "3lb": 1300 },
+        variantPrices: { "1lb": 450, "2lb": 850, "3lb": 1250 },
         image: "/images/cream cake/red_velvet_cake.jpg",
         category: "cream-cakes",
         bestseller: false,
