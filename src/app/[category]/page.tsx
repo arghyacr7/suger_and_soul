@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { ProductCard } from "@/components/product/ProductCard"
+import { CategoryProductList } from "@/components/product/CategoryProductList"
 import { getProductsByCategory, products } from "@/lib/products"
 import { Metadata } from "next"
 
@@ -49,17 +49,7 @@ export default async function CategoryPage({ params }: PageProps) {
                 </p>
             </div>
 
-            {categoryProducts.length > 0 ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 animate-[slide-up_0.5s_ease-out]">
-                    {categoryProducts.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
-            ) : (
-                <div className="text-center py-20 text-brown/50">
-                    <p>No products found in this category yet.</p>
-                </div>
-            )}
+            <CategoryProductList products={categoryProducts} categorySlug={category} />
         </div>
     )
 }
