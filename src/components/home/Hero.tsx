@@ -37,13 +37,13 @@ export function Hero() {
                         initial={{ opacity: 0, scale: 0.9, y: -20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         transition={{ duration: 0.7, ease: "easeOut" }}
-                        className="mb-4 md:mb-8"
+                        className="mb-4 md:mb-8 w-full flex justify-center"
                     >
                         <div
                             onClick={() => setIsProfileOpen(true)}
-                            className="inline-block bg-[#050505] px-10 py-2.5 rounded-full border border-white/10 hover:border-yellow/50 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] cursor-pointer hover:scale-105 transition-all duration-300 active:scale-95 min-w-[200px]"
+                            className="inline-block bg-[#050505] px-6 md:px-10 py-2.5 rounded-full border border-white/10 hover:border-yellow/50 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] cursor-pointer hover:scale-105 transition-all duration-300 active:scale-95 min-w-[200px] max-w-full whitespace-nowrap overflow-hidden text-ellipsis"
                         >
-                            <span className="text-base md:text-xl font-bold text-white drop-shadow-lg font-waffle-mango tracking-wide">
+                            <span className="text-sm md:text-xl font-bold text-white drop-shadow-lg font-waffle-mango tracking-wide truncate">
                                 {greeting}, <span className="text-yellow capitalize">{user.user_metadata.full_name?.split(" ")[0].toLowerCase() || "User"}</span> 🎂
                             </span>
                         </div>
@@ -51,9 +51,9 @@ export function Hero() {
                 )}
 
                 {/* Animated Gradient Badge */}
-                <div className="relative group inline-block mb-6">
+                <div className="relative group inline-block mb-6 max-w-full">
                     <div className="absolute -inset-1 bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-                    <span className="relative font-bold uppercase tracking-[0.3em] text-xs md:text-sm bg-[#0A0A0A] text-yellow px-4 py-2 border border-yellow/20 rounded-full inline-block backdrop-blur-xl">
+                    <span className="relative font-bold uppercase tracking-widest md:tracking-[0.3em] text-[10px] md:text-sm bg-[#0A0A0A] text-yellow px-4 py-2 border border-yellow/20 rounded-full inline-block backdrop-blur-xl whitespace-nowrap">
                         Dankuni, West Bengal
                     </span>
                 </div>
