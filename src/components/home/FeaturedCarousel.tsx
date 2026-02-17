@@ -41,8 +41,14 @@ export function FeaturedCarousel() {
     }
 
     return (
-        <section className="py-8 md:py-12 container mx-auto px-4 md:px-6 bg-transparent border-y border-white/5">
-            <div className="flex flex-row justify-between items-end mb-6 md:mb-8 gap-4">
+        <section className="relative py-8 md:py-12 container mx-auto px-4 md:px-6 bg-transparent border-y border-white/5">
+            {/* Top Gradient Fade */}
+            <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            {/* Bottom Gradient Fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            <div className="relative z-20 flex flex-row justify-between items-end mb-6 md:mb-8 gap-4">
                 <div>
                     <h2 className="font-heading text-2xl md:text-4xl text-brown mb-2 uppercase tracking-wider">Customer Favorites</h2>
                     <p className="text-brown/60 tracking-wide uppercase text-xs md:text-sm">Our most loved treats.</p>

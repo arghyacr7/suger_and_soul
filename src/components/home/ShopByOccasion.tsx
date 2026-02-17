@@ -52,8 +52,14 @@ Thank you.`
 
 export function ShopByOccasion() {
     return (
-        <section className="py-8 md:py-16 container mx-auto px-4 md:px-6">
-            <div className="text-center mb-6 md:mb-12">
+        <section className="relative py-8 md:py-16 container mx-auto px-4 md:px-6">
+            {/* Top Gradient Fade */}
+            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            {/* Bottom Gradient Fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            <div className="relative z-20 text-center mb-6 md:mb-12">
                 <h2 className="font-heading text-4xl text-brown mb-4 uppercase drop-shadow-sm tracking-widest">Shop by Occasion</h2>
                 <p className="text-brown/60 uppercase tracking-widest text-sm max-w-2xl mx-auto">Find the perfect cake for your special moment.</p>
             </div>

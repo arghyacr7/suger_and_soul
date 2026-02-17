@@ -92,14 +92,20 @@ export function ProductCatalogue() {
         : products
 
     return (
-        <section id="menu" className="py-0 container mx-auto px-6 md:px-8 scroll-mt-32">
-            <div className="text-center mb-6 md:mb-12">
-                <h2 className="font-heading text-3xl md:text-5xl text-brown mb-4 uppercase drop-shadow-sm">Our Cake Catalogue</h2>
-                <p className="text-brown/70 text-lg">Freshly baked delights for every craving.</p>
+        <section id="menu" className="py-0 container mx-auto px-6 md:px-8 scroll-mt-32 relative">
+            {/* Top Gradient Fade */}
+            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            {/* Bottom Gradient Fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            <div className="relative z-20 text-center mb-6 md:mb-12 pt-[30px]">
+                <h2 className="font-heading text-2xl md:text-4xl text-brown mb-3 uppercase drop-shadow-sm tracking-widest">Our Cake Catalogue</h2>
+                <p className="text-brown/60 uppercase tracking-widest text-sm max-w-2xl mx-auto">Freshly baked delights for every craving.</p>
             </div>
 
             {/* Tabs */}
-            <div className="flex justify-center gap-4 mb-8 flex-wrap">
+            <div className="flex justify-center gap-2 md:gap-4 mb-8 flex-wrap">
                 {[
                     { id: "plain-cakes", label: "Plain Cakes" },
                     { id: "cream-cakes", label: "Cream Cakes" },
@@ -108,14 +114,21 @@ export function ProductCatalogue() {
                     <button
                         key={tab.id}
                         onClick={() => handleTabChange(tab.id as any)}
-                        className={cn(
-                            "px-8 py-3 rounded-none font-bold text-sm md:text-lg transition-all border uppercase tracking-widest",
-                            activeTab === tab.id
-                                ? "bg-yellow text-black border-yellow shadow-[0_0_15px_rgba(212,175,55,0.4)] transform -translate-y-1"
-                                : "bg-transparent text-brown/60 border-white/10 hover:border-yellow hover:text-yellow hover:bg-white/5"
-                        )}
+                        className="relative px-6 py-2.5 md:px-8 md:py-3 rounded-full font-bold text-sm md:text-lg uppercase tracking-widest transition-all group"
                     >
-                        {tab.label}
+                        {activeTab === tab.id && (
+                            <motion.div
+                                layoutId="activeTab"
+                                className="absolute inset-0 bg-yellow rounded-full shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+                                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                            />
+                        )}
+                        <span className={cn(
+                            "relative z-10 transition-colors duration-300",
+                            activeTab === tab.id ? "text-black" : "text-brown/60 group-hover:text-yellow"
+                        )}>
+                            {tab.label}
+                        </span>
                     </button>
                 ))}
             </div>
@@ -188,7 +201,7 @@ export function ProductCatalogue() {
                                     animate={{ opacity: 1, scale: 1 }}
                                     exit={{ opacity: 0, scale: 0.9 }}
                                     transition={{ duration: 0.3 }}
-                                    className="min-w-[280px] md:min-w-[320px] snap-center"
+                                    className="min-w-[260px] md:min-w-[300px] snap-center"
                                 >
                                     <ProductCard
                                         product={product as Product}

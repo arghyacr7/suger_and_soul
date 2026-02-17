@@ -96,7 +96,7 @@ export default function RootLayout({
         <AuthProvider>
           <Navbar />
           <BirthdayBannerWrapper />
-          <main className="min-h-screen pt-16 pb-20 md:pb-0">
+          <main className="min-h-screen pb-20 md:pb-0">
             {children}
           </main>
           <FloatingWhatsApp />

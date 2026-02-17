@@ -4,8 +4,14 @@ import { CheckCircle, Clock, Heart } from "lucide-react"
 
 export function WhySugarAndSoul() {
     return (
-        <section className="py-16 bg-transparent border-t border-white/5">
-            <div className="container mx-auto px-4 md:px-6">
+        <section className="relative py-16 bg-transparent border-t border-white/5">
+            {/* Top Gradient Fade */}
+            <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            {/* Bottom Gradient Fade */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            <div className="relative z-20 container mx-auto px-4 md:px-6">
                 <div className="text-center mb-10">
                     <h2 className="font-branding text-3xl md:text-5xl text-brown mb-4 normal-case tracking-normal font-normal">Why Sugar & Soul?</h2>
                     <p className="text-brown/50 tracking-widest uppercase text-sm">The secret ingredients.</p>

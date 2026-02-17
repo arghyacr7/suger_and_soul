@@ -12,7 +12,7 @@ export function Hero() {
     const [isProfileOpen, setIsProfileOpen] = useState(false)
 
     return (
-        <section className="relative min-h-[85dvh] md:min-h-[60dvh] lg:min-h-[70vh] w-full flex items-center justify-center overflow-hidden pt-8 pb-16 md:pt-12 lg:pt-16 md:pb-12">
+        <section className="relative h-auto w-full flex items-center justify-center overflow-hidden pt-12 md:pt-20 pb-0">
             {/* Cinematic Background Image with Slow Zoom */}
             <div
                 className="absolute inset-0 bg-cover bg-center animate-slowZoom"
@@ -25,8 +25,11 @@ export function Hero() {
             {/* Dark Overlay with Blur */}
             <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black backdrop-blur-[2px]" />
 
-            {/* Content - Dark Luxury Card */}
-            <div className="relative z-10 text-center px-4 max-w-5xl mx-auto backdrop-blur-md bg-[#0A0A0A]/40 rounded-[3rem] p-6 md:p-14 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 animate-[fade-in_1s_ease-out] w-[95%] md:w-full">
+            {/* Bottom Gradient Fade (Behind Content) */}
+            <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#050505] to-transparent z-0 pointer-events-none" />
+
+            {/* Content - Dark Luxury Card (Transparent) */}
+            <div className="relative z-10 text-center px-4 max-w-5xl mx-auto pt-6 px-6 pb-0 md:pt-14 md:px-14 md:pb-0 animate-[fade-in_1s_ease-out] w-[95%] md:w-full">
 
                 {/* User Greeting */}
                 {user && !loading && (
@@ -38,10 +41,10 @@ export function Hero() {
                     >
                         <div
                             onClick={() => setIsProfileOpen(true)}
-                            className="inline-block bg-white/5 backdrop-blur-xl px-8 py-4 rounded-full border-2 border-white/10 hover:border-yellow/50 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] cursor-pointer hover:scale-105 transition-all duration-300 active:scale-95"
+                            className="inline-block bg-[#050505] px-10 py-2.5 rounded-full border border-white/10 hover:border-yellow/50 shadow-[0_0_30px_rgba(0,0,0,0.3)] hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] cursor-pointer hover:scale-105 transition-all duration-300 active:scale-95 min-w-[200px]"
                         >
-                            <span className="text-base md:text-xl font-bold text-white drop-shadow-lg">
-                                {greeting}, <span className="text-yellow">{user.user_metadata.full_name?.split(" ")[0] || "User"}</span>! 🎂
+                            <span className="text-base md:text-xl font-bold text-white drop-shadow-lg font-waffle-mango tracking-wide">
+                                {greeting}, <span className="text-yellow capitalize">{user.user_metadata.full_name?.split(" ")[0].toLowerCase() || "User"}</span> 🎂
                             </span>
                         </div>
                     </motion.div>
@@ -55,10 +58,10 @@ export function Hero() {
                     </span>
                 </div>
 
-                <h1 className="font-branding text-5xl md:text-7xl mb-6 leading-tight text-white drop-shadow-2xl normal-case tracking-normal font-normal">
-                    <span className="block text-white">Sugar</span>
-                    <span className="block text-[0.5em] md:text-[0.6em] text-yellow my-2 md:my-4">&</span>
-                    <span className="block text-white">Soul</span>
+                <h1 className="font-branding text-4xl md:text-6xl lg:text-7xl mb-4 leading-tight text-white normal-case tracking-normal font-bold flex items-center justify-center gap-2 md:gap-4 flex-wrap">
+                    <span className="text-white">Sugar</span>
+                    <span className="text-[0.6em] text-yellow">&</span>
+                    <span className="text-white">Soul</span>
                 </h1>
 
                 <p className="font-sans text-lg md:text-xl text-white/90 max-w-lg mx-auto mb-8 leading-relaxed font-light tracking-wide text-shadow">

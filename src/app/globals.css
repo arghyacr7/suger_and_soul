@@ -24,6 +24,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Waffle Mango";
+  src: url("/font/Waffle Mango.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   /* Dark Luxury Palette */
   --color-cream: #050505;
@@ -51,6 +59,7 @@
   /* Keep compatibility */
   --font-pinko: "Pinko", sans-serif;
   --font-qareports: "QAReports", sans-serif;
+  --font-waffle-mango: "Waffle Mango", sans-serif;
 
   /* Keeping for Logo checks */
 
@@ -160,6 +169,10 @@ h6 {
 
 .font-signature {
   font-family: var(--font-signature) !important;
+}
+
+.font-waffle-mango {
+  font-family: var(--font-waffle-mango) !important;
 }
 
 @keyframes gradientShift {

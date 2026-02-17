@@ -102,7 +102,7 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
             onClick={handleImageClick}
         >
             {/* 1. Image Section */}
-            <div className="relative h-52 md:h-auto md:aspect-square w-full bg-[#111] overflow-hidden cursor-pointer group-hover:opacity-90 transition-opacity">
+            <div className="relative h-40 md:h-48 w-full bg-[#111] overflow-hidden cursor-pointer group-hover:opacity-90 transition-opacity">
                 <Image
                     src={product.image}
                     alt={`${product.name} by Sugar & Soul`}
@@ -149,8 +149,8 @@ export function ProductCard({ product, onSelect }: ProductCardProps) {
             </div>
 
             {/* 2. Content Section */}
-            <div className="p-4 md:p-6 flex flex-col flex-grow">
-                <div className="mb-4">
+            <div className="p-3 md:p-4 flex flex-col flex-grow">
+                <div className="mb-3">
                     <h3 className="font-heading text-lg md:text-xl font-bold text-brown leading-tight mb-2 line-clamp-2 uppercase tracking-wide group-hover:text-yellow transition-colors">
                         {product.name}
                     </h3>
