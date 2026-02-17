@@ -14,12 +14,24 @@ export function ProductCatalogue() {
     const [activeFilter, setActiveFilter] = useState("all")
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
     const scrollContainerRef = useRef<HTMLDivElement>(null)
 
-    // Reset filter when tab changes
-    useEffect(() => {
+    const handleTabChange = async (tabId: "plain-cakes" | "cream-cakes" | "brownies") => {
+        if (tabId === activeTab) return
+
+        setLoading(true)
+        // Artificial delay for smooth transition
+        await new Promise(resolve => setTimeout(resolve, 400))
+        setActiveTab(tabId)
         setActiveFilter("all")
-    }, [activeTab])
+        setLoading(false)
+    }
+
+    // Reset filter when tab changes - handled in handleTabChange now
+    // useEffect(() => {
+    //     setActiveFilter("all")
+    // }, [activeTab])
 
     const handleProductSelect = (product: Product) => {
         setSelectedProduct(product)
@@ -95,7 +107,7 @@ export function ProductCatalogue() {
                 ].map((tab) => (
                     <button
                         key={tab.id}
-                        onClick={() => setActiveTab(tab.id as any)}
+                        onClick={() => handleTabChange(tab.id as any)}
                         className={cn(
                             "px-8 py-3 rounded-none font-bold text-sm md:text-lg transition-all border uppercase tracking-widest",
                             activeTab === tab.id
@@ -152,11 +164,22 @@ export function ProductCatalogue() {
 
                 <div
                     ref={scrollContainerRef}
-                    className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide"
+                    className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide min-h-[400px]"
                     style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                    <AnimatePresence mode="popLayout">
-                        {filteredProducts.length > 0 ? (
+                    <AnimatePresence mode="wait">
+                        {loading ? (
+                            <motion.div
+                                key="loader"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="w-full h-[400px] flex flex-col items-center justify-center text-brown"
+                            >
+                                <div className="w-12 h-12 border-4 border-brown/20 border-t-yellow rounded-full animate-spin mb-4"></div>
+                                <span className="font-heading text-lg animate-pulse">Baking details...</span>
+                            </motion.div>
+                        ) : filteredProducts.length > 0 ? (
                             filteredProducts.map((product) => (
                                 <motion.div
                                     key={product.id}
@@ -174,7 +197,7 @@ export function ProductCatalogue() {
                                 </motion.div>
                             ))
                         ) : (
-                            <div className="w-full text-center py-10 text-brown/50 min-w-[300px]">
+                            <div className="w-full text-center py-10 text-brown/50 min-w-[300px] flex items-center justify-center">
                                 <p>No products found for this filter.</p>
                             </div>
                         )}
