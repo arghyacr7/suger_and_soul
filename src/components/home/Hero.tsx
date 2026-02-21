@@ -12,7 +12,7 @@ export function Hero() {
     const [isProfileOpen, setIsProfileOpen] = useState(false)
 
     return (
-        <section className="relative h-auto w-full flex items-center justify-center overflow-hidden pt-24 md:pt-32 pb-0">
+        <section className="relative h-auto w-full flex items-center justify-center overflow-hidden pt-12 md:pt-20 pb-0">
             {/* Cinematic Background Image with Slow Zoom */}
             <div
                 className="absolute inset-0 bg-cover bg-center animate-slowZoom"
@@ -69,18 +69,18 @@ export function Hero() {
                     <span className="block text-sm mt-2 text-white/70">Handcrafted Cakes • Brownies • Desserts</span>
                 </p>
 
-                <div className="flex flex-row gap-3 md:gap-6 justify-center items-center w-full max-w-md md:max-w-none mx-auto">
-                    <Link href="https://wa.me/919836733874" target="_blank" rel="noopener noreferrer" className="flex-1 md:flex-none">
+                <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <Link href="https://wa.me/919836733874" target="_blank" rel="noopener noreferrer">
                         <Button
                             variant="gradient"
                             size="lg"
-                            className="w-full md:w-auto bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 font-bold uppercase tracking-wider md:tracking-widest hover:brightness-110 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(236,72,153,0.3)] rounded-xl h-12 px-3 text-[10px] md:h-16 md:px-12 md:text-sm whitespace-nowrap"
+                            className="bg-gradient-to-r from-pink-500 to-purple-600 text-white border-0 font-bold uppercase tracking-widest hover:brightness-110 hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(236,72,153,0.3)] rounded-xl"
                         >
                             Order on WhatsApp
                         </Button>
                     </Link>
-                    <Link href="#menu" className="flex-1 md:flex-none">
-                        <Button variant="secondary" size="lg" className="w-full md:w-auto text-[10px] md:text-base bg-transparent text-yellow border border-yellow hover:bg-yellow hover:text-black rounded-xl uppercase tracking-wider md:tracking-[0.2em] font-bold backdrop-blur-sm h-12 px-3 md:px-8 md:py-6 whitespace-nowrap">
+                    <Link href="#menu">
+                        <Button variant="secondary" size="lg" className="text-sm md:text-base bg-transparent text-yellow border border-yellow hover:bg-yellow hover:text-black rounded-xl uppercase tracking-[0.2em] font-bold backdrop-blur-sm px-8 py-6">
                             View Menu
                         </Button>
                     </Link>
